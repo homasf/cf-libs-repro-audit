@@ -7,7 +7,7 @@ five-checkpoint framework (A1–A5):
 
   A5  validation      signed relative deviation vs. the stated tolerance
   A1  linewidth       printed FWHM vs. printed Stark relation (Eq. 2)
-  A1  instrument      upper bound on the instrumental-width correction
+  A1  instrument      conditional instrument-response scenarios
   A2  scale           which power-of-ten exponent reproduces the printed
                       concentration estimate (Eqs. 3–4)
   A4  invertibility   zero-slope / constant-mismatch audit of empirical
@@ -17,7 +17,7 @@ five-checkpoint framework (A1–A5):
 
 Every check returns a :class:`CheckResult` with an explicit status:
 
-  PASS            the printed claim is reproduced from the printed values
+  PASS            the declared numerical comparison rule is met
   FAIL            the printed claim is NOT reproduced from the printed values
   NOT_INVERTIBLE  an equation required for inversion has zero slope
   NOT_REPORTED    the record marks a required diagnostic as absent
@@ -42,6 +42,9 @@ from .audit import (
     quadrature_corrected_fwhm,
     signed_relative_deviation,
     stark_ne,
+    finite_number,
+    inverse_rounding_interval,
+    voigt_lorentzian_fwhm,
 )
 
 PASS = "PASS"
@@ -50,6 +53,7 @@ NOT_INVERTIBLE = "NOT_INVERTIBLE"
 NOT_REPORTED = "NOT_REPORTED"
 REPORTED = "REPORTED"
 INFO = "INFO"
+NOT_ASSESSED = "NOT_ASSESSED"
 
 
 @dataclass
@@ -65,6 +69,9 @@ class CheckResult:
 class AuditReport:
     paper: dict
     results: list[CheckResult]
+    verification: str = "Not recorded; source verification required"
+    missing: list = field(default_factory=list)
+    conflicts: list = field(default_factory=list)
 
     def counts(self) -> dict[str, int]:
         out: dict[str, int] = {}
@@ -74,7 +81,7 @@ class AuditReport:
 
     def failed(self) -> list[CheckResult]:
         return [r for r in self.results
-                if r.status in (FAIL, NOT_INVERTIBLE, NOT_REPORTED)]
+                if r.status in (FAIL, NOT_INVERTIBLE, NOT_REPORTED, NOT_ASSESSED)]
 
 
 # ----------------------------------------------------------------------
@@ -92,6 +99,38 @@ def load_record(path: str | Path) -> dict:
     return record
 
 
+def _match_inverse(chk: dict, y: float, expected: float,
+                   fallback_percent=None, y_scale=1.0):
+    """Compare an inversion using explicit rounding or declared tolerances."""
+    c = LinearEquation(chk['a'], chk['b']).invert(y)
+    finite_number(expected, 'printed estimate')
+    rounding = chk.get('rounding')
+    if rounding is not None:
+        lo, hi = inverse_rounding_interval(
+            chk['a'], chk['b'], y, rounding.get('a_halfwidth', 0),
+            rounding.get('b_halfwidth', 0),
+            rounding.get('y_halfwidth', 0) * y_scale)
+        h = rounding.get('estimate_halfwidth', 0)
+        finite_number(h, 'estimate rounding half-width')
+        if h < 0:
+            raise ValueError('estimate rounding half-width must be non-negative')
+        return c, lo <= expected+h and hi >= expected-h, {
+            'rounding_interval': [lo, hi], 'comparison_basis': 'declared rounding intervals'}
+    tol = chk.get('tolerance_percent', fallback_percent)
+    atol = chk.get('tolerance_absolute')
+    if tol is None and atol is None:
+        return c, None, {'comparison_basis': 'no numerical tolerance supplied'}
+    for v in (tol, atol):
+        if v is not None:
+            finite_number(v, 'comparison tolerance')
+            if v < 0:
+                raise ValueError('comparison tolerances must be non-negative')
+    allowed = (atol or 0) + abs(expected) * (tol or 0) / 100
+    return c, abs(c-expected) <= allowed, {
+        'allowed_absolute_difference': allowed,
+        'comparison_basis': chk.get('tolerance_basis', 'explicit numerical tolerance')}
+
+
 # ----------------------------------------------------------------------
 # A5 — validation agreement
 # ----------------------------------------------------------------------
@@ -103,15 +142,22 @@ def check_validation(record: dict) -> list[CheckResult]:
     tol = block.get("tolerance_percent")
     results = []
     for pt in block.get("points", []):
+        tol = pt.get("tolerance_percent", block.get("tolerance_percent"))
+        if tol is not None:
+            finite_number(tol, 'validation tolerance')
+            if tol < 0:
+                raise ValueError('validation tolerance must be non-negative')
         delta = signed_relative_deviation(pt["method_value"],
                                           pt["reference_value"])
         name = f"validation:{pt.get('analyte', '?')}:{pt.get('label', '')}"
         values = {
             "method_value": pt["method_value"],
             "reference_value": pt["reference_value"],
-            "delta_percent": round(delta, 2),
+            "delta_percent": delta,
             "tolerance_percent": tol,
             "units": pt.get("units", ""),
+            "source": pt.get("source", block.get("source", "not supplied")),
+            "tolerance_source": pt.get("tolerance_source", block.get("tolerance_source", "not supplied")),
         }
         if tol is None:
             results.append(CheckResult("A5", name, INFO,
@@ -136,9 +182,10 @@ def check_validation(record: dict) -> list[CheckResult]:
 # ----------------------------------------------------------------------
 
 def check_stark(record: dict,
-                ratio_tolerance: float = 0.05) -> list[CheckResult]:
+                ratio_tolerance: float | None = None) -> list[CheckResult]:
     """Does Eq.-(2)-style substitution of the printed FWHM reproduce the
-    printed/plotted electron density within ``ratio_tolerance`` (default 5%)?
+    printed/plotted electron density within an explicitly supplied tolerance?
+    A missing tolerance yields INFO, never an automatic pass/fail.
     """
     results = []
     for chk in record.get("stark_checks", []):
@@ -146,6 +193,11 @@ def check_stark(record: dict,
         ne_calc = stark_ne(chk["fwhm_nm"], chk["w_s_nm"], exponent)
         ne_comp = chk["ne_comparison_mantissa"] * 10.0 ** exponent
         ratio = ne_calc / ne_comp
+        tolerance = chk.get('ratio_tolerance', ratio_tolerance)
+        if tolerance is not None:
+            finite_number(tolerance, 'Stark ratio tolerance')
+            if tolerance < 0:
+                raise ValueError('Stark ratio tolerance must be non-negative')
         w_eff = effective_stark_width(chk["fwhm_nm"], ne_comp, exponent)
         name = f"stark:{chk.get('sample', chk.get('line', '?'))}"
         values = {
@@ -153,10 +205,16 @@ def check_stark(record: dict,
             "w_s_nm": chk["w_s_nm"],
             "ne_calc": ne_calc,
             "ne_comparison": ne_comp,
-            "ratio": round(ratio, 3),
-            "w_s_effective_nm": round(w_eff, 4),
+            "ratio": ratio,
+            "w_s_effective_nm": w_eff,
+            "ratio_tolerance": tolerance,
+            "tolerance_basis": chk.get('tolerance_basis', 'explicit tolerance' if tolerance is not None else 'not supplied'),
+            "source": chk.get('source', 'not supplied'),
         }
-        if abs(ratio - 1.0) <= ratio_tolerance:
+        if tolerance is None:
+            results.append(CheckResult('A1', name, INFO,
+                f'calculated/comparison density ratio = {ratio:.4f}; no numerical tolerance supplied', values))
+        elif abs(ratio - 1.0) <= tolerance:
             results.append(CheckResult(
                 "A1", name, PASS,
                 f"printed FWHM reproduces the comparison N_e "
@@ -178,17 +236,23 @@ def check_instrument_bound(record: dict) -> list[CheckResult]:
                                instr["resolving_power"])
     results = [CheckResult(
         "A1", "instrument:width", INFO,
-        f"Gaussian instrumental FWHM ~ {w_inst:.4f} nm at "
+        f"Resolution width ~ {w_inst:.4f} nm at "
         f"R = {instr['resolving_power']}",
-        {"instrumental_fwhm_nm": round(w_inst, 4)})]
+        {"instrumental_fwhm_nm": w_inst,
+         "source": instr.get('source', 'not supplied'),
+         "assumption": "lambda/R treated as a Gaussian FWHM for scenarios only"})]
     for chk in record.get("stark_checks", []):
         corrected = quadrature_corrected_fwhm(chk["fwhm_nm"], w_inst)
         change = (chk["fwhm_nm"] - corrected) / chk["fwhm_nm"] * 100
+        lorentzian = voigt_lorentzian_fwhm(chk['fwhm_nm'], w_inst)
+        voigt_change = (chk['fwhm_nm']-lorentzian)/chk['fwhm_nm']*100
         results.append(CheckResult(
             "A1", f"instrument:correction:{chk.get('sample', '?')}", INFO,
             f"quadrature instrumental correction changes the FWHM by "
-            f"{change:.2f}% (upper bound; Gaussian idealization)",
-            {"change_percent": round(change, 2)}))
+            f"{change:.2f}%; the Voigt scenario changes it by {voigt_change:.2f}%. "
+            "These assume different profile models; neither is a measured correction.",
+            {"change_percent": change, "voigt_change_percent": voigt_change,
+             "voigt_lorentzian_fwhm_nm": lorentzian}))
     return results
 
 
@@ -197,7 +261,7 @@ def check_instrument_bound(record: dict) -> list[CheckResult]:
 # ----------------------------------------------------------------------
 
 def check_scale(record: dict,
-                match_tolerance_percent: float = 0.5) -> list[CheckResult]:
+                match_tolerance_percent: float | None = None) -> list[CheckResult]:
     """For each candidate exponent, invert the printed linear equation and
     compare with the printed concentration estimate. Reports which exponent
     (if any) reproduces the printed value within ``match_tolerance_percent``.
@@ -212,19 +276,27 @@ def check_scale(record: dict,
             continue
         base = chk.get("equation_exponent", 16)
         printed = chk["printed_estimate"]
-        matches, per_exponent = [], {}
+        matches, per_exponent, comparison_details = [], {}, {}
+        assessed = False
         for p in chk.get("candidate_exponents", [16, 17]):
             y = chk["ne_mantissa"] * 10.0 ** (p - base)
-            c = eq.invert(y)
-            per_exponent[p] = round(c, 2)
-            if printed and abs(c - printed) / abs(printed) * 100 <= \
-                    match_tolerance_percent:
+            c, match, comparison = _match_inverse(chk, y, printed,
+                match_tolerance_percent, 10.0 ** (p-base))
+            assessed = assessed or match is not None
+            per_exponent[p] = c
+            comparison_details[p] = comparison
+            if match:
                 matches.append(p)
         name = f"scale:{chk.get('analyte', '?')}"
         values = {"per_exponent_ppm": per_exponent,
-                  "printed_estimate": printed, "matching_exponents": matches}
+                  "printed_estimate": printed, "matching_exponents": matches,
+                  "comparison_details": comparison_details,
+                  "source": chk.get('source', 'not supplied')}
         stated = chk.get("stated_exponent")
-        if not matches:
+        if not assessed:
+            results.append(CheckResult('A2', name, INFO,
+                'candidate inversions computed; no rounding bounds or numerical tolerance supplied', values))
+        elif not matches:
             results.append(CheckResult(
                 "A2", name, FAIL,
                 "no candidate exponent reproduces the printed estimate",
@@ -232,9 +304,12 @@ def check_scale(record: dict,
         elif stated is not None and stated not in matches:
             results.append(CheckResult(
                 "A2", name, FAIL,
-                f"operative exponent is 10^{matches[0]} "
+                f"exponent inferred from this comparison is 10^{matches[0]} "
                 f"(gives {per_exponent[matches[0]]}), but the article "
-                f"states 10^{stated} — factor-of-ten inconsistency", values))
+                f"states 10^{stated}; this does not establish the physical density", values))
+        elif len(matches) > 1:
+            results.append(CheckResult('A2', name, INFO,
+                f'multiple exponents {matches} are compatible with the supplied comparison rule', values))
         else:
             results.append(CheckResult(
                 "A2", name, PASS,
@@ -267,13 +342,17 @@ def check_equations(record: dict) -> list[CheckResult]:
         op = chk.get("operative_value")
         expected = chk.get("printed_estimate")
         if op is not None and expected is not None:
-            c = eq.invert(op)
-            values["inverted_concentration"] = round(c, 2)
-            if abs(c - expected) / abs(expected) * 100 <= 0.5:
+            c, match, comparison = _match_inverse(chk, op, expected)
+            values['inverted_concentration'] = c
+            values.update(comparison)
+            if match is None:
+                results.append(CheckResult('A4', name, INFO,
+                    f'inversion gives {c:.4g}; no numerical comparison rule supplied', values))
+            elif match:
                 results.append(CheckResult(
                     "A4", name, PASS,
-                    f"inversion gives {c:.2f}, reproducing the printed "
-                    f"estimate {expected}", values))
+                    f"inversion gives {c:.5g}, compatible with the printed "
+                    f"estimate {expected} by the declared comparison rule", values))
             else:
                 results.append(CheckResult(
                     "A4", name, FAIL,
@@ -281,7 +360,7 @@ def check_equations(record: dict) -> list[CheckResult]:
                     f"the printed estimate {expected}", values))
         else:
             results.append(CheckResult(
-                "A4", name, PASS,
+                "A4", name, INFO,
                 "equation has non-zero slope and is invertible", values))
     return results
 
@@ -311,11 +390,21 @@ def check_qualitative(record: dict) -> list[CheckResult]:
     for key, description in QUALITATIVE_ITEMS.items():
         if key not in block:
             continue
+        if block[key] is not None and not isinstance(block[key], bool):
+            raise ValueError(f'qualitative flag {key} must be true, false or null')
+        if block[key] is None:
+            results.append(CheckResult('A3', f'qualitative:{key}', NOT_ASSESSED,
+                f'{description}: not assessed', {}))
+            continue
         status = REPORTED if block[key] else NOT_REPORTED
         verb = "reported in the article" if block[key] else \
-               "NOT found in the printed record"
-        results.append(CheckResult("A3", f"qualitative:{key}", status,
-                                   f"{description}: {verb}", {}))
+               "not fully specified in the supplied record"
+        cp = {'instrumental_width_reported': 'A1',
+              'atomic_data_provenance_reported': 'A2',
+              'full_precision_coefficients_available': 'A4'}.get(key, 'A3')
+        results.append(CheckResult(cp, f"qualitative:{key}", status,
+            f"{description}: {verb}",
+            {'source': record.get('qualitative_sources', {}).get(key, 'not supplied')}))
     return results
 
 
@@ -324,6 +413,8 @@ def check_qualitative(record: dict) -> list[CheckResult]:
 # ----------------------------------------------------------------------
 
 def run_audit(record: dict) -> AuditReport:
+    if not isinstance(record, dict) or not isinstance(record.get('paper'), dict):
+        raise ValueError('audit record must contain a paper object')
     results: list[CheckResult] = []
     results += check_validation(record)
     results += check_stark(record)
@@ -331,13 +422,24 @@ def run_audit(record: dict) -> AuditReport:
     results += check_scale(record)
     results += check_equations(record)
     results += check_qualitative(record)
-    return AuditReport(paper=record.get("paper", {}), results=results)
+    covered = {r.checkpoint for r in results}
+    for cp in ('A1', 'A2', 'A3', 'A4', 'A5'):
+        if cp not in covered:
+            results.append(CheckResult(cp, 'coverage:' + cp, NOT_ASSESSED,
+                'No applicable input/check supplied; this is not a reproduced result.', {}))
+    return AuditReport(paper=record.get("paper", {}), results=results,
+        verification=record.get('verification', 'Not recorded; source verification required'),
+        missing=record.get('missing', []), conflicts=record.get('conflicts', []))
 
 
 def render_markdown(report: AuditReport) -> str:
     p = report.paper
     lines = [
         "# CF-LIBS/LIPS reproducibility-audit report",
+        "",
+        f"**Source verification:** {report.verification}",
+        f"**Unresolved missing inputs:** {json.dumps(report.missing, ensure_ascii=False)}",
+        f"**Recorded conflicts:** {json.dumps(report.conflicts, ensure_ascii=False)}",
         "",
         f"**Audited publication:** {p.get('title', '(untitled)')}",
         f"**DOI:** {p.get('doi', 'n/a')}  |  "
@@ -354,7 +456,7 @@ def render_markdown(report: AuditReport) -> str:
         "",
     ]
     counts = report.counts()
-    for status in (PASS, FAIL, NOT_INVERTIBLE, NOT_REPORTED, REPORTED, INFO):
+    for status in (PASS, FAIL, NOT_INVERTIBLE, NOT_REPORTED, NOT_ASSESSED, REPORTED, INFO):
         if status in counts:
             lines.append(f"- {status}: {counts[status]}")
     lines += ["", "## Findings", ""]
@@ -363,11 +465,15 @@ def render_markdown(report: AuditReport) -> str:
     for r in report.results:
         lines.append(f"| {r.checkpoint} | `{r.name}` | **{r.status}** | "
                      f"{r.detail} |")
+    lines += ['', '## Numerical values, sources and comparison rules', '']
+    for r in report.results:
+        lines += [f'### {r.name}', '```json',
+                  json.dumps(r.values, ensure_ascii=False, indent=2), '```', '']
     lines += [
         "",
         "## Interpretation guide",
         "",
-        "PASS: the printed claim follows from the printed values. "
+        "PASS: the declared numerical comparison rule is met; physical validity is not established. "
         "FAIL: it does not; possible explanations include typographical "
         "errors, rounding, unreported full-precision coefficients or an "
         "undocumented calculation pathway — any of which the authors could "

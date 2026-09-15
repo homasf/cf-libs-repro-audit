@@ -1,5 +1,5 @@
 {
-  "description": "All numerical inputs are values printed in the case-study article (El-Saeed et al., Sci. Rep. 15 (2025) 19949, ref. [29] of the audit paper) as transcribed in Saeidfirozeh & Ferus, 'Can a published CF-LIBS quantification be reconstructed? A reproducibility-audit framework and reporting checklist'. No raw spectra are used.",
+  "description": "All numerical inputs are values printed in the case-study article (El-Saeed et al., Sci. Rep. 15 (2025) 19949, ref. [29] of the audit paper) as transcribed in Saeidfirozeh et al., 'Can a published CF-LIBS quantification be reconstructed? A reproducibility-audit framework and reporting checklist'. No raw spectra are used.",
   "validation_table": {
     "source": "Table 6 of ref. [29]; audit paper Table 1",
     "units": "ppm",
@@ -21,7 +21,7 @@
       "S1-P1":   {"fwhm_nm": 0.15322, "ne_comparison_1e16": 1.75,
                   "comparison_note": "approximate value plotted in ref. [29]"},
       "S1-Ptest": {"fwhm_nm": 0.13493, "ne_comparison_1e16": 1.54382,
-                  "comparison_note": "ref. [29] prints 1.54382e17 cm-3; 1e16 is the operative scale required to reproduce the validation-table concentrations"}
+                  "comparison_note": "ref. [29] prints 1.54382e17 cm-3; 1e16 is inferred from the validation-table inversion, not a corrected measurement"}
     }
   },
   "instrument": {
@@ -56,3 +56,4 @@
     "te_reported_K": 9136.3
   }
 }
+

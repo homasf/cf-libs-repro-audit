@@ -102,7 +102,7 @@ footer code { font-family: var(--mono); background: var(--info-bg);
   <p class="subtitle">Deterministic recalculation of the published numerical
   chain from printed values</p>
   <dl class="meta"><div><dt>Audited publication</dt><dd>Calibration-free picosecond LIPS for quantifying heavy metals in soils near Egyptian industrial sites</dd></div><div><dt>Authors</dt><dd>M. El-Saeed, W. Tawfik, et al.</dd></div><div><dt>Journal</dt><dd>Sci. Rep. 15 (2025) 19949</dd></div><div><dt>DOI</dt><dd>10.1038/s41598-025-04395-5</dd></div><div><dt>Record transcribed by</dt><dd>Homa Saeidfirozeh</dd></div><div><dt>Transcription date</dt><dd>2026-07-29</dd></div>
-    <div><dt>Report generated</dt><dd>2026-07-31 ·
+    <div><dt>Report generated</dt><dd>2026-09-15 ·
     CF-LIBS Reproducibility Audit</dd></div>
   </dl>
 </header>
@@ -116,12 +116,374 @@ be resolved by author clarification.</div>
 
 <div class="summary">
       <div class="stat pass"><b>5</b><span>reproduced</span></div>
-      <div class="stat fail"><b>11</b><span>not reproduced</span></div>
+      <div class="stat fail"><b>12</b><span>not reproduced</span></div>
       <div class="stat warn"><b>5</b><span>not reported</span></div>
-      <div class="stat info"><b>24</b><span>checks run</span></div>
+      <div class="stat info"><b>25</b><span>checks run</span></div>
     </div>
+<div class="scope"><strong>Source verification:</strong> AI cross-check against the supplied publication on 2026-09-15; author source verification pending<br>
+<strong>Missing inputs:</strong> []<br>
+<strong>Recorded conflicts:</strong> [{&#x27;quantity&#x27;: &#x27;test electron density&#x27;, &#x27;printed&#x27;: &#x27;1.54382e17 cm^-3&#x27;, &#x27;alternative&#x27;: &#x27;1.54382e16 cm^-3&#x27;, &#x27;basis&#x27;: &#x27;Alternative inferred only from empirical inversion; not a corrected measurement.&#x27;}]</div>
 
-<h2 class="cp">A5 · Validation</h2><p class="cp-q">Does the stated validation agreement follow from the printed central values?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">validation:Cd:Ne-based</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>delta = -6.61% lies OUTSIDE the stated ±1.0% interval</td></tr><tr><td class="check">validation:Cd:Te-based</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>delta = +8.88% lies OUTSIDE the stated ±1.0% interval</td></tr><tr><td class="check">validation:Zn:Ne-based</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>delta = -5.77% lies OUTSIDE the stated ±1.0% interval</td></tr><tr><td class="check">validation:Zn:Te-based</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>delta = -4.59% lies OUTSIDE the stated ±1.0% interval</td></tr><tr><td class="check">validation:Fe:Ne-based</td><td class="status"><span class="pill PASS">PASS</span></td><td>delta = -0.65% lies within the stated ±1.0% interval</td></tr><tr><td class="check">validation:Fe:Te-based</td><td class="status"><span class="pill PASS">PASS</span></td><td>delta = -0.65% lies within the stated ±1.0% interval</td></tr><tr><td class="check">validation:Ni:Ne-based</td><td class="status"><span class="pill PASS">PASS</span></td><td>delta = +0.23% lies within the stated ±1.0% interval</td></tr><tr><td class="check">validation:Ni:Te-based</td><td class="status"><span class="pill PASS">PASS</span></td><td>delta = +0.23% lies within the stated ±1.0% interval</td></tr></tbody></table><h2 class="cp">A1 · Linewidth provenance</h2><p class="cp-q">Can the linewidth actually entered into the Stark calculation be reconstructed from the printed record?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">stark:S1-P1</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>printed FWHM gives 1.15x the comparison N_e; an effective W_s of 0.0438 nm would be required instead of the printed 0.0381 nm</td></tr><tr><td class="check">stark:S1-Ptest</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>printed FWHM gives 1.15x the comparison N_e; an effective W_s of 0.0437 nm would be required instead of the printed 0.0381 nm</td></tr><tr><td class="check">instrument:width</td><td class="status"><span class="pill INFO">INFO</span></td><td>Gaussian instrumental FWHM ~ 0.0086 nm at R = 75000</td></tr><tr><td class="check">instrument:correction:S1-P1</td><td class="status"><span class="pill INFO">INFO</span></td><td>quadrature instrumental correction changes the FWHM by 0.16% (upper bound; Gaussian idealization)</td></tr><tr><td class="check">instrument:correction:S1-Ptest</td><td class="status"><span class="pill INFO">INFO</span></td><td>quadrature instrumental correction changes the FWHM by 0.20% (upper bound; Gaussian idealization)</td></tr></tbody></table><h2 class="cp">A2 · Plasma-parameter consistency</h2><p class="cp-q">Do the printed units, exponents and inputs reproduce the plasma parameters carried into later calculations?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">scale:Cd</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>operative exponent is 10^16 (gives 65.03), but the article states 10^17 — factor-of-ten inconsistency</td></tr><tr><td class="check">scale:Zn</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>operative exponent is 10^16 (gives 136.95), but the article states 10^17 — factor-of-ten inconsistency</td></tr></tbody></table><h2 class="cp">A3 · Plasma-model assessment</h2><p class="cp-q">Are the necessary LTE, optical-thinness and self-absorption diagnostics reported?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">qualitative:lte_check_reported</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>explicit LTE check (e.g. McWhirter with inputs): NOT found in the printed record</td></tr><tr><td class="check">qualitative:optical_thinness_or_self_absorption_reported</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>optical-thinness / self-absorption diagnostic for analytical lines: NOT found in the printed record</td></tr><tr><td class="check">qualitative:atomic_data_provenance_reported</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>atomic/broadening-data source, version and access date: NOT found in the printed record</td></tr><tr><td class="check">qualitative:instrumental_width_reported</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>numerical instrumental width / line-shape treatment: NOT found in the printed record</td></tr><tr><td class="check">qualitative:full_precision_coefficients_available</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>full-precision coefficients or machine-actionable record: NOT found in the printed record</td></tr></tbody></table><h2 class="cp">A4 · Concentration inversion</h2><p class="cp-q">Are the concentration equations supplied with sufficient precision, non-zero slopes and a valid domain?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">equation:Fe:Ne</td><td class="status"><span class="pill NOT_INVERTIBLE">NOT INVERTIBLE</span></td><td>printed slope is 0.0 — equation returns a constant and cannot be inverted for concentration; moreover the constant 1.566 does not equal the operative test value 1.54382</td></tr><tr><td class="check">equation:Ni:Ne</td><td class="status"><span class="pill NOT_INVERTIBLE">NOT INVERTIBLE</span></td><td>printed slope is 0.0 — equation returns a constant and cannot be inverted for concentration; moreover the constant 1.563 does not equal the operative test value 1.54382</td></tr><tr><td class="check">equation:Fe:Te</td><td class="status"><span class="pill NOT_INVERTIBLE">NOT INVERTIBLE</span></td><td>printed slope is 0.0 — equation returns a constant and cannot be inverted for concentration; moreover the constant 9118.16 does not equal the operative test value 9136.3</td></tr><tr><td class="check">equation:Cd:Ne</td><td class="status"><span class="pill PASS">PASS</span></td><td>inversion gives 65.03, reproducing the printed estimate 65.02</td></tr></tbody></table>
+<h2 class="cp">A5 · Validation</h2><p class="cp-q">Does the stated validation agreement follow from the printed central values?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">validation:Cd:Ne-based</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>delta = -6.61% lies OUTSIDE the stated ±1.0% interval</td></tr><tr><td class="check">validation:Cd:Te-based</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>delta = +8.88% lies OUTSIDE the stated ±1.0% interval</td></tr><tr><td class="check">validation:Zn:Ne-based</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>delta = -5.77% lies OUTSIDE the stated ±1.0% interval</td></tr><tr><td class="check">validation:Zn:Te-based</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>delta = -4.59% lies OUTSIDE the stated ±1.0% interval</td></tr><tr><td class="check">validation:Fe:Ne-based</td><td class="status"><span class="pill PASS">PASS</span></td><td>delta = -0.65% lies within the stated ±1.0% interval</td></tr><tr><td class="check">validation:Fe:Te-based</td><td class="status"><span class="pill PASS">PASS</span></td><td>delta = -0.65% lies within the stated ±1.0% interval</td></tr><tr><td class="check">validation:Ni:Ne-based</td><td class="status"><span class="pill PASS">PASS</span></td><td>delta = +0.23% lies within the stated ±1.0% interval</td></tr><tr><td class="check">validation:Ni:Te-based</td><td class="status"><span class="pill PASS">PASS</span></td><td>delta = +0.23% lies within the stated ±1.0% interval</td></tr></tbody></table><h2 class="cp">A1 · Linewidth provenance</h2><p class="cp-q">Can the linewidth actually entered into the Stark calculation be reconstructed from the printed record?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">stark:S1-P1</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>printed FWHM gives 1.15x the comparison N_e; an effective W_s of 0.0438 nm would be required instead of the printed 0.0381 nm</td></tr><tr><td class="check">stark:S1-Ptest</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>printed FWHM gives 1.15x the comparison N_e; an effective W_s of 0.0437 nm would be required instead of the printed 0.0381 nm</td></tr><tr><td class="check">instrument:width</td><td class="status"><span class="pill INFO">INFO</span></td><td>Resolution width ~ 0.0086 nm at R = 75000</td></tr><tr><td class="check">instrument:correction:S1-P1</td><td class="status"><span class="pill INFO">INFO</span></td><td>quadrature instrumental correction changes the FWHM by 0.16%; the Voigt scenario changes it by 0.34%. These assume different profile models; neither is a measured correction.</td></tr><tr><td class="check">instrument:correction:S1-Ptest</td><td class="status"><span class="pill INFO">INFO</span></td><td>quadrature instrumental correction changes the FWHM by 0.20%; the Voigt scenario changes it by 0.44%. These assume different profile models; neither is a measured correction.</td></tr><tr><td class="check">qualitative:instrumental_width_reported</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>numerical instrumental width / line-shape treatment: not fully specified in the supplied record</td></tr></tbody></table><h2 class="cp">A2 · Plasma-parameter consistency</h2><p class="cp-q">Do the printed units, exponents and inputs reproduce the plasma parameters carried into later calculations?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">scale:Cd</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>exponent inferred from this comparison is 10^16 (gives 65.02866972477065), but the article states 10^17; this does not establish the physical density</td></tr><tr><td class="check">scale:Zn</td><td class="status"><span class="pill FAIL">FAIL</span></td><td>exponent inferred from this comparison is 10^16 (gives 136.94603804511928), but the article states 10^17; this does not establish the physical density</td></tr><tr><td class="check">qualitative:atomic_data_provenance_reported</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>atomic/broadening-data source, version and access date: not fully specified in the supplied record</td></tr></tbody></table><h2 class="cp">A3 · Plasma-model assessment</h2><p class="cp-q">Are the necessary LTE, optical-thinness and self-absorption diagnostics reported?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">qualitative:lte_check_reported</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>explicit LTE check (e.g. McWhirter with inputs): not fully specified in the supplied record</td></tr><tr><td class="check">qualitative:optical_thinness_or_self_absorption_reported</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>optical-thinness / self-absorption diagnostic for analytical lines: not fully specified in the supplied record</td></tr></tbody></table><h2 class="cp">A4 · Concentration inversion</h2><p class="cp-q">Are the concentration equations supplied with sufficient precision, non-zero slopes and a valid domain?</p><table><thead><tr><th>Check</th><th>Status</th><th>Finding</th></tr></thead><tbody><tr><td class="check">equation:Fe:Ne</td><td class="status"><span class="pill NOT_INVERTIBLE">NOT INVERTIBLE</span></td><td>printed slope is 0.0 — equation returns a constant and cannot be inverted for concentration; moreover the constant 1.566 does not equal the operative test value 1.54382</td></tr><tr><td class="check">equation:Ni:Ne</td><td class="status"><span class="pill NOT_INVERTIBLE">NOT INVERTIBLE</span></td><td>printed slope is 0.0 — equation returns a constant and cannot be inverted for concentration; moreover the constant 1.563 does not equal the operative test value 1.54382</td></tr><tr><td class="check">equation:Fe:Te</td><td class="status"><span class="pill NOT_INVERTIBLE">NOT INVERTIBLE</span></td><td>printed slope is 0.0 — equation returns a constant and cannot be inverted for concentration; moreover the constant 9118.16 does not equal the operative test value 9136.3</td></tr><tr><td class="check">equation:Ni:Te</td><td class="status"><span class="pill NOT_INVERTIBLE">NOT INVERTIBLE</span></td><td>printed slope is 0.0 — equation returns a constant and cannot be inverted for concentration; moreover the constant 9118.16 does not equal the operative test value 9136.3</td></tr><tr><td class="check">equation:Cd:Ne</td><td class="status"><span class="pill PASS">PASS</span></td><td>inversion gives 65.029, compatible with the printed estimate 65.02 by the declared comparison rule</td></tr><tr><td class="check">qualitative:full_precision_coefficients_available</td><td class="status"><span class="pill NOT_REPORTED">NOT REPORTED</span></td><td>full-precision coefficients or machine-actionable record: not fully specified in the supplied record</td></tr></tbody></table>
+<details><summary>Numerical values, sources and comparison rules</summary>
+<pre>[
+  {
+    &quot;checkpoint&quot;: &quot;A5&quot;,
+    &quot;name&quot;: &quot;validation:Cd:Ne-based&quot;,
+    &quot;status&quot;: &quot;FAIL&quot;,
+    &quot;values&quot;: {
+      &quot;method_value&quot;: 65.02,
+      &quot;reference_value&quot;: 69.62,
+      &quot;delta_percent&quot;: -6.60729675380639,
+      &quot;tolerance_percent&quot;: 1.0,
+      &quot;units&quot;: &quot;ppm&quot;,
+      &quot;source&quot;: &quot;Table 6 of the audited article&quot;,
+      &quot;tolerance_source&quot;: &quot;article states approximately +/-1% agreement with ICP-OES for all four elements&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A5&quot;,
+    &quot;name&quot;: &quot;validation:Cd:Te-based&quot;,
+    &quot;status&quot;: &quot;FAIL&quot;,
+    &quot;values&quot;: {
+      &quot;method_value&quot;: 75.8,
+      &quot;reference_value&quot;: 69.62,
+      &quot;delta_percent&quot;: 8.876759551852905,
+      &quot;tolerance_percent&quot;: 1.0,
+      &quot;units&quot;: &quot;ppm&quot;,
+      &quot;source&quot;: &quot;Table 6&quot;,
+      &quot;tolerance_source&quot;: &quot;article states approximately +/-1% agreement with ICP-OES for all four elements&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A5&quot;,
+    &quot;name&quot;: &quot;validation:Zn:Ne-based&quot;,
+    &quot;status&quot;: &quot;FAIL&quot;,
+    &quot;values&quot;: {
+      &quot;method_value&quot;: 136.94,
+      &quot;reference_value&quot;: 145.33,
+      &quot;delta_percent&quot;: -5.773068189637387,
+      &quot;tolerance_percent&quot;: 1.0,
+      &quot;units&quot;: &quot;ppm&quot;,
+      &quot;source&quot;: &quot;Table 6&quot;,
+      &quot;tolerance_source&quot;: &quot;article states approximately +/-1% agreement with ICP-OES for all four elements&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A5&quot;,
+    &quot;name&quot;: &quot;validation:Zn:Te-based&quot;,
+    &quot;status&quot;: &quot;FAIL&quot;,
+    &quot;values&quot;: {
+      &quot;method_value&quot;: 138.66,
+      &quot;reference_value&quot;: 145.33,
+      &quot;delta_percent&quot;: -4.589554806302908,
+      &quot;tolerance_percent&quot;: 1.0,
+      &quot;units&quot;: &quot;ppm&quot;,
+      &quot;source&quot;: &quot;Table 6&quot;,
+      &quot;tolerance_source&quot;: &quot;article states approximately +/-1% agreement with ICP-OES for all four elements&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A5&quot;,
+    &quot;name&quot;: &quot;validation:Fe:Ne-based&quot;,
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;values&quot;: {
+      &quot;method_value&quot;: 61.27,
+      &quot;reference_value&quot;: 61.67,
+      &quot;delta_percent&quot;: -0.6486135884546759,
+      &quot;tolerance_percent&quot;: 1.0,
+      &quot;units&quot;: &quot;ppm&quot;,
+      &quot;source&quot;: &quot;Table 6&quot;,
+      &quot;tolerance_source&quot;: &quot;article states approximately +/-1% agreement with ICP-OES for all four elements&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A5&quot;,
+    &quot;name&quot;: &quot;validation:Fe:Te-based&quot;,
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;values&quot;: {
+      &quot;method_value&quot;: 61.27,
+      &quot;reference_value&quot;: 61.67,
+      &quot;delta_percent&quot;: -0.6486135884546759,
+      &quot;tolerance_percent&quot;: 1.0,
+      &quot;units&quot;: &quot;ppm&quot;,
+      &quot;source&quot;: &quot;Table 6&quot;,
+      &quot;tolerance_source&quot;: &quot;article states approximately +/-1% agreement with ICP-OES for all four elements&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A5&quot;,
+    &quot;name&quot;: &quot;validation:Ni:Ne-based&quot;,
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;values&quot;: {
+      &quot;method_value&quot;: 149.87,
+      &quot;reference_value&quot;: 149.53,
+      &quot;delta_percent&quot;: 0.2273791212465749,
+      &quot;tolerance_percent&quot;: 1.0,
+      &quot;units&quot;: &quot;ppm&quot;,
+      &quot;source&quot;: &quot;Table 6&quot;,
+      &quot;tolerance_source&quot;: &quot;article states approximately +/-1% agreement with ICP-OES for all four elements&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A5&quot;,
+    &quot;name&quot;: &quot;validation:Ni:Te-based&quot;,
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;values&quot;: {
+      &quot;method_value&quot;: 149.87,
+      &quot;reference_value&quot;: 149.53,
+      &quot;delta_percent&quot;: 0.2273791212465749,
+      &quot;tolerance_percent&quot;: 1.0,
+      &quot;units&quot;: &quot;ppm&quot;,
+      &quot;source&quot;: &quot;Table 6&quot;,
+      &quot;tolerance_source&quot;: &quot;article states approximately +/-1% agreement with ICP-OES for all four elements&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A1&quot;,
+    &quot;name&quot;: &quot;stark:S1-P1&quot;,
+    &quot;status&quot;: &quot;FAIL&quot;,
+    &quot;values&quot;: {
+      &quot;fwhm_nm&quot;: 0.15322,
+      &quot;w_s_nm&quot;: 0.0381,
+      &quot;ne_calc&quot;: 2.0107611548556428e+16,
+      &quot;ne_comparison&quot;: 1.75e+16,
+      &quot;ratio&quot;: 1.1490063742032244,
+      &quot;w_s_effective_nm&quot;: 0.043777142857142855,
+      &quot;ratio_tolerance&quot;: 0.01,
+      &quot;tolerance_basis&quot;: &quot;Analyst numerical screen, 1% relative; intentionally coarser than printed precision. Not an experimental uncertainty.&quot;,
+      &quot;source&quot;: &quot;FWHM and W_s printed in the audited article; comparison value plotted there&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A1&quot;,
+    &quot;name&quot;: &quot;stark:S1-Ptest&quot;,
+    &quot;status&quot;: &quot;FAIL&quot;,
+    &quot;values&quot;: {
+      &quot;fwhm_nm&quot;: 0.13493,
+      &quot;w_s_nm&quot;: 0.0381,
+      &quot;ne_calc&quot;: 1.7707349081364828e+16,
+      &quot;ne_comparison&quot;: 1.54382e+16,
+      &quot;ratio&quot;: 1.146982749372649,
+      &quot;w_s_effective_nm&quot;: 0.04370004275109793,
+      &quot;ratio_tolerance&quot;: 0.01,
+      &quot;tolerance_basis&quot;: &quot;Analyst numerical screen, 1% relative; intentionally coarser than printed precision. Not an experimental uncertainty.&quot;,
+      &quot;source&quot;: &quot;article prints 1.54382e17 cm-3; 1e16 is inferred from the printed inversion, not independently measured here&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A1&quot;,
+    &quot;name&quot;: &quot;instrument:width&quot;,
+    &quot;status&quot;: &quot;INFO&quot;,
+    &quot;values&quot;: {
+      &quot;instrumental_fwhm_nm&quot;: 0.00861676,
+      &quot;source&quot;: &quot;conditioned resolving power stated in the audited article&quot;,
+      &quot;assumption&quot;: &quot;lambda/R treated as a Gaussian FWHM for scenarios only&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A1&quot;,
+    &quot;name&quot;: &quot;instrument:correction:S1-P1&quot;,
+    &quot;status&quot;: &quot;INFO&quot;,
+    &quot;values&quot;: {
+      &quot;change_percent&quot;: 0.15825989565464743,
+      &quot;voigt_change_percent&quot;: 0.33999936243042156,
+      &quot;voigt_lorentzian_fwhm_nm&quot;: 0.1526990529768841
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A1&quot;,
+    &quot;name&quot;: &quot;instrument:correction:S1-Ptest&quot;,
+    &quot;status&quot;: &quot;INFO&quot;,
+    &quot;values&quot;: {
+      &quot;change_percent&quot;: 0.20411946596588848,
+      &quot;voigt_change_percent&quot;: 0.43830131232099795,
+      &quot;voigt_lorentzian_fwhm_nm&quot;: 0.13433860003928527
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A2&quot;,
+    &quot;name&quot;: &quot;scale:Cd&quot;,
+    &quot;status&quot;: &quot;FAIL&quot;,
+    &quot;values&quot;: {
+      &quot;per_exponent_ppm&quot;: {
+        &quot;16&quot;: 65.02866972477065,
+        &quot;17&quot;: 4048.5091743119265
+      },
+      &quot;printed_estimate&quot;: 65.02,
+      &quot;matching_exponents&quot;: [
+        16
+      ],
+      &quot;comparison_details&quot;: {
+        &quot;16&quot;: {
+          &quot;rounding_interval&quot;: [
+            64.87458793177584,
+            65.18279569892472
+          ],
+          &quot;comparison_basis&quot;: &quot;declared rounding intervals&quot;
+        },
+        &quot;17&quot;: {
+          &quot;rounding_interval&quot;: [
+            4047.7712483875594,
+            4049.2473118279568
+          ],
+          &quot;comparison_basis&quot;: &quot;declared rounding intervals&quot;
+        }
+      },
+      &quot;source&quot;: &quot;S1 Cd Ne-concentration equation, Table 4; test-sample Ne stated as 1.54382e17&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A2&quot;,
+    &quot;name&quot;: &quot;scale:Zn&quot;,
+    &quot;status&quot;: &quot;FAIL&quot;,
+    &quot;values&quot;: {
+      &quot;per_exponent_ppm&quot;: {
+        &quot;16&quot;: 136.94603804511928,
+        &quot;17&quot;: 736.2808954837597
+      },
+      &quot;printed_estimate&quot;: 136.94,
+      &quot;matching_exponents&quot;: [
+        16
+      ],
+      &quot;comparison_details&quot;: {
+        &quot;16&quot;: {
+          &quot;rounding_interval&quot;: [
+            136.9213017879095,
+            136.97077536935188
+          ],
+          &quot;comparison_basis&quot;: &quot;declared rounding intervals&quot;
+        },
+        &quot;17&quot;: {
+          &quot;rounding_interval&quot;: [
+            736.241292298402,
+            736.3205003774399
+          ],
+          &quot;comparison_basis&quot;: &quot;declared rounding intervals&quot;
+        }
+      },
+      &quot;source&quot;: &quot;S1 Zn Ne-concentration equation, Table 4&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A4&quot;,
+    &quot;name&quot;: &quot;equation:Fe:Ne&quot;,
+    &quot;status&quot;: &quot;NOT_INVERTIBLE&quot;,
+    &quot;values&quot;: {
+      &quot;analyte&quot;: &quot;Fe&quot;,
+      &quot;parameter&quot;: &quot;Ne&quot;,
+      &quot;a&quot;: 1.566,
+      &quot;b&quot;: 0.0,
+      &quot;operative_value&quot;: 1.54382,
+      &quot;source&quot;: &quot;S1 Fe: Ne = (1.566 + 0.0*C) x 1e16&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A4&quot;,
+    &quot;name&quot;: &quot;equation:Ni:Ne&quot;,
+    &quot;status&quot;: &quot;NOT_INVERTIBLE&quot;,
+    &quot;values&quot;: {
+      &quot;analyte&quot;: &quot;Ni&quot;,
+      &quot;parameter&quot;: &quot;Ne&quot;,
+      &quot;a&quot;: 1.563,
+      &quot;b&quot;: 0.0,
+      &quot;operative_value&quot;: 1.54382,
+      &quot;source&quot;: &quot;S1 Ni: Ne = (1.563 + 0.0*C) x 1e16&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A4&quot;,
+    &quot;name&quot;: &quot;equation:Fe:Te&quot;,
+    &quot;status&quot;: &quot;NOT_INVERTIBLE&quot;,
+    &quot;values&quot;: {
+      &quot;analyte&quot;: &quot;Fe&quot;,
+      &quot;parameter&quot;: &quot;Te&quot;,
+      &quot;a&quot;: 9118.16,
+      &quot;b&quot;: 0.0,
+      &quot;operative_value&quot;: 9136.3,
+      &quot;source&quot;: &quot;S1 Fe/Ni: Te = 9118.16 + 0.0*C; reported test-sample Te = 9136.3 K&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A4&quot;,
+    &quot;name&quot;: &quot;equation:Ni:Te&quot;,
+    &quot;status&quot;: &quot;NOT_INVERTIBLE&quot;,
+    &quot;values&quot;: {
+      &quot;analyte&quot;: &quot;Ni&quot;,
+      &quot;parameter&quot;: &quot;Te&quot;,
+      &quot;a&quot;: 9118.16,
+      &quot;b&quot;: 0.0,
+      &quot;operative_value&quot;: 9136.3,
+      &quot;source&quot;: &quot;El-Saeed Table 5, S1 Ni; validation paragraph for temperature&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A4&quot;,
+    &quot;name&quot;: &quot;equation:Cd:Ne&quot;,
+    &quot;status&quot;: &quot;PASS&quot;,
+    &quot;values&quot;: {
+      &quot;analyte&quot;: &quot;Cd&quot;,
+      &quot;parameter&quot;: &quot;Ne&quot;,
+      &quot;a&quot;: 1.317,
+      &quot;b&quot;: 0.003488,
+      &quot;operative_value&quot;: 1.54382,
+      &quot;printed_estimate&quot;: 65.02,
+      &quot;source&quot;: &quot;S1 Cd equation: compatible with the printed estimate under the declared rounding intervals&quot;,
+      &quot;rounding&quot;: {
+        &quot;a_halfwidth&quot;: 0.0005,
+        &quot;b_halfwidth&quot;: 5e-07,
+        &quot;y_halfwidth&quot;: 5e-06,
+        &quot;estimate_halfwidth&quot;: 0.005
+      },
+      &quot;inverted_concentration&quot;: 65.02866972477065,
+      &quot;rounding_interval&quot;: [
+        64.87458793177584,
+        65.18279569892472
+      ],
+      &quot;comparison_basis&quot;: &quot;declared rounding intervals&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A3&quot;,
+    &quot;name&quot;: &quot;qualitative:lte_check_reported&quot;,
+    &quot;status&quot;: &quot;NOT_REPORTED&quot;,
+    &quot;values&quot;: {
+      &quot;source&quot;: &quot;Population-model discussion: no numerical LTE diagnostic located in supplied PDF.&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A3&quot;,
+    &quot;name&quot;: &quot;qualitative:optical_thinness_or_self_absorption_reported&quot;,
+    &quot;status&quot;: &quot;NOT_REPORTED&quot;,
+    &quot;values&quot;: {
+      &quot;source&quot;: &quot;Ca I 646.257 nm described as free of self-absorption; no quantitative diagnostic located.&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A2&quot;,
+    &quot;name&quot;: &quot;qualitative:atomic_data_provenance_reported&quot;,
+    &quot;status&quot;: &quot;NOT_REPORTED&quot;,
+    &quot;values&quot;: {
+      &quot;source&quot;: &quot;Atomic-data sources are cited, but a complete reproducible broadening-data record is not supplied. False means incomplete, not wholly absent.&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A1&quot;,
+    &quot;name&quot;: &quot;qualitative:instrumental_width_reported&quot;,
+    &quot;status&quot;: &quot;NOT_REPORTED&quot;,
+    &quot;values&quot;: {
+      &quot;source&quot;: &quot;Resolving power and profile discussion supplied; measured response at diagnostic line and numerical separated Stark width not supplied.&quot;
+    }
+  },
+  {
+    &quot;checkpoint&quot;: &quot;A4&quot;,
+    &quot;name&quot;: &quot;qualitative:full_precision_coefficients_available&quot;,
+    &quot;status&quot;: &quot;NOT_REPORTED&quot;,
+    &quot;values&quot;: {
+      &quot;source&quot;: &quot;Tables 4 and 5 print S1 Fe/Ni slopes as 0.0.&quot;
+    }
+  }
+]</pre></details>
 
 <div class="interp">
 <h2>Interpretation</h2>
@@ -135,10 +497,10 @@ underlying physics is wrong.</p>
 </div>
 
 <footer>
-<p>Generated by <strong>CF-LIBS Reproducibility Audit</strong>, software by
-Homa Saeidfirozeh. It accompanies the article by Homa Saeidfirozeh and
-Martin Ferus, <em>Can a published CF-LIBS quantification be reconstructed?
-A reproducibility-audit framework and reporting checklist</em>. Anyone can
+<p>Generated by <strong>CF-LIBS Reproducibility Audit</strong>, the
+machine-actionable record accompanying Saeidfirozeh et al.,
+<em>Can a published CF-LIBS quantification be reconstructed? A
+reproducibility-audit framework and reporting checklist</em>. Anyone can
 regenerate this report from the same audit record:
 <code>cf-libs-audit record.json -o report.html</code></p>
 </footer>

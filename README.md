@@ -1,154 +1,88 @@
 # CF-LIBS Reproducibility Audit
 
-[![audit-checks](https://github.com/homasf/cf-libs-repro-audit/actions/workflows/ci.yml/badge.svg)](https://github.com/homasf/cf-libs-repro-audit/actions/workflows/ci.yml)
-![python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white)
-![version](https://img.shields.io/badge/version-2.0.0-blue)
-![license](https://img.shields.io/badge/license-MIT-green)
+Selected executable calculations for reconstructing printed CF-LIBS/LIPS results.
+This is an unreleased revision accompanying *Reconstructable CF-LIBS quantification:
+a reporting framework with worked literature examples*, by Homa Saeidfirozeh,
+Petr Kubelík, Jan Suchánek and Martin Ferus. Software author: Homa Saeidfirozeh.
 
-**CF-LIBS Reproducibility Audit** is an executable A1–A5 audit engine for
-checking whether quantitative claims in a published calibration-free
-LIBS/LIPS study can be reconstructed from the values printed in the article.
+## Scope and installation
 
-**Software author:** Homa Saeidfirozeh  
-**Version:** 2.0.0  
-**Release date:** 7 July 2026  
-**Repository:** `homasf/cf-libs-repro-audit`
-
-The software accompanies the article:
-
-> Homa Saeidfirozeh and Martin Ferus, *Can a published CF-LIBS
-> quantification be reconstructed? A reproducibility-audit framework and
-> reporting checklist.*
-
-The article's short title is *Reproducibility audit for CF-LIBS
-quantification*.
-
-## Scope
-
-The software reads a machine-actionable JSON record containing values
-transcribed from a publication and reruns deterministic checks associated
-with five checkpoints:
-
-- **A1 — Linewidth provenance:** printed FWHM, Stark-width and instrumental-width checks.
-- **A2 — Plasma-parameter consistency:** units, normalizations and powers of ten.
-- **A3 — Plasma-model reporting:** LTE, optical-thinness/self-absorption, atomic-data provenance and related reporting flags.
-- **A4 — Concentration inversion:** invertibility and consistency of printed empirical equations.
-- **A5 — Validation:** signed relative deviations from independent comparison values and stated tolerances.
-
-The engine returns `PASS`, `FAIL`, `NOT_INVERTIBLE`, `NOT_REPORTED`,
-`REPORTED` and `INFO` results, with the arithmetic shown in Markdown or HTML.
-
-**No raw spectra are used and no new measurements are made.** A failure means
-that a claim is not reproducible from the values as printed; it is not an
-assessment of author intent, experimental misconduct or the true sample
-concentrations.
-
-## Worked example
-
-The bundled record audits El-Saeed et al., *Scientific Reports* 15 (2025)
-19949. From printed values only, the repository regenerates:
-
-| Paper item | Checkpoint | Implementation/output |
-|---|---|---|
-| Table 1 — signed relative deviations versus ICP-OES | A5 | `report.table1_rows`, `output/table1_signed_deviations.csv` |
-| Figure 2 — deviation chart with the stated ±1% band | A5 | `scripts/make_figure2.py` |
-| Table 2 — Ca I 646.257 nm linewidth/Stark check | A1/A2 | `report.table2_rows`, `output/table2_linewidth_check.csv` |
-| Instrumental-width upper bound at $R=75{,}000$ | A1 | `audit.instrumental_fwhm`, `audit.quadrature_corrected_fwhm` |
-| Electron-density exponent check | A2/A4 | `audit.ne_scale_check` |
-| Fe/Ni zero-slope equation audit | A4 | `audit.LinearEquation` |
-
-## Installation
-
-From PyPI, after the release is published:
-
-```bash
-python -m pip install cf-libs-repro-audit
-```
-
-For development from GitHub:
+The generic engine checks selected linewidth, parameter, empirical inversion,
+validation and reporting operations. The multi-case module adds an unweighted
+Boltzmann line-table fit, mass–mole conversion and a MESBP composition-distance
+comparison. It does not process raw spectra, implement a complete CF-LIBS closure
+pipeline, or rerun the iterative MESBP algorithm.
 
 ```bash
 git clone https://github.com/homasf/cf-libs-repro-audit.git
 cd cf-libs-repro-audit
 python -m pip install -e ".[dev]"
-```
-
-## Use
-
-Audit the bundled worked example:
-
-```bash
-cf-libs-audit --worked-example
-```
-
-Write a styled HTML report:
-
-```bash
+python -m pytest -q
 cf-libs-audit --worked-example -o audit_report.html
+python -m libs_repro_audit.cases --output output/case_results.json
+python scripts/make_validation_figure.py
 ```
 
-Audit another paper:
+Bundled records are labelled **AI source cross-check; author verification pending**.
+Outputs from them are preliminary. Follow AGENT_GUIDE.md before assigning a human
+verification stamp. Local tests do not establish source verification or experimental
+validity. PyPI availability and an archival DOI are not claimed for this revision.
 
-```bash
-cp examples/template.json mypaper.json
-# Transcribe and verify the paper's printed values in mypaper.json.
-cf-libs-audit mypaper.json -o mypaper_report.html
-```
+The earlier commands `python -m libs_repro_audit` and
+`python scripts/make_figure2.py` remain available for soil-only outputs.
 
-Use strict mode in continuous integration:
+## Results and comparison rules
 
-```bash
-cf-libs-audit mypaper.json --strict
-```
+| Status | Interpretation |
+|---|---|
+| PASS | The declared numerical rule is met; physical validity is not established. |
+| FAIL | The declared rule is not met; experimental cause is not determined. |
+| NOT_INVERTIBLE | The printed linear relation has zero slope. |
+| NOT_REPORTED | The record explicitly marks an item absent. |
+| NOT_ASSESSED | No check was supplied for this checkpoint. |
+| REPORTED | A diagnostic is marked present; adequacy is not assessed. |
+| INFO | Arithmetic or a scenario without a supported binary rule. |
 
-Regenerate the manuscript tables and numerical checks:
+Markdown and HTML retain values, sources, assumptions, tolerances, missing inputs,
+conflicts and verification status. The manuscript further distinguishes numerical
+reconstruction, uncertainty-interval compatibility, conditional scenarios and
+missing inputs. Neither representation is a composite score for a paper.
 
-```bash
-python -m libs_repro_audit
-```
+`--strict` returns nonzero for failed, absent or non-invertible checks and for
+unverified records. A non-strict zero exit means a report was generated, not that
+all checks passed. Invalid input returns code 2.
 
-Regenerate Figure 2:
+## Numerical safeguards
 
-```bash
-python scripts/make_figure2.py
-```
+- Reject non-finite, boolean and physically invalid numeric inputs.
+- Convert McWhirter temperature in eV to K before using the K prefactor.
+- Distinguish Gaussian quadrature and Voigt instrument-response scenarios;
+  neither is a universal correction bound.
+- Require explicit rounding bounds or tolerances for inverse comparisons.
+  Nonzero slope alone proves invertibility, not reproduction.
+- Preserve conflicting density scales; the soil lower scale is an inference.
+- Keep numerical rounding, analyst screening and measurement uncertainty separate.
+- State the SD/mean assumptions behind plant RA and RSD checks. A necessary bound
+  does not demonstrate attainability for an integer replicate count.
+- Normalize mass–mole conversions only over the stated element set.
 
-Run the test suite:
+## Files and sources
 
-```bash
-python -m pytest -v
-```
+`src/libs_repro_audit/case_studies.json` contains the five cases, source locations
+and DOI identifiers. `cases.py` computes their results. `audit.py` contains kernels;
+`engine.py` runs generic records; `tests/` verifies known answers, domains, rounding,
+round trips and reporting provenance. SCIENTIFIC_REVIEW.md describes this revision.
 
-## Repository structure
+Source papers: [soil](https://doi.org/10.1038/s41598-025-04395-5),
+[alloy](https://doi.org/10.3390/met13071188),
+[plant](https://doi.org/10.1016/j.arabjc.2024.105941),
+[MESBP](https://doi.org/10.1039/D2JA00218C),
+[mass–mole](https://doi.org/10.1039/D4JA00028E).
 
-- `data/printed_values.json` — printed numerical inputs for the worked example.
-- `examples/template.json` — paper-independent audit-record template.
-- `examples/elsaeed2025_scirep.json` — verified worked-example record.
-- `src/libs_repro_audit/audit.py` — deterministic numerical functions.
-- `src/libs_repro_audit/engine.py` — general A1–A5 audit engine.
-- `src/libs_repro_audit/cli.py` — `cf-libs-audit` command-line interface.
-- `tests/` — assertions for the numerical results used in the article.
-- `.github/workflows/ci.yml` — tests on Python 3.9 and 3.12.
-- `.github/workflows/publish.yml` — trusted publication to PyPI from a GitHub Release.
+## Extraction, citation and license
 
-## AI-assisted extraction
-
-`cf-libs-audit-extract` can draft an audit record from a plain-text paper
-export. The draft is always stamped `UNVERIFIED`. A human must check every
-value against the publication before the deterministic audit is run. The
-language model performs transcription only; it never determines the audit
-verdict. See `AGENT_GUIDE.md`.
-
-## Citation
-
-The software author is **Homa Saeidfirozeh**. Use GitHub's **Cite this
-repository** control or the archived Zenodo DOI after it is minted. The
-machine-readable software metadata are in `CITATION.cff`.
-
-The accompanying article is a separate research output authored by Homa
-Saeidfirozeh and Martin Ferus. It should be cited separately using its full
-journal citation when available.
-
-## License
-
-MIT License. See `LICENSE`.
+`cf-libs-audit-extract` drafts unverified records from plain text. It requires
+configured service credentials and is not invoked by tests. Human source
+verification is required before a record is labelled verified; see AGENT_GUIDE.md.
+Cite software separately from the article using CITATION.cff. Mint a DOI for the
+accepted archival release; do not substitute a placeholder. MIT License.

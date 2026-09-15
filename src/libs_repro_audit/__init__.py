@@ -1,10 +1,4 @@
-"""Executable reproducibility-audit record for CF-LIBS/LIPS quantification.
-
-Implements the numerical checks of checkpoints A1-A5 from
-Saeidfirozeh & Ferus and regenerates Tables 1-2, Figure 2, the
-electron-density scale checks and the equation invertibility audit
-from printed values only.
-"""
+"""Selected printed-value CF-LIBS operations; not a full spectral pipeline."""
 
 from .htmlreport import render_html
 from .engine import AuditReport, CheckResult, load_record, render_markdown, run_audit
@@ -36,4 +30,5 @@ __all__ = [
     "render_html",
 ]
 
-__version__ = "2.0.0"
+__version__ = "2.0.1.dev0"
+

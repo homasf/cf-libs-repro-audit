@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cf-libs-repro-audit"
-version = "2.0.0"
+version = "2.0.1.dev0"
 description = "CF-LIBS Reproducibility Audit: executable A1-A5 checks for reconstructing quantitative claims from printed CF-LIBS/LIPS records."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -56,3 +56,4 @@ libs_repro_audit = ["*.json"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
+
