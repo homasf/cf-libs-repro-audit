@@ -87,7 +87,9 @@
       "w_s_nm": 0.0381,
       "exponent": 16,
       "ne_comparison_mantissa": 1.75,
-      "source": "FWHM and W_s printed in the audited article; comparison value plotted there"
+      "source": "FWHM and W_s printed in the audited article; comparison value plotted there",
+      "ratio_tolerance": 0.01,
+      "tolerance_basis": "Analyst numerical screen, 1% relative; intentionally coarser than printed precision. Not an experimental uncertainty."
     },
     {
       "sample": "S1-Ptest",
@@ -96,7 +98,9 @@
       "w_s_nm": 0.0381,
       "exponent": 16,
       "ne_comparison_mantissa": 1.54382,
-      "source": "article prints 1.54382e17 cm-3; 1e16 is the operative scale required by the validation table"
+      "source": "article prints 1.54382e17 cm-3; 1e16 is inferred from the printed inversion, not independently measured here",
+      "ratio_tolerance": 0.01,
+      "tolerance_basis": "Analyst numerical screen, 1% relative; intentionally coarser than printed precision. Not an experimental uncertainty."
     }
   ],
   "instrument": {
@@ -117,7 +121,14 @@
       ],
       "printed_estimate": 65.02,
       "stated_exponent": 17,
-      "source": "S1 Cd Ne-concentration equation, Table 4; test-sample Ne stated as 1.54382e17"
+      "source": "S1 Cd Ne-concentration equation, Table 4; test-sample Ne stated as 1.54382e17",
+      "rounding": {
+        "a_halfwidth": 0.0005,
+        "b_halfwidth": 5e-07,
+        "y_halfwidth": 5e-06,
+        "estimate_halfwidth": 0.005
+      },
+      "tolerance_basis": "Endpoint propagation of half the last printed digit."
     },
     {
       "analyte": "Zn",
@@ -131,7 +142,14 @@
       ],
       "printed_estimate": 136.94,
       "stated_exponent": 17,
-      "source": "S1 Zn Ne-concentration equation, Table 4"
+      "source": "S1 Zn Ne-concentration equation, Table 4",
+      "rounding": {
+        "a_halfwidth": 0.0005,
+        "b_halfwidth": 5e-07,
+        "y_halfwidth": 5e-06,
+        "estimate_halfwidth": 0.005
+      },
+      "tolerance_basis": "Endpoint propagation of half the last printed digit."
     }
   ],
   "equations": [
@@ -160,13 +178,27 @@
       "source": "S1 Fe/Ni: Te = 9118.16 + 0.0*C; reported test-sample Te = 9136.3 K"
     },
     {
+      "analyte": "Ni",
+      "parameter": "Te",
+      "a": 9118.16,
+      "b": 0.0,
+      "operative_value": 9136.3,
+      "source": "El-Saeed Table 5, S1 Ni; validation paragraph for temperature"
+    },
+    {
       "analyte": "Cd",
       "parameter": "Ne",
       "a": 1.317,
       "b": 0.003488,
       "operative_value": 1.54382,
       "printed_estimate": 65.02,
-      "source": "invertible counter-example: S1 Cd equation reproduces its printed estimate"
+      "source": "S1 Cd equation: compatible with the printed estimate under the declared rounding intervals",
+      "rounding": {
+        "a_halfwidth": 0.0005,
+        "b_halfwidth": 5e-07,
+        "y_halfwidth": 5e-06,
+        "estimate_halfwidth": 0.005
+      }
     }
   ],
   "qualitative": {
@@ -175,5 +207,21 @@
     "atomic_data_provenance_reported": false,
     "instrumental_width_reported": false,
     "full_precision_coefficients_available": false
+  },
+  "verification": "AI cross-check against the supplied publication on 2026-09-15; author source verification pending",
+  "conflicts": [
+    {
+      "quantity": "test electron density",
+      "printed": "1.54382e17 cm^-3",
+      "alternative": "1.54382e16 cm^-3",
+      "basis": "Alternative inferred only from empirical inversion; not a corrected measurement."
+    }
+  ],
+  "qualitative_sources": {
+    "lte_check_reported": "Population-model discussion: no numerical LTE diagnostic located in supplied PDF.",
+    "optical_thinness_or_self_absorption_reported": "Ca I 646.257 nm described as free of self-absorption; no quantitative diagnostic located.",
+    "atomic_data_provenance_reported": "Atomic-data sources are cited, but a complete reproducible broadening-data record is not supplied. False means incomplete, not wholly absent.",
+    "instrumental_width_reported": "Resolving power and profile discussion supplied; measured response at diagnostic line and numerical separated Stark width not supplied.",
+    "full_precision_coefficients_available": "Tables 4 and 5 print S1 Fe/Ni slopes as 0.0."
   }
 }

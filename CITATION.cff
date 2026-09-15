@@ -1,15 +1,14 @@
 cff-version: 1.2.0
 message: >-
   If you use this software, please cite the software. It accompanies the
-  article "Can a published CF-LIBS quantification be reconstructed? A
-  reproducibility-audit framework and reporting checklist" by Homa
-  Saeidfirozeh and Martin Ferus.
+  article "Reconstructable CF-LIBS quantification: a reporting framework
+  with worked literature examples" by Homa
+  Saeidfirozeh, Petr Kubelik, Jan Suchanek and Martin Ferus (unpublished revision).
 title: >-
   CF-LIBS Reproducibility Audit: an executable A1-A5 audit engine for
   CF-LIBS/LIPS quantification
 type: software
-version: 2.0.0
-date-released: 2026-07-07
+version: 2.0.1.dev0
 license: MIT
 authors:
   - family-names: Saeidfirozeh
@@ -35,11 +34,16 @@ keywords:
 references:
   - type: article
     title: >-
-      Can a published CF-LIBS quantification be reconstructed? A
-      reproducibility-audit framework and reporting checklist
+      Reconstructable CF-LIBS quantification: a reporting framework
+      with worked literature examples
     authors:
       - family-names: Saeidfirozeh
         given-names: Homa
+      - family-names: Kubelík
+        given-names: Petr
+      - family-names: Suchánek
+        given-names: Jan
       - family-names: Ferus
         given-names: Martin
     year: 2026
+

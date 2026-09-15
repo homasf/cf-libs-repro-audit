@@ -1,0 +1,586 @@
+{
+  "schema_version": "1.0",
+  "verification": "AI source cross-check completed 2026-09-15; author verification pending",
+  "scope": "Printed-value reconstruction and labeled numerical scenarios; no raw spectra or new experimental validation.",
+  "sources": {
+    "soil": "10.1038/s41598-025-04395-5, Tables 4-6 and Fig. 7",
+    "alloy": "10.3390/met13071188, Tables 1 and 4; Sections 3.2-3.4",
+    "plant": "10.1016/j.arabjc.2024.105941, Tables 1, 3a, 3b; Fig. 8; Section 3.2",
+    "mesbp": "10.1039/D2JA00218C, Table 2 and Eq. (16), p. 2458",
+    "mass_mole": "10.1039/D4JA00028E, Table 1 and Eqs. (3)-(4), p. 1031"
+  },
+  "soil_validation": [
+    {
+      "element": "Cd",
+      "reference": 69.62,
+      "ne_estimate": 65.02,
+      "te_estimate": 75.8
+    },
+    {
+      "element": "Zn",
+      "reference": 145.33,
+      "ne_estimate": 136.94,
+      "te_estimate": 138.66
+    },
+    {
+      "element": "Fe",
+      "reference": 61.67,
+      "ne_estimate": 61.27,
+      "te_estimate": 61.27
+    },
+    {
+      "element": "Ni",
+      "reference": 149.53,
+      "ne_estimate": 149.87,
+      "te_estimate": 149.87
+    }
+  ],
+  "plant_validation": [
+    {
+      "element": "Ca",
+      "cf_libs": 14424.0,
+      "reference": 14458.0,
+      "ra_printed": 0.12,
+      "sd_printed": 0.13,
+      "rsd_printed_percent": 1.64
+    },
+    {
+      "element": "K",
+      "cf_libs": 9511.0,
+      "reference": 9531.0,
+      "ra_printed": 0.18,
+      "sd_printed": 0.11,
+      "rsd_printed_percent": 1.67
+    },
+    {
+      "element": "Mg",
+      "cf_libs": 2031.0,
+      "reference": 2024.0,
+      "ra_printed": 0.09,
+      "sd_printed": 0.07,
+      "rsd_printed_percent": 1.38
+    },
+    {
+      "element": "Si",
+      "cf_libs": 1559.0,
+      "reference": 1576.0,
+      "ra_printed": 0.12,
+      "sd_printed": 0.12,
+      "rsd_printed_percent": 1.43
+    },
+    {
+      "element": "S",
+      "cf_libs": 1450.0,
+      "reference": 1461.0,
+      "ra_printed": 0.12,
+      "sd_printed": 0.11,
+      "rsd_printed_percent": 1.69
+    },
+    {
+      "element": "P",
+      "cf_libs": 1465.0,
+      "reference": 1450.0,
+      "ra_printed": 0.13,
+      "sd_printed": 0.1,
+      "rsd_printed_percent": 1.46
+    },
+    {
+      "element": "Al",
+      "cf_libs": 678.0,
+      "reference": 684.0,
+      "ra_printed": 0.33,
+      "sd_printed": 0.11,
+      "rsd_printed_percent": 2.64
+    },
+    {
+      "element": "Fe",
+      "cf_libs": 458.0,
+      "reference": 461.0,
+      "ra_printed": 0.28,
+      "sd_printed": 0.08,
+      "rsd_printed_percent": 2.97
+    },
+    {
+      "element": "Na",
+      "cf_libs": 59.0,
+      "reference": 61.0,
+      "ra_printed": 0.22,
+      "sd_printed": 0.07,
+      "rsd_printed_percent": 3.76
+    },
+    {
+      "element": "Ti",
+      "cf_libs": 48.0,
+      "reference": 50.0,
+      "ra_printed": 0.23,
+      "sd_printed": 0.1,
+      "rsd_printed_percent": 3.86
+    },
+    {
+      "element": "Ba",
+      "cf_libs": 47.0,
+      "reference": 45.0,
+      "ra_printed": 0.24,
+      "sd_printed": 0.09,
+      "rsd_printed_percent": 4.65
+    },
+    {
+      "element": "Mn",
+      "cf_libs": 37.0,
+      "reference": 38.0,
+      "ra_printed": 0.34,
+      "sd_printed": 0.12,
+      "rsd_printed_percent": 4.43
+    },
+    {
+      "element": "Zn",
+      "cf_libs": 37.0,
+      "reference": 38.0,
+      "ra_printed": 0.34,
+      "sd_printed": 0.12,
+      "rsd_printed_percent": 3.09
+    },
+    {
+      "element": "Sr",
+      "cf_libs": 27.0,
+      "reference": 28.0,
+      "ra_printed": 0.39,
+      "sd_printed": 0.2,
+      "rsd_printed_percent": 3.1
+    },
+    {
+      "element": "B",
+      "cf_libs": 19.0,
+      "reference": 20.0,
+      "ra_printed": 0.43,
+      "sd_printed": 0.22,
+      "rsd_printed_percent": 3.12
+    },
+    {
+      "element": "Cu",
+      "cf_libs": 19.6,
+      "reference": 19.0,
+      "ra_printed": 0.21,
+      "sd_printed": 0.13,
+      "rsd_printed_percent": 3.82
+    },
+    {
+      "element": "Rb",
+      "cf_libs": 15.0,
+      "reference": 16.0,
+      "ra_printed": 0.25,
+      "sd_printed": 0.24,
+      "rsd_printed_percent": 2.68
+    },
+    {
+      "element": "Cr",
+      "cf_libs": 2.6,
+      "reference": 2.7,
+      "ra_printed": 0.46,
+      "sd_printed": 0.26,
+      "rsd_printed_percent": 3.82
+    },
+    {
+      "element": "Ni",
+      "cf_libs": 1.5,
+      "reference": 1.9,
+      "ra_printed": 0.48,
+      "sd_printed": 0.27,
+      "rsd_printed_percent": 3.88
+    },
+    {
+      "element": "Pb",
+      "cf_libs": 1.5,
+      "reference": 1.6,
+      "ra_printed": 0.49,
+      "sd_printed": 0.24,
+      "rsd_printed_percent": 3.91
+    },
+    {
+      "element": "V",
+      "cf_libs": 1.16,
+      "reference": 1.1,
+      "ra_printed": 0.41,
+      "sd_printed": 0.19,
+      "rsd_printed_percent": 3.65
+    },
+    {
+      "element": "Mo",
+      "cf_libs": 1.0,
+      "reference": 0.9,
+      "ra_printed": 0.44,
+      "sd_printed": 0.13,
+      "rsd_printed_percent": 3.79
+    },
+    {
+      "element": "Li",
+      "cf_libs": 0.9,
+      "reference": 0.76,
+      "ra_printed": 0.49,
+      "sd_printed": 0.1,
+      "rsd_printed_percent": 3.94
+    }
+  ],
+  "plant_lines": [
+    {
+      "wavelength_nm": 335.0,
+      "intensity": 1563.0,
+      "g": 5.0,
+      "A_1e8_s": 0.178,
+      "energy_ev": 5.585
+    },
+    {
+      "wavelength_nm": 445.5,
+      "intensity": 5034.0,
+      "g": 5.0,
+      "A_1e8_s": 0.2,
+      "energy_ev": 4.681
+    },
+    {
+      "wavelength_nm": 452.6,
+      "intensity": 2176.0,
+      "g": 3.0,
+      "A_1e8_s": 0.41,
+      "energy_ev": 5.447
+    },
+    {
+      "wavelength_nm": 518.8,
+      "intensity": 4374.0,
+      "g": 5.0,
+      "A_1e8_s": 0.4,
+      "energy_ev": 5.321
+    },
+    {
+      "wavelength_nm": 526.5,
+      "intensity": 4636.0,
+      "g": 3.0,
+      "A_1e8_s": 0.44,
+      "energy_ev": 4.877
+    },
+    {
+      "wavelength_nm": 558.1,
+      "intensity": 1826.0,
+      "g": 7.0,
+      "A_1e8_s": 0.06,
+      "energy_ev": 4.743
+    },
+    {
+      "wavelength_nm": 559.0,
+      "intensity": 1977.0,
+      "g": 5.0,
+      "A_1e8_s": 0.083,
+      "energy_ev": 4.739
+    },
+    {
+      "wavelength_nm": 559.8,
+      "intensity": 4511.0,
+      "g": 3.0,
+      "A_1e8_s": 0.43,
+      "energy_ev": 4.735
+    },
+    {
+      "wavelength_nm": 610.2,
+      "intensity": 4261.0,
+      "g": 3.0,
+      "A_1e8_s": 0.096,
+      "energy_ev": 3.91
+    },
+    {
+      "wavelength_nm": 616.9,
+      "intensity": 4841.0,
+      "g": 5.0,
+      "A_1e8_s": 0.19,
+      "energy_ev": 4.535
+    }
+  ],
+  "alloy_validation": [
+    {
+      "method": "CF-LIBS",
+      "cu_wt_percent": 18.09,
+      "fe_wt_percent": 81.91
+    },
+    {
+      "method": "Boltzmann intercept",
+      "cu_wt_percent": 19.11,
+      "fe_wt_percent": 80.89
+    },
+    {
+      "method": "EDX",
+      "cu_wt_percent": 22.21,
+      "fe_wt_percent": 77.79
+    },
+    {
+      "method": "ICP-AES",
+      "cu_wt_percent": 21.09,
+      "fe_wt_percent": 78.91
+    }
+  ],
+  "alloy_ratios": [
+    {
+      "element": "Fe",
+      "kT_ev": 0.69,
+      "lines": [
+        {
+          "wavelength_nm": 372.13,
+          "A_s": 6700000.0,
+          "g": 3,
+          "intensity": 61.5,
+          "energy_ev": 5.82
+        },
+        {
+          "wavelength_nm": 382.18,
+          "A_s": 7300000.0,
+          "g": 5,
+          "intensity": 104.9,
+          "energy_ev": 5.85
+        }
+      ]
+    },
+    {
+      "element": "Cu",
+      "kT_ev": 0.69,
+      "lines": [
+        {
+          "wavelength_nm": 515.32,
+          "A_s": 60000000.0,
+          "g": 4,
+          "intensity": 1079,
+          "energy_ev": 6.19
+        },
+        {
+          "wavelength_nm": 521.82,
+          "A_s": 75000000.0,
+          "g": 6,
+          "intensity": 2028,
+          "energy_ev": 6.19
+        }
+      ]
+    }
+  ],
+  "mesbp": [
+    {
+      "method": "CF-LIBS",
+      "composition": [
+        76,
+        20.1,
+        3.9
+      ]
+    },
+    {
+      "method": "MESBP-CF-LIBS",
+      "composition": [
+        62,
+        32.5,
+        5.5
+      ]
+    }
+  ],
+  "mass_mole": [
+    {
+      "material": "Portland cement",
+      "elements": [
+        {
+          "element": "Al",
+          "molar_mass_g_mol": 26.98,
+          "mass_percent": 2.51,
+          "mole_percent_printed": 2.34
+        },
+        {
+          "element": "Ca",
+          "molar_mass_g_mol": 40.08,
+          "mass_percent": 47.37,
+          "mole_percent_printed": 29.72
+        },
+        {
+          "element": "Fe",
+          "molar_mass_g_mol": 55.84,
+          "mass_percent": 1.77,
+          "mole_percent_printed": 0.8
+        },
+        {
+          "element": "K",
+          "molar_mass_g_mol": 39.1,
+          "mass_percent": 0.74,
+          "mole_percent_printed": 0.47
+        },
+        {
+          "element": "Mg",
+          "molar_mass_g_mol": 24.31,
+          "mass_percent": 1.38,
+          "mole_percent_printed": 1.43
+        },
+        {
+          "element": "Na",
+          "molar_mass_g_mol": 22.99,
+          "mass_percent": 0.15,
+          "mole_percent_printed": 0.17
+        },
+        {
+          "element": "O",
+          "molar_mass_g_mol": 16,
+          "mass_percent": 35.46,
+          "mole_percent_printed": 55.72
+        },
+        {
+          "element": "S",
+          "molar_mass_g_mol": 32.06,
+          "mass_percent": 1.07,
+          "mole_percent_printed": 0.84
+        },
+        {
+          "element": "Si",
+          "molar_mass_g_mol": 28.09,
+          "mass_percent": 9.45,
+          "mole_percent_printed": 8.46
+        },
+        {
+          "element": "Ti",
+          "molar_mass_g_mol": 47.87,
+          "mass_percent": 0.11,
+          "mole_percent_printed": 0.06
+        }
+      ]
+    },
+    {
+      "material": "Alnico",
+      "elements": [
+        {
+          "element": "Al",
+          "molar_mass_g_mol": 26.98,
+          "mass_percent": 13.96,
+          "mole_percent_printed": 25.49
+        },
+        {
+          "element": "Co",
+          "molar_mass_g_mol": 58.93,
+          "mass_percent": 36.09,
+          "mole_percent_printed": 30.17
+        },
+        {
+          "element": "Cu",
+          "molar_mass_g_mol": 63.55,
+          "mass_percent": 2.5,
+          "mole_percent_printed": 1.94
+        },
+        {
+          "element": "Fe",
+          "molar_mass_g_mol": 55.84,
+          "mass_percent": 28.5,
+          "mole_percent_printed": 25.14
+        },
+        {
+          "element": "Ni",
+          "molar_mass_g_mol": 58.69,
+          "mass_percent": 11.75,
+          "mole_percent_printed": 9.86
+        },
+        {
+          "element": "Ti",
+          "molar_mass_g_mol": 47.87,
+          "mass_percent": 7.2,
+          "mole_percent_printed": 7.41
+        }
+      ]
+    },
+    {
+      "material": "Stainless steel",
+      "elements": [
+        {
+          "element": "C",
+          "molar_mass_g_mol": 12.01,
+          "mass_percent": 0.2,
+          "mole_percent_printed": 0.9
+        },
+        {
+          "element": "Cr",
+          "molar_mass_g_mol": 52.0,
+          "mass_percent": 13.0,
+          "mole_percent_printed": 13.59
+        },
+        {
+          "element": "Fe",
+          "molar_mass_g_mol": 55.84,
+          "mass_percent": 84.25,
+          "mole_percent_printed": 81.99
+        },
+        {
+          "element": "Mn",
+          "molar_mass_g_mol": 54.94,
+          "mass_percent": 1.5,
+          "mole_percent_printed": 1.48
+        },
+        {
+          "element": "P",
+          "molar_mass_g_mol": 30.97,
+          "mass_percent": 0.04,
+          "mole_percent_printed": 0.07
+        },
+        {
+          "element": "S",
+          "molar_mass_g_mol": 32.06,
+          "mass_percent": 0.01,
+          "mole_percent_printed": 0.03
+        },
+        {
+          "element": "Si",
+          "molar_mass_g_mol": 28.09,
+          "mass_percent": 1.0,
+          "mole_percent_printed": 1.94
+        }
+      ]
+    },
+    {
+      "material": "Soda-lime glass",
+      "elements": [
+        {
+          "element": "Al",
+          "molar_mass_g_mol": 26.98,
+          "mass_percent": 0.74,
+          "mole_percent_printed": 0.57
+        },
+        {
+          "element": "Ca",
+          "molar_mass_g_mol": 40.08,
+          "mass_percent": 5.62,
+          "mole_percent_printed": 2.89
+        },
+        {
+          "element": "Fe",
+          "molar_mass_g_mol": 55.84,
+          "mass_percent": 0.04,
+          "mole_percent_printed": 0.02
+        },
+        {
+          "element": "K",
+          "molar_mass_g_mol": 39.1,
+          "mass_percent": 0.12,
+          "mole_percent_printed": 0.06
+        },
+        {
+          "element": "Mg",
+          "molar_mass_g_mol": 24.31,
+          "mass_percent": 1.44,
+          "mole_percent_printed": 1.22
+        },
+        {
+          "element": "Na",
+          "molar_mass_g_mol": 22.99,
+          "mass_percent": 11.77,
+          "mole_percent_printed": 10.56
+        },
+        {
+          "element": "O",
+          "molar_mass_g_mol": 16.0,
+          "mass_percent": 46.48,
+          "mole_percent_printed": 59.89
+        },
+        {
+          "element": "Si",
+          "molar_mass_g_mol": 28.09,
+          "mass_percent": 33.79,
+          "mole_percent_printed": 24.8
+        }
+      ]
+    }
+  ]
+}

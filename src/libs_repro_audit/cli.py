@@ -15,7 +15,7 @@ from pathlib import Path
 
 from . import __version__
 from .engine import (FAIL, INFO, NOT_INVERTIBLE, NOT_REPORTED, PASS,
-                     REPORTED, load_record, render_markdown, run_audit)
+                     REPORTED, NOT_ASSESSED, load_record, render_markdown, run_audit)
 from .htmlreport import render_html
 
 _COLORS = {PASS: "\033[32m", REPORTED: "\033[32m", FAIL: "\033[31m",
@@ -72,14 +72,18 @@ def main(argv: list[str] | None = None) -> int:
         print(_c(_DIM, f"(no record given — auditing bundled worked "
                        f"example: {path.name})", color))
 
-    record = load_record(path)
-    if "UNVERIFIED" in str(record.get("verification", "")):
+    try:
+        record = load_record(path)
+        report = run_audit(record)
+    except (OSError, ValueError, KeyError, TypeError, ZeroDivisionError) as exc:
+        print(f'Invalid or incomplete audit input: {exc}', file=sys.stderr)
+        return 2
+    unverified = not str(record.get('verification', '')).lower().startswith('verified by ')
+    if unverified:
         print(_c("\033[33m",
-                 "⚠ this record is an UNVERIFIED DRAFT (LLM-extracted). "
+                 "Source verification is not recorded as complete. "
                  "Verify every value against the PDF before citing this "
                  "report — see AGENT_GUIDE.md.", color))
-
-    report = run_audit(record)
 
     title = report.paper.get("title", "(untitled)")
     print(f"\n{_c(_BOLD, 'Audited publication:', color)} {title}")
@@ -106,7 +110,7 @@ def main(argv: list[str] | None = None) -> int:
         out.write_text(text, encoding="utf-8")
         print(f"report written to {out}")
 
-    return 1 if (args.strict and bad) else 0
+    return 1 if (args.strict and (bad or unverified)) else 0
 
 
 if __name__ == "__main__":  # pragma: no cover

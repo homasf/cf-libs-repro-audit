@@ -1,4 +1,4 @@
-"""Regenerate the audit paper's numerical results from printed values.
+"""Regenerate the earlier soil-only tables from printed values.
 
 Running ``python -m libs_repro_audit`` prints, in order:
 
@@ -125,7 +125,7 @@ def main(output_dir: str = "output") -> None:
     print(
         f"Instrumental FWHM at R={instr['conditioned_resolving_power']}: "
         f"{w_inst:.4f} nm; quadrature correction changes the displayed "
-        f"FWHM by {change:.2f}% (far below the ~13% reduction required)."
+        f"FWHM by {change:.2f}%. This assumes Gaussian widths; it is not a universal bound."
     )
 
     # --- A2/A4: electron-density scale check, Eqs. (3)-(4) ---------------
@@ -150,7 +150,7 @@ def main(output_dir: str = "output") -> None:
         status = "invertible" if eq.invertible else "NOT invertible (zero slope)"
         print(
             f"{element} (S1, N_e eq.): a={coeffs['a']}, b={coeffs['b']} -> {status}; "
-            f"constant {coeffs['a']} vs operative test value "
+            f"constant {coeffs['a']} vs test mantissa under the inferred 1e16 normalization "
             f"{data['test_sample']['ne_printed']['value']}"
         )
     te_const = data["te_concentration_equations"]["S1"]["Fe"]["a"]
@@ -165,3 +165,4 @@ def main(output_dir: str = "output") -> None:
 
 if __name__ == "__main__":  # pragma: no cover
     main()
+
