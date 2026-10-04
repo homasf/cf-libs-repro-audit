@@ -21,5 +21,5 @@ jobs:
           python -m venv .wheel-smoke
           .wheel-smoke/bin/python -m pip install --no-deps dist/*.whl
           (cd /tmp && "$GITHUB_WORKSPACE/.wheel-smoke/bin/python" -m libs_repro_audit)
-          (cd /tmp && "$GITHUB_WORKSPACE/.wheel-smoke/bin/libs-audit" --worked-example -o audit_report.html)
-          (cd /tmp && "$GITHUB_WORKSPACE/.wheel-smoke/bin/libs-audit-extract" --help)
+          (cd /tmp && "$GITHUB_WORKSPACE/.wheel-smoke/bin/cf-libs-audit" --worked-example -o audit_report.html)
+          (cd /tmp && "$GITHUB_WORKSPACE/.wheel-smoke/bin/cf-libs-audit-extract" --help)
