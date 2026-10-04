@@ -23,6 +23,25 @@ The software accompanies the article:
 The article's short title is *Reproducibility audit for CF-LIBS
 quantification*.
 
+## Chemosensors Perspective support
+
+The [`perspective/`](perspective/) folder contains Code S1 and Data S1 for
+*Towards Reconstructable CF LIBS Quantification: A Perspective on Reporting,
+Validation, and Reproducibility*. It includes the original calculation
+scripts, constructed input record, numerical results, tables, and all five
+original figures. Run the supporting calculations from the repository root:
+
+```bash
+cd perspective
+python3 supplementary/code/run_all.py
+python3 supplementary/code/verify_release.py
+```
+
+The calculations use only the Python standard library. See the
+[Perspective README](perspective/README.md) for figure dependencies, input
+provenance, and verification details. This support folder supplements the
+audit engine described below.
+
 ## Scope
 
 The software reads a machine-actionable JSON record containing values
@@ -129,7 +148,8 @@ python -m pytest -v
 - `src/libs_repro_audit/cli.py` — `cf-libs-audit` command-line interface.
 - `tests/` — assertions for the numerical results used in the article.
 - `.github/workflows/ci.yml` — tests on Python 3.9 and 3.12.
-- `.github/workflows/publish.yml` — trusted publication to PyPI from a GitHub Release.
+- `perspective/` — Code S1 and Data S1 for the Chemosensors Perspective.
+- `.github/workflows/perspective.yml` — numerical and consistency checks for the Perspective support.
 
 ## AI-assisted extraction
 

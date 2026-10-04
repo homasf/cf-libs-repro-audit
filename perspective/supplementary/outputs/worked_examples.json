@@ -1,0 +1,365 @@
+{
+  "A1": {
+    "table": [
+      {
+        "G_over_W": 0.1,
+        "L_over_W_voigt": 0.9892621395976534,
+        "L_over_W_quadrature": 0.99498743710662,
+        "ne_bias_uncorrected_percent": 1.0854413580119182,
+        "ne_bias_quadrature_percent": 0.5787442255998032
+      },
+      {
+        "G_over_W": 0.2,
+        "L_over_W_voigt": 0.9571598617522533,
+        "L_over_W_quadrature": 0.9797958971132712,
+        "ne_bias_uncorrected_percent": 4.475755822994931,
+        "ne_bias_quadrature_percent": 2.3649169031783934
+      },
+      {
+        "G_over_W": 0.3,
+        "L_over_W_voigt": 0.9039917659586367,
+        "L_over_W_quadrature": 0.9539392014169457,
+        "ne_bias_uncorrected_percent": 10.620476607942496,
+        "ne_bias_quadrature_percent": 5.525209115742591
+      },
+      {
+        "G_over_W": 0.4,
+        "L_over_W_voigt": 0.8302451217255353,
+        "L_over_W_quadrature": 0.916515138991168,
+        "ne_bias_uncorrected_percent": 20.446356603897353,
+        "ne_bias_quadrature_percent": 10.390909263800774
+      },
+      {
+        "G_over_W": 0.5,
+        "L_over_W_voigt": 0.7365713051785276,
+        "L_over_W_quadrature": 0.8660254037844386,
+        "ne_bias_uncorrected_percent": 35.76418100588692,
+        "ne_bias_quadrature_percent": 17.575229675086824
+      },
+      {
+        "G_over_W": 0.6,
+        "L_over_W_voigt": 0.6237587785067797,
+        "L_over_W_quadrature": 0.8,
+        "ne_bias_uncorrected_percent": 60.31838500035327,
+        "ne_bias_quadrature_percent": 28.254708000282626
+      },
+      {
+        "G_over_W": 0.7,
+        "L_over_W_voigt": 0.49270299521477073,
+        "L_over_W_quadrature": 0.714142842854285,
+        "ne_bias_uncorrected_percent": 102.96202980542,
+        "ne_bias_quadrature_percent": 44.94388095671875
+      },
+      {
+        "G_over_W": 0.8,
+        "L_over_W_voigt": 0.34437561448757487,
+        "L_over_W_quadrature": 0.5999999999999999,
+        "ne_bias_uncorrected_percent": 190.3806070845008,
+        "ne_bias_quadrature_percent": 74.22836425070045
+      },
+      {
+        "G_over_W": 0.9,
+        "L_over_W_voigt": 0.17979506716502397,
+        "L_over_W_quadrature": 0.4358898943540673,
+        "ne_bias_uncorrected_percent": 456.1887852474591,
+        "ne_bias_quadrature_percent": 142.43707084243192
+      }
+    ],
+    "near_resolution": {
+      "observed_fwhm_nm": 0.12,
+      "instrument_fwhm_nm": 0.1,
+      "lorentz_fwhm_nm": 0.03495242740208265,
+      "density_overestimate_factor_if_uncorrected": 3.4332379442364496,
+      "density_overestimate_factor_if_quadrature": 1.897793679507236
+    },
+    "lorentzian_instrument": {
+      "G_over_W_0.4": {
+        "stark_share": 0.6,
+        "ne_bias_uncorrected_percent": 66.66666666666667,
+        "ne_bias_quadrature_percent": 52.752523165194674
+      },
+      "G_over_W_0.8": {
+        "stark_share": 0.19999999999999996,
+        "ne_bias_uncorrected_percent": 400.0000000000001,
+        "ne_bias_quadrature_percent": 200.0
+      }
+    },
+    "approximation_check": {
+      "max_relative_deviation_percent": 0.023378943390084395,
+      "record_point": {
+        "observed_fwhm_nm": 0.14954,
+        "instrument_fwhm_nm": 0.06,
+        "lorentz_fwhm_approximation_nm": 0.12400038044705208,
+        "lorentz_fwhm_exact_nm": 0.12397310930235622,
+        "relative_difference_percent": -0.0219927911491391
+      }
+    },
+    "convention_factors": {
+      "half_vs_full_width": 2.0,
+      "reference_density_1e16_vs_1e17": 10.0
+    }
+  },
+  "A2": {
+    "temperature_K": 10000.0,
+    "kT_eV": 0.8617333262145179,
+    "slope_ln_per_eV": -1.160451812155008,
+    "slope_log10_per_eV": -0.5039778185335488,
+    "temperature_if_log10_slope_read_as_ln_K": 23025.85092994046,
+    "kelvin_per_eV": 11604.518121550082,
+    "saha_prefactor_cm-3_K-1.5": 4829366089004774.0,
+    "saha_prefactor_cm-3_eV-1.5": 6.037133712024948e+21,
+    "saha_prefactor_ratio": 1250088.231200768
+  },
+  "A3": {
+    "temperature_K": 10000.0,
+    "temperature_eV": 0.8617333262145179,
+    "gap_eV": 3.14,
+    "threshold_cm3": 4953463040000000.0,
+    "threshold_with_eV_inserted_cm3": 45982795595870.77,
+    "ratio": 107.72426895342609
+  },
+  "A4_sensitivity": {
+    "kT_eV": 0.8617333262145179,
+    "dln_n_dlnT_Ek_3eV": -3.481355436465024,
+    "dln_n_dlnT_Ek_4eV": -4.641807248620032,
+    "dln_n_dlnT_Ek_5eV": -5.80225906077504,
+    "dln_n_dlnT_Ek_6eV": -6.962710872930048,
+    "dln_Saha_dlnT_Eion_6eV": 8.462710872930048,
+    "Saha_factor_for_T_plus_5pct_Eion_6eV": 1.4989170892293673,
+    "dln_Saha_dlnT_Eion_7eV": 9.623162685085056,
+    "Saha_factor_for_T_plus_5pct_Eion_7eV": 1.5840779720701317,
+    "dln_Saha_dlnT_Eion_8eV": 10.783614497240064,
+    "Saha_factor_for_T_plus_5pct_Eion_8eV": 1.674077265266167,
+    "dln_Saha_dlnT_Eion_9eV": 11.944066309395073,
+    "Saha_factor_for_T_plus_5pct_Eion_9eV": 1.7691898628061773
+  },
+  "A4_basis": {
+    "rows": [
+      {
+        "material": "Ti-6Al-4V (titanium alloy)",
+        "element": "Ti",
+        "molar_mass": 47.867,
+        "mass_percent": 90.0,
+        "mole_percent": 86.20462072720711,
+        "mean_molar_mass": 45.8484064483247,
+        "M_over_mean": 1.0440275618728523,
+        "reported_over_true_if_unconverted": 0.9578291191911902,
+        "relative_error_percent_if_unconverted": -4.217088080880982,
+        "roundtrip_mass_percent": 90.0
+      },
+      {
+        "material": "Ti-6Al-4V (titanium alloy)",
+        "element": "Al",
+        "molar_mass": 26.982,
+        "mass_percent": 6.0,
+        "mole_percent": 10.195331654063756,
+        "mean_molar_mass": 45.8484064483247,
+        "M_over_mean": 0.5885046414952535,
+        "reported_over_true_if_unconverted": 1.6992219423439592,
+        "relative_error_percent_if_unconverted": 69.92219423439592,
+        "roundtrip_mass_percent": 6.000000000000002
+      },
+      {
+        "material": "Ti-6Al-4V (titanium alloy)",
+        "element": "V",
+        "molar_mass": 50.942,
+        "mass_percent": 4.0,
+        "mole_percent": 3.60004761872912,
+        "mean_molar_mass": 45.8484064483247,
+        "M_over_mean": 1.1110964141668966,
+        "reported_over_true_if_unconverted": 0.90001190468228,
+        "relative_error_percent_if_unconverted": -9.998809531772002,
+        "roundtrip_mass_percent": 4.000000000000001
+      },
+      {
+        "material": "90W-7Ni-3Fe (tungsten heavy alloy)",
+        "element": "W",
+        "molar_mass": 183.84,
+        "mass_percent": 90.0,
+        "mole_percent": 73.89070382492768,
+        "mean_molar_mass": 150.93407767971894,
+        "M_over_mean": 1.2180151946209736,
+        "reported_over_true_if_unconverted": 0.8210078202769743,
+        "relative_error_percent_if_unconverted": -17.899217972302573,
+        "roundtrip_mass_percent": 90.0
+      },
+      {
+        "material": "90W-7Ni-3Fe (tungsten heavy alloy)",
+        "element": "Ni",
+        "molar_mass": 58.693,
+        "mass_percent": 7.000000000000001,
+        "mole_percent": 18.001099684085542,
+        "mean_molar_mass": 150.93407767971894,
+        "M_over_mean": 0.3888651317335117,
+        "reported_over_true_if_unconverted": 2.5715856691550774,
+        "relative_error_percent_if_unconverted": 157.15856691550775,
+        "roundtrip_mass_percent": 7.000000000000001
+      },
+      {
+        "material": "90W-7Ni-3Fe (tungsten heavy alloy)",
+        "element": "Fe",
+        "molar_mass": 55.845,
+        "mass_percent": 3.0,
+        "mole_percent": 8.108196490986781,
+        "mean_molar_mass": 150.93407767971894,
+        "M_over_mean": 0.3699959668386002,
+        "reported_over_true_if_unconverted": 2.7027321636622603,
+        "relative_error_percent_if_unconverted": 170.27321636622602,
+        "roundtrip_mass_percent": 3.0000000000000004
+      },
+      {
+        "material": "63Sn-37Pb (solder)",
+        "element": "Sn",
+        "molar_mass": 118.71,
+        "mass_percent": 63.0,
+        "mole_percent": 74.82343958770757,
+        "mean_molar_mass": 140.98873830883755,
+        "M_over_mean": 0.8419821428571429,
+        "reported_over_true_if_unconverted": 1.1876736442493265,
+        "relative_error_percent_if_unconverted": 18.76736442493265,
+        "roundtrip_mass_percent": 63.0
+      },
+      {
+        "material": "63Sn-37Pb (solder)",
+        "element": "Pb",
+        "molar_mass": 207.2,
+        "mass_percent": 37.0,
+        "mole_percent": 25.17656041229242,
+        "mean_molar_mass": 140.98873830883755,
+        "M_over_mean": 1.4696209249431387,
+        "reported_over_true_if_unconverted": 0.680447578710606,
+        "relative_error_percent_if_unconverted": -31.9552421289394,
+        "roundtrip_mass_percent": 37.0
+      },
+      {
+        "material": "Al-2.5Li (aluminum-lithium alloy)",
+        "element": "Al",
+        "molar_mass": 26.982,
+        "mass_percent": 97.5,
+        "mole_percent": 90.93474711230269,
+        "mean_molar_mass": 25.165142016247707,
+        "M_over_mean": 1.0721974063400577,
+        "reported_over_true_if_unconverted": 0.9326640729466943,
+        "relative_error_percent_if_unconverted": -6.733592705330571,
+        "roundtrip_mass_percent": 97.5
+      },
+      {
+        "material": "Al-2.5Li (aluminum-lithium alloy)",
+        "element": "Li",
+        "molar_mass": 6.94,
+        "mass_percent": 2.5,
+        "mole_percent": 9.0652528876973,
+        "mean_molar_mass": 25.165142016247707,
+        "M_over_mean": 0.27577829664220593,
+        "reported_over_true_if_unconverted": 3.62610115507892,
+        "relative_error_percent_if_unconverted": 262.61011550789203,
+        "roundtrip_mass_percent": 2.5
+      },
+      {
+        "material": "Constructed record X-Y-Z (hypothetical)",
+        "element": "X",
+        "molar_mass": 27.0,
+        "mass_percent": 6.0,
+        "mole_percent": 11.924821775761503,
+        "mean_molar_mass": 53.66169799092676,
+        "M_over_mean": 0.5031521739130436,
+        "reported_over_true_if_unconverted": 1.9874702959602506,
+        "relative_error_percent_if_unconverted": 98.74702959602506,
+        "roundtrip_mass_percent": 6.000000000000001
+      },
+      {
+        "material": "Constructed record X-Y-Z (hypothetical)",
+        "element": "Y",
+        "molar_mass": 56.0,
+        "mass_percent": 91.0,
+        "mole_percent": 87.200259235256,
+        "mean_molar_mass": 53.66169799092676,
+        "M_over_mean": 1.0435748792270532,
+        "reported_over_true_if_unconverted": 0.958244606980835,
+        "relative_error_percent_if_unconverted": -4.175539301916498,
+        "roundtrip_mass_percent": 91.0
+      },
+      {
+        "material": "Constructed record X-Y-Z (hypothetical)",
+        "element": "Z",
+        "molar_mass": 184.0,
+        "mass_percent": 3.0,
+        "mole_percent": 0.8749189889825015,
+        "mean_molar_mass": 53.66169799092676,
+        "M_over_mean": 3.4288888888888893,
+        "reported_over_true_if_unconverted": 0.29163966299416716,
+        "relative_error_percent_if_unconverted": -70.83603370058329,
+        "roundtrip_mass_percent": 3.0
+      }
+    ]
+  },
+  "A4_closure": {
+    "whole_sample_mg_per_kg": {
+      "K": 20000.0,
+      "Ca": 12000.0,
+      "Mg": 4000.0,
+      "P": 3000.0,
+      "S": 2500.0,
+      "Fe": 300.0
+    },
+    "detected_total_mg_per_kg": 41800.0,
+    "detected_total_mass_percent": 4.18,
+    "subset_normalized_percent": {
+      "K": 47.84688995215311,
+      "Ca": 28.708133971291865,
+      "Mg": 9.569377990430622,
+      "P": 7.177033492822966,
+      "S": 5.980861244019139,
+      "Fe": 0.7177033492822966
+    },
+    "scale_factor_subset_to_whole": 0.0418
+  },
+  "A4_inverse": {
+    "a": 1.8,
+    "b": 0.05,
+    "C": 4.0,
+    "y": 2.0,
+    "amplification": 10.0,
+    "rel_uncertainty_y": 0.05,
+    "rel_uncertainty_C": 0.5,
+    "C_if_slope_rounded_up": 3.6363636363636354,
+    "C_if_slope_rounded_down": 4.444444444444444,
+    "rel_spread_from_one_digit_slope_percent": [
+      -9.090909090909117,
+      11.111111111111093
+    ]
+  },
+  "A4_lowering": {
+    "temperature_K": 10000.0,
+    "n_e_cm3": 1e+17,
+    "electrons_only": {
+      "debye_length_nm": 21.822555802126224,
+      "lowering_eV": 0.06598514674099183,
+      "saha_ratio_factor": 1.0795805468080053
+    },
+    "electrons_and_singly_charged_ions": {
+      "debye_length_nm": 15.430877190505292,
+      "lowering_eV": 0.09331708943628948,
+      "saha_ratio_factor": 1.1143708499705935
+    }
+  },
+  "A5": {
+    "replicates": [
+      47.1,
+      47.6,
+      47.9,
+      48.2,
+      48.7
+    ],
+    "mean": 47.9,
+    "sd": 0.6041522986797292,
+    "rsd_percent": 1.2612782853439024,
+    "reference": 45.0,
+    "u_reference": 0.3,
+    "signed_deviation_percent": 6.444444444444442,
+    "u_repeatability_of_mean": 0.27018512172212616,
+    "zeta_repeatability_only": 7.182972366962007,
+    "u_full_assumed": 2.8739999999999997,
+    "zeta_full_uncertainty": 1.003593835160805
+  }
+}

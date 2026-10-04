@@ -1,0 +1,726 @@
+{
+  "elements": [
+    "X",
+    "Y",
+    "Z"
+  ],
+  "flag_criteria": {
+    "D": "N_e(Saha balance of Y)/N_e(Stark) outside the 95% range of the baseline Monte Carlo propagation",
+    "S": "residual SD of the Boltzmann plot above the 97.5th percentile of the baseline Monte Carlo propagation",
+    "R": "|zeta| above 2 for at least one element, input uncertainties propagated through the scenario"
+  },
+  "validation_test": {
+    "draws_per_scenario": 20000,
+    "seed": 97531,
+    "zeta_limit": 2.0,
+    "definition": "zeta of the scenario result against the constructed reference; the assigned input uncertainties are propagated through the perturbed calculation and combined with the standard deviation of the mean; the generator is restarted with the same seed for every scenario"
+  },
+  "baseline": {
+    "mass_percent": {
+      "X": 5.981715191436924,
+      "Y": 91.03440467460523,
+      "Z": 2.983880133957852
+    },
+    "saha_stark_ratio": 0.9868513191888685,
+    "residual_sd": 0.03142559983217473,
+    "zeta_repeatability_only": {
+      "X": -0.18805826562865116,
+      "Y": 0.16332295747648742,
+      "Z": -0.44430889790876643
+    },
+    "zeta_vs_reference": {
+      "X": -0.0116285362541745,
+      "Y": 0.02280365274464726,
+      "Z": -0.057342820788234446
+    }
+  },
+  "scenarios": [
+    {
+      "id": "U1",
+      "family": "uncertainty",
+      "checkpoint": "A2",
+      "label": "Temperature +5%",
+      "definition": "temperature multiplied by 1.05; slope set to -1/(k_B T); species intercepts and scatter re-derived from the data with that slope",
+      "overrides": {
+        "temperature_factor": 1.05
+      },
+      "mass_percent": {
+        "X": 9.173719715134217,
+        "Y": 88.08038155714705,
+        "Z": 2.7458987277187408
+      },
+      "ratio_to_baseline": {
+        "X": 1.5336269650997059,
+        "Y": 0.9675504758006922,
+        "Z": 0.9202443142635727
+      },
+      "n_e_ratio": 1.0,
+      "temperature_ratio": 1.05,
+      "saha_stark_ratio": 1.789837933821372,
+      "residual_sd": 0.07217192754565988,
+      "u_combined_rel_percent": {
+        "X": 25.32712442782522,
+        "Y": 2.5493741900199445,
+        "Z": 9.184030491632733
+      },
+      "zeta_vs_reference": {
+        "X": 1.365502370670053,
+        "Y": -1.2950827120381976,
+        "Z": -1.0005471462463105
+      },
+      "zeta_repeatability_only": {
+        "X": 25.139340425062915,
+        "Y": -13.02782330601588,
+        "Z": -7.221356072801639
+      },
+      "outside_95_interval": {
+        "X": false,
+        "Y": false,
+        "Z": false
+      },
+      "residual_sd_ratio": 2.29659665785496,
+      "flag_D": false,
+      "flag_S": false,
+      "max_abs_zeta": 1.365502370670053,
+      "flag_R": false,
+      "flagged_by_any": false,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "U2",
+      "family": "uncertainty",
+      "checkpoint": "A2",
+      "label": "Stark parameter +20%",
+      "definition": "Stark parameter multiplied by 1.20",
+      "overrides": {
+        "stark_param_factor": 1.2
+      },
+      "mass_percent": {
+        "X": 6.978458176725651,
+        "Y": 90.11665943524633,
+        "Z": 2.9048823880280175
+      },
+      "ratio_to_baseline": {
+        "X": 1.1666316354739867,
+        "Y": 0.9899186989508055,
+        "Z": 0.9735251610710478
+      },
+      "n_e_ratio": 0.8333333333333333,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 1.1842215830266423,
+      "residual_sd": 0.03142559983217473,
+      "u_combined_rel_percent": {
+        "X": 26.250191001086325,
+        "Y": 1.9491525290563039,
+        "Z": 9.250074181544292
+      },
+      "zeta_vs_reference": {
+        "X": 0.5338478383068349,
+        "Y": -0.4996663885222498,
+        "Z": -0.35180105959414004
+      },
+      "zeta_repeatability_only": {
+        "X": 9.072998678240944,
+        "Y": -4.1056434889454705,
+        "Z": -2.6513677351182166
+      },
+      "outside_95_interval": {
+        "X": false,
+        "Y": false,
+        "Z": false
+      },
+      "residual_sd_ratio": 1.0,
+      "flag_D": false,
+      "flag_S": false,
+      "max_abs_zeta": 0.5338478383068349,
+      "flag_R": false,
+      "flagged_by_any": false,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "U3",
+      "family": "uncertainty",
+      "checkpoint": "A2",
+      "label": "Transition probabilities of X I lines +10%",
+      "definition": "A_ki of all X I lines multiplied by 1.10",
+      "overrides": {
+        "ga_factor": {
+          "X I": 1.1
+        }
+      },
+      "mass_percent": {
+        "X": 5.4676752617071,
+        "Y": 91.53213319984866,
+        "Z": 3.0001915384442372
+      },
+      "ratio_to_baseline": {
+        "X": 0.9140647935786554,
+        "Y": 1.0054674771260659,
+        "Z": 1.005466507954108
+      },
+      "n_e_ratio": 1.0,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 0.9868513191888685,
+      "residual_sd": 0.03142559983217472,
+      "u_combined_rel_percent": {
+        "X": 26.41441328565439,
+        "Y": 1.5027000714400651,
+        "Z": 9.267360853179538
+      },
+      "zeta_vs_reference": {
+        "X": -0.36826336465729764,
+        "Y": 0.38285221638327427,
+        "Z": 0.0006849162124169501
+      },
+      "zeta_repeatability_only": {
+        "X": -5.758695284152011,
+        "Y": 2.547323771476023,
+        "Z": 0.005280494315647716
+      },
+      "outside_95_interval": {
+        "X": false,
+        "Y": false,
+        "Z": false
+      },
+      "residual_sd_ratio": 0.9999999999999998,
+      "flag_D": false,
+      "flag_S": false,
+      "max_abs_zeta": 0.38285221638327427,
+      "flag_R": false,
+      "flagged_by_any": false,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "U4",
+      "family": "uncertainty",
+      "checkpoint": "A2",
+      "label": "Spectral response tilted by +5% per 100 nm",
+      "definition": "every intensity multiplied by 1 + 0.05 (lambda - 400 nm)/(100 nm)",
+      "overrides": {
+        "response_tilt_per_100nm": 0.05
+      },
+      "mass_percent": {
+        "X": 5.955735289582019,
+        "Y": 91.07914016034488,
+        "Z": 2.965124550073101
+      },
+      "ratio_to_baseline": {
+        "X": 0.9956567805347709,
+        "Y": 1.0004914129542513,
+        "Z": 0.9937143641692224
+      },
+      "n_e_ratio": 1.0,
+      "temperature_ratio": 0.9954915657106733,
+      "saha_stark_ratio": 1.0002247371914557,
+      "residual_sd": 0.04595321783951364,
+      "u_combined_rel_percent": {
+        "X": 26.115238175158954,
+        "Y": 1.6222644006955096,
+        "Z": 9.349933543833277
+      },
+      "zeta_vs_reference": {
+        "X": -0.028438412172528283,
+        "Y": 0.053077902054904265,
+        "Z": -0.12506633788835747
+      },
+      "zeta_repeatability_only": {
+        "X": -0.4584977631448256,
+        "Y": 0.376288529918753,
+        "Z": -0.9606820545322718
+      },
+      "outside_95_interval": {
+        "X": false,
+        "Y": false,
+        "Z": false
+      },
+      "residual_sd_ratio": 1.4622861006606778,
+      "flag_D": false,
+      "flag_S": false,
+      "max_abs_zeta": 0.12506633788835747,
+      "flag_R": false,
+      "flagged_by_any": false,
+      "flag_R_repeatability_only": false
+    },
+    {
+      "id": "C1",
+      "family": "slip",
+      "checkpoint": "A1",
+      "label": "Instrumental width not removed",
+      "definition": "observed width used as the Stark width",
+      "overrides": {
+        "width_treatment": "none"
+      },
+      "mass_percent": {
+        "X": 5.113358752032587,
+        "Y": 91.8155659130606,
+        "Z": 3.0710753349068343
+      },
+      "ratio_to_baseline": {
+        "X": 0.8548315304868701,
+        "Y": 1.008580945206898,
+        "Z": 1.0292220856852334
+      },
+      "n_e_ratio": 1.2059640418914142,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 0.8183090746562452,
+      "residual_sd": 0.03142559983217473,
+      "u_combined_rel_percent": {
+        "X": 25.76341327369439,
+        "Y": 1.3542674451725154,
+        "Z": 9.40996002429194
+      },
+      "zeta_vs_reference": {
+        "X": -0.6723389840423055,
+        "Y": 0.6475776760696019,
+        "Z": 0.24463188064451577
+      },
+      "zeta_repeatability_only": {
+        "X": -10.035449056192235,
+        "Y": 3.934904507497877,
+        "Z": 1.9308394137843887
+      },
+      "outside_95_interval": {
+        "X": false,
+        "Y": false,
+        "Z": false
+      },
+      "residual_sd_ratio": 1.0,
+      "flag_D": false,
+      "flag_S": false,
+      "max_abs_zeta": 0.6723389840423055,
+      "flag_R": false,
+      "flagged_by_any": false,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "C2",
+      "family": "slip",
+      "checkpoint": "A1",
+      "label": "Quadrature subtraction applied to a Voigt profile",
+      "definition": "Stark width = sqrt(W^2 - G^2)",
+      "overrides": {
+        "width_treatment": "quadrature"
+      },
+      "mass_percent": {
+        "X": 5.502091521429588,
+        "Y": 91.46862425478062,
+        "Z": 3.029284223789794
+      },
+      "ratio_to_baseline": {
+        "X": 0.9198183707084653,
+        "Y": 1.0047698403886691,
+        "Z": 1.0152164590377555
+      },
+      "n_e_ratio": 1.1046355025936387,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 0.8933728065699336,
+      "residual_sd": 0.03142559983217473,
+      "u_combined_rel_percent": {
+        "X": 25.948551869733777,
+        "Y": 1.4801283664565685,
+        "Z": 9.354980360248765
+      },
+      "zeta_vs_reference": {
+        "X": -0.3484379223391862,
+        "Y": 0.3424249258502549,
+        "Z": 0.10276159829933726
+      },
+      "zeta_repeatability_only": {
+        "X": -5.396203384765569,
+        "Y": 2.245278069621634,
+        "Z": 0.8012925529806325
+      },
+      "outside_95_interval": {
+        "X": false,
+        "Y": false,
+        "Z": false
+      },
+      "residual_sd_ratio": 1.0,
+      "flag_D": false,
+      "flag_S": false,
+      "max_abs_zeta": 0.3484379223391862,
+      "flag_R": false,
+      "flagged_by_any": false,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "C3",
+      "family": "slip",
+      "checkpoint": "A2",
+      "label": "Half width (HWHM) used as a full width",
+      "definition": "electron density multiplied by 2",
+      "overrides": {
+        "ne_factor": 2.0
+      },
+      "mass_percent": {
+        "X": 3.392616502445482,
+        "Y": 93.24726816457577,
+        "Z": 3.360115332978754
+      },
+      "ratio_to_baseline": {
+        "X": 0.5671644994569709,
+        "Y": 1.0243079910049417,
+        "Z": 1.1260892469302577
+      },
+      "n_e_ratio": 2.0,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 0.49342565959443424,
+      "residual_sd": 0.03142559983217473,
+      "u_combined_rel_percent": {
+        "X": 25.071871487874535,
+        "Y": 0.823120951696409,
+        "Z": 10.10137304961507
+      },
+      "zeta_vs_reference": {
+        "X": -3.057775494030152,
+        "Y": 2.8332841313623844,
+        "Z": 1.0568593963931112
+      },
+      "zeta_repeatability_only": {
+        "X": -35.84982617256905,
+        "Y": 11.103061425017819,
+        "Z": 9.210259717989356
+      },
+      "outside_95_interval": {
+        "X": true,
+        "Y": true,
+        "Z": false
+      },
+      "residual_sd_ratio": 1.0,
+      "flag_D": true,
+      "flag_S": false,
+      "max_abs_zeta": 3.057775494030152,
+      "flag_R": true,
+      "flagged_by_any": true,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "C4",
+      "family": "slip",
+      "checkpoint": "A2",
+      "label": "Full width (FWHM) used as a half width",
+      "definition": "electron density multiplied by 0.5",
+      "overrides": {
+        "ne_factor": 0.5
+      },
+      "mass_percent": {
+        "X": 10.761984710798115,
+        "Y": 86.54229867184056,
+        "Z": 2.6957166173613323
+      },
+      "ratio_to_baseline": {
+        "X": 1.7991469614274425,
+        "Y": 0.9506548538563928,
+        "Z": 0.903426577590335
+      },
+      "n_e_ratio": 0.5,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 1.973702638377737,
+      "residual_sd": 0.03142559983217473,
+      "u_combined_rel_percent": {
+        "X": 25.663022469144895,
+        "Y": 3.0909574536633397,
+        "Z": 9.310574275555712
+      },
+      "zeta_vs_reference": {
+        "X": 1.7237939885766331,
+        "Y": -1.6618010370123568,
+        "Z": -1.203779936700485
+      },
+      "zeta_repeatability_only": {
+        "X": 31.912899623086172,
+        "Y": -18.85216083917599,
+        "Z": -8.658929083537428
+      },
+      "outside_95_interval": {
+        "X": true,
+        "Y": true,
+        "Z": false
+      },
+      "residual_sd_ratio": 1.0,
+      "flag_D": true,
+      "flag_S": false,
+      "max_abs_zeta": 1.7237939885766331,
+      "flag_R": false,
+      "flagged_by_any": true,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "C5",
+      "family": "slip",
+      "checkpoint": "A2",
+      "label": "Reference density too high by a factor of 10",
+      "definition": "reference density multiplied by 10",
+      "overrides": {
+        "n_ref_factor": 10.0
+      },
+      "mass_percent": {
+        "X": 1.2020171462103824,
+        "Y": 93.02224981396003,
+        "Z": 5.775733039829582
+      },
+      "ratio_to_baseline": {
+        "X": 0.20094857540712072,
+        "Y": 1.0218361963969578,
+        "Z": 1.9356451266588197
+      },
+      "n_e_ratio": 10.0,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 0.09868513191888684,
+      "residual_sd": 0.03142559983217473,
+      "u_combined_rel_percent": {
+        "X": 17.609420225266266,
+        "Y": 0.9063462622590882,
+        "Z": 16.65359848246687
+      },
+      "zeta_vs_reference": {
+        "X": -21.808236123275453,
+        "Y": 2.3338115365433567,
+        "Z": 2.8843725988588655
+      },
+      "zeta_repeatability_only": {
+        "X": -78.87183601794585,
+        "Y": 9.71448678007098,
+        "Z": 38.60737423500853
+      },
+      "outside_95_interval": {
+        "X": true,
+        "Y": false,
+        "Z": true
+      },
+      "residual_sd_ratio": 1.0,
+      "flag_D": true,
+      "flag_S": false,
+      "max_abs_zeta": 21.808236123275453,
+      "flag_R": true,
+      "flagged_by_any": true,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "C6",
+      "family": "slip",
+      "checkpoint": "A2",
+      "label": "Reference density too low by a factor of 10",
+      "definition": "reference density multiplied by 0.1",
+      "overrides": {
+        "n_ref_factor": 0.1
+      },
+      "mass_percent": {
+        "X": 36.55697163285117,
+        "Y": 61.604316238277676,
+        "Z": 1.838712128871143
+      },
+      "ratio_to_baseline": {
+        "X": 6.111453063693839,
+        "Y": 0.6767146603361344,
+        "Z": 0.6162151448195925
+      },
+      "n_e_ratio": 0.09999999999999999,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 9.868513191888685,
+      "residual_sd": 0.03142559983217473,
+      "u_combined_rel_percent": {
+        "X": 18.069657691022375,
+        "Y": 10.429150846709256,
+        "Z": 13.120314529862569
+      },
+      "zeta_vs_reference": {
+        "X": 4.625644576861506,
+        "Y": -4.573125863001208,
+        "Z": -4.776937964839551
+      },
+      "zeta_repeatability_only": {
+        "X": 88.01200716814293,
+        "Y": -76.43807973643769,
+        "Z": -33.803923971665924
+      },
+      "outside_95_interval": {
+        "X": true,
+        "Y": true,
+        "Z": true
+      },
+      "residual_sd_ratio": 1.0,
+      "flag_D": true,
+      "flag_S": false,
+      "max_abs_zeta": 4.776937964839551,
+      "flag_R": true,
+      "flagged_by_any": true,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "C7",
+      "family": "slip",
+      "checkpoint": "A2",
+      "label": "Energy-unit ordinate applied to photon-unit intensities",
+      "definition": "ordinate ln[I lambda/(g A)] instead of ln[I/(g A)]",
+      "overrides": {
+        "intensity_units": "energy"
+      },
+      "mass_percent": {
+        "X": 5.605586991529199,
+        "Y": 91.50963718440683,
+        "Z": 2.8847758240639685
+      },
+      "ratio_to_baseline": {
+        "X": 0.9371203429333832,
+        "Y": 1.0052203615929636,
+        "Z": 0.9667867657396712
+      },
+      "n_e_ratio": 1.0,
+      "temperature_ratio": 0.9740776563527506,
+      "saha_stark_ratio": 1.0404706265444748,
+      "residual_sd": 0.17669871598822118,
+      "u_combined_rel_percent": {
+        "X": 25.596116230007194,
+        "Y": 1.4689051450996438,
+        "Z": 9.551018953709765
+      },
+      "zeta_vs_reference": {
+        "X": -0.27464814435778395,
+        "Y": 0.37501250546088694,
+        "Z": -0.41574074615360296
+      },
+      "zeta_repeatability_only": {
+        "X": -4.321493943726627,
+        "Y": 2.449455894477842,
+        "Z": -3.158111294720053
+      },
+      "outside_95_interval": {
+        "X": false,
+        "Y": false,
+        "Z": false
+      },
+      "residual_sd_ratio": 5.6227635091092285,
+      "flag_D": false,
+      "flag_S": true,
+      "max_abs_zeta": 0.41574074615360296,
+      "flag_R": false,
+      "flagged_by_any": true,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "C8",
+      "family": "slip",
+      "checkpoint": "A4",
+      "label": "Ground-level weights used in place of partition functions",
+      "definition": "every partition function replaced by the statistical weight of the ground level; in the propagation for the reference test, the uncertainty assigned to the partition functions is applied to these weights",
+      "overrides": {
+        "partition_function": "g0"
+      },
+      "mass_percent": {
+        "X": 25.80902430218973,
+        "Y": 72.37209006070357,
+        "Z": 1.8188856371067035
+      },
+      "ratio_to_baseline": {
+        "X": 4.314652817161276,
+        "Y": 0.79499712575033,
+        "Z": 0.6095706112343438
+      },
+      "n_e_ratio": 1.0,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 0.9868513191888685,
+      "residual_sd": 0.03142559983217473,
+      "u_combined_rel_percent": {
+        "X": 20.912490123555866,
+        "Y": 7.2598050037433834,
+        "Z": 11.79638829079492
+      },
+      "zeta_vs_reference": {
+        "X": 3.669939594257689,
+        "Y": -3.5428571407832106,
+        "Z": -5.4517177040110525
+      },
+      "zeta_repeatability_only": {
+        "X": 70.2794231388599,
+        "Y": -56.26567359011888,
+        "Z": -35.06792110957604
+      },
+      "outside_95_interval": {
+        "X": true,
+        "Y": true,
+        "Z": true
+      },
+      "residual_sd_ratio": 1.0,
+      "flag_D": false,
+      "flag_S": false,
+      "max_abs_zeta": 5.4517177040110525,
+      "flag_R": true,
+      "flagged_by_any": true,
+      "flag_R_repeatability_only": true
+    },
+    {
+      "id": "C9",
+      "family": "slip",
+      "checkpoint": "A4",
+      "label": "Mole fractions reported as mass fractions",
+      "definition": "mole-to-mass conversion omitted",
+      "overrides": {
+        "skip_mass_conversion": true
+      },
+      "mass_percent": {
+        "X": 11.888948906778992,
+        "Y": 87.24074576766243,
+        "Z": 0.870305325558572
+      },
+      "ratio_to_baseline": {
+        "X": 1.9875484750257786,
+        "Y": 0.9583271959595615,
+        "Z": 0.2916689969057803
+      },
+      "n_e_ratio": 1.0,
+      "temperature_ratio": 1.0,
+      "saha_stark_ratio": 0.9868513191888685,
+      "residual_sd": 0.03142559983217473,
+      "u_combined_rel_percent": {
+        "X": 24.15408159294721,
+        "Y": 3.244362283866668,
+        "Z": 10.169727335529524
+      },
+      "zeta_vs_reference": {
+        "X": 2.0502603908464594,
+        "Y": -1.3248644992326368,
+        "Z": -22.78874811921531
+      },
+      "zeta_repeatability_only": {
+        "X": 38.28678201241579,
+        "Y": -15.492574615074929,
+        "Z": -69.37822303012045
+      },
+      "outside_95_interval": {
+        "X": true,
+        "Y": true,
+        "Z": true
+      },
+      "residual_sd_ratio": 1.0,
+      "flag_D": false,
+      "flag_S": false,
+      "max_abs_zeta": 22.78874811921531,
+      "flag_R": true,
+      "flagged_by_any": true,
+      "flag_R_repeatability_only": true
+    }
+  ],
+  "monte_carlo_95_interval_ratio": {
+    "X": [
+      0.616813414097984,
+      1.636668059397353
+    ],
+    "Y": [
+      0.9597309831404796,
+      1.0236542867305687
+    ],
+    "Z": [
+      0.8341039942154251,
+      1.2005980819212452
+    ]
+  },
+  "saha_stark_ratio_95_range": [
+    0.5375054465449305,
+    1.8184315384324492
+  ],
+  "residual_sd_95_range": [
+    0.07190504137712128,
+    0.13776726617366591
+  ]
+}

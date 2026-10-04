@@ -1,0 +1,26 @@
+24 of 24 checks passed.
+
+PASS: A1 Voigt inversion round trip
+PASS: A1 quadrature subtraction always leaves a wider Lorentzian than the Voigt inversion
+PASS: A1 zero Gaussian width returns the observed width (to 1 part in 1e5)
+PASS: A1 G/W = 0.5: uncorrected density overestimated by 36%
+PASS: A1 the width approximation agrees with an exact Voigt profile to better than 0.03%
+PASS: A1 exact inversion at the operating point of the record gives 0.12397 nm (approximation: 0.12400 nm)
+PASS: A3 unit slip lowers the threshold by sqrt(11604.5) = 107.7
+PASS: A4 mole/mass round trip
+PASS: A4 unconverted error equals mean molar mass over molar mass
+PASS: A4 Ti-6Al-4V: 6.00 mass% Al equals 10.20 mole%
+PASS: A2 a 5% higher T raises the Saha ratio by a factor of 1.50 (E_ion 6 eV) to 1.77 (9 eV)
+PASS: A4 constructed record: 6/91/3 mass% equals 11.92/87.20/0.87 mole%
+PASS: A4 inverse relation amplifies a 5% input uncertainty to 50%
+PASS: A4 ionization-energy lowering is 0.07 to 0.09 eV at 1e17 cm^-3 and 10,000 K
+PASS: A1 Lorentzian instrumental profile at G/W = 0.4: overestimates of 67% and 53%
+PASS: A2 Saha prefactor: 4.83e15 with T in K and 6.04e21 with T in eV
+PASS: A5 signed deviation +6.4%, RSD 1.3%
+PASS: reject NaN width
+PASS: reject unresolved Lorentzian
+PASS: reject negative width
+PASS: reject zero comparator
+PASS: reject empty vectors
+PASS: reject zero molar mass
+PASS: reject negative temperature

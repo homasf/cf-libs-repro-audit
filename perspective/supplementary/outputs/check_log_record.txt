@@ -1,0 +1,39 @@
+35 of 35 checks passed.
+Checks concern the constructed record and this script only. They do not validate
+any experiment, plasma model or published study.
+
+PASS: reported deterministic value A1_stark_fwhm_nm = 0.124 reconstructed - recomputed 0.124
+PASS: reported deterministic value A1_n_e_1e17_cm3 = 1 reconstructed - recomputed 1
+PASS: reported deterministic value A2_temperature_K = 9990 reconstructed - recomputed 9990
+PASS: reported deterministic value A2_temperature_replicate_sd_K = 35 reconstructed - recomputed 35
+PASS: reported deterministic value A3_mcwhirter_threshold_1e15_cm3 = 4.95 reconstructed - recomputed 4.95
+PASS: reported deterministic value A3_ne_saha_over_ne_stark = 0.99 reconstructed - recomputed 0.99
+PASS: reported deterministic value A4_mole_percent.X = 11.889 reconstructed - recomputed 11.889
+PASS: reported deterministic value A4_mole_percent.Y = 87.241 reconstructed - recomputed 87.241
+PASS: reported deterministic value A4_mole_percent.Z = 0.87 reconstructed - recomputed 0.87
+PASS: reported deterministic value A4_mass_percent.X = 5.982 reconstructed - recomputed 5.982
+PASS: reported deterministic value A4_mass_percent.Y = 91.034 reconstructed - recomputed 91.034
+PASS: reported deterministic value A4_mass_percent.Z = 2.984 reconstructed - recomputed 2.984
+PASS: reported deterministic value A5_rsd_percent.X = 2.9 reconstructed - recomputed 2.9
+PASS: reported deterministic value A5_rsd_percent.Y = 0.2 reconstructed - recomputed 0.2
+PASS: reported deterministic value A5_rsd_percent.Z = 1.5 reconstructed - recomputed 1.5
+PASS: reported deterministic value A5_signed_deviation_percent.X = -0.3 reconstructed - recomputed -0.3
+PASS: reported deterministic value A5_signed_deviation_percent.Y = 0 reconstructed - recomputed 0
+PASS: reported deterministic value A5_signed_deviation_percent.Z = -0.5 reconstructed - recomputed -0.5
+PASS: reported Monte Carlo-based value A2_temperature_propagated_u_K = 180 reconstructed - recomputed 180
+PASS: reported Monte Carlo-based value A5_u_combined_percentage_points.X = 1.6 reconstructed - recomputed 1.6
+PASS: reported Monte Carlo-based value A5_u_combined_percentage_points.Y = 1.5 reconstructed - recomputed 1.5
+PASS: reported Monte Carlo-based value A5_u_combined_percentage_points.Z = 0.28 reconstructed - recomputed 0.28
+PASS: reported Monte Carlo-based value A5_zeta.X = -0.01 reconstructed - recomputed -0.01
+PASS: reported Monte Carlo-based value A5_zeta.Y = 0.02 reconstructed - recomputed 0.02
+PASS: reported Monte Carlo-based value A5_zeta.Z = -0.06 reconstructed - recomputed -0.06
+PASS: A1 recovered N_e within 1% of the generating value - 1.0000e+17
+PASS: A2 recovered T within 2% of the generating value - 9990.0 K
+PASS: A3 N_e exceeds the McWhirter threshold - ratio 20.2
+PASS: A4 mole fractions sum to unity
+PASS: A4 mass fractions sum to unity
+PASS: A5 X: |zeta| < 2 (compatible with the constructed reference) - zeta -0.01
+PASS: A5 Y: |zeta| < 2 (compatible with the constructed reference) - zeta 0.02
+PASS: A5 Z: |zeta| < 2 (compatible with the constructed reference) - zeta -0.06
+PASS: A5 minor constituents: combined uncertainty exceeds twice the repeatability of the mean
+PASS: A5 Monte Carlo uncertainties reproduced within 3% by an independent seed - X 1.010, Y 1.008, Z 1.011

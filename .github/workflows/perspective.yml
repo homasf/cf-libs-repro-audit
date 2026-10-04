@@ -1,0 +1,31 @@
+name: perspective-checks
+
+on:
+  push:
+    paths:
+      - 'perspective/**'
+      - '.github/workflows/perspective.yml'
+  pull_request:
+    paths:
+      - 'perspective/**'
+      - '.github/workflows/perspective.yml'
+  workflow_dispatch:
+
+jobs:
+  numerical-support:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: perspective
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reproduce the numerical results
+        run: python supplementary/code/run_all.py
+      - name: Check numerical and table consistency
+        run: python supplementary/code/verify_release.py
+      - name: Confirm the supplied results remain identical
+        run: git diff --exit-code -- supplementary/record supplementary/outputs supplementary/tables

@@ -1,0 +1,19 @@
+17 of 17 checks passed.
+
+PASS: C5 and C6: a tenfold reference-density slip changes the electron density tenfold
+PASS: C3 and C4: a half-/full-width slip changes the electron density twofold
+PASS: C1: an uncorrected width overestimates the electron density
+PASS: C2: quadrature subtraction undercorrects a Voigt profile
+PASS: C9: unconverted values equal the baseline mole fractions (to 0.05 percentage points)
+PASS: Every scenario still sums to 100%
+PASS: C8 and C9 leave both internal consistency indicators unchanged
+PASS: 6 of 9 slips move X outside the 95% Monte Carlo interval: C3, C4, C5, C6, C8, C9
+PASS: None of the uncertainty scenarios U1-U4 moves an element outside its 95% Monte Carlo interval
+PASS: The density ratio flags 4 of 9 slips: C3, C4, C5, C6
+PASS: The scatter of the Boltzmann plot flags 1 of 9 slips: C7
+PASS: The comparison with the reference flags 5 of 9 slips: C3, C5, C6, C8, C9
+PASS: Major element Y stays within 5% of the baseline in 11 of the 13 scenarios
+PASS: The baseline is compatible with the reference (|zeta| < 2 for every element)
+PASS: 7 of 9 slips are flagged by at least one indicator; no indicator flags all of them
+PASS: None of the uncertainty scenarios U1-U4 is flagged by any indicator
+PASS: With repeatability as the only uncertainty, |zeta| > 2 for 9 of 9 slips and for U1, U2, U3 among the uncertainty scenarios

@@ -1,0 +1,110 @@
+105 of 105 revised manuscript consistency checks passed.
+
+The original prose-specific 180 checks are retained separately and are not asserted here.
+Main manuscript text and citation checks not performed: source or bibliography absent.
+Supplement text and citation checks not performed: source or bibliography absent.
+PASS: record: 21 lines and five replicates
+PASS: record: assigned 3 percent intensity noise
+PASS: reported record: 18 deterministic and seven Monte Carlo values
+PASS: X: JSON mean agrees with replicates
+PASS: X: JSON sample deviation agrees with replicates
+PASS: Y: JSON mean agrees with replicates
+PASS: Y: JSON sample deviation agrees with replicates
+PASS: Z: JSON mean agrees with replicates
+PASS: Z: JSON sample deviation agrees with replicates
+PASS: replicate 1: mass fractions close
+PASS: replicate 2: mass fractions close
+PASS: replicate 3: mass fractions close
+PASS: replicate 4: mass fractions close
+PASS: replicate 5: mass fractions close
+PASS: printed table source exists: tableS1_linewidth.tex
+PASS: Table S1: nine rows
+PASS: Table S1 all cells at G/W 0.1
+PASS: Table S1 all cells at G/W 0.2
+PASS: Table S1 all cells at G/W 0.3
+PASS: Table S1 all cells at G/W 0.4
+PASS: Table S1 all cells at G/W 0.5
+PASS: Table S1 all cells at G/W 0.6
+PASS: Table S1 all cells at G/W 0.7
+PASS: Table S1 all cells at G/W 0.8
+PASS: Table S1 all cells at G/W 0.9
+PASS: printed table source exists: tableS2_lines.tex
+PASS: Table S2: 21 line rows and 105 replicate intensities
+PASS: Table S2 XI_1: species, atomic values and all five intensities
+PASS: Table S2 XI_2: species, atomic values and all five intensities
+PASS: Table S2 XI_3: species, atomic values and all five intensities
+PASS: Table S2 XI_4: species, atomic values and all five intensities
+PASS: Table S2 YI_1: species, atomic values and all five intensities
+PASS: Table S2 YI_2: species, atomic values and all five intensities
+PASS: Table S2 YI_3: species, atomic values and all five intensities
+PASS: Table S2 YI_4: species, atomic values and all five intensities
+PASS: Table S2 YI_5: species, atomic values and all five intensities
+PASS: Table S2 YI_6: species, atomic values and all five intensities
+PASS: Table S2 YI_7: species, atomic values and all five intensities
+PASS: Table S2 YII_1: species, atomic values and all five intensities
+PASS: Table S2 YII_2: species, atomic values and all five intensities
+PASS: Table S2 YII_3: species, atomic values and all five intensities
+PASS: Table S2 YII_4: species, atomic values and all five intensities
+PASS: Table S2 YII_5: species, atomic values and all five intensities
+PASS: Table S2 ZII_1: species, atomic values and all five intensities
+PASS: Table S2 ZII_2: species, atomic values and all five intensities
+PASS: Table S2 ZII_3: species, atomic values and all five intensities
+PASS: Table S2 ZII_4: species, atomic values and all five intensities
+PASS: Table S2 ZII_5: species, atomic values and all five intensities
+PASS: printed table source exists: tableS3_summary.tex
+PASS: Table S3: three element rows
+PASS: Table S3 X: all displayed numeric cells
+PASS: Table S3 Y: all displayed numeric cells
+PASS: Table S3 Z: all displayed numeric cells
+PASS: printed table source exists: tableS4_seeded.tex
+PASS: Table S4: baseline, interval and 13 perturbation rows
+PASS: Table S4 baseline ratios
+PASS: Table S4 95 percent interval endpoints
+PASS: printed table source exists: tableS5_indicators.tex
+PASS: Table S5: baseline, interval and 13 perturbation rows
+PASS: Table S5 baseline numeric cells
+PASS: Table S5 density and scatter interval endpoints
+PASS: Table S4 U1: parameter and composition ratios
+PASS: Table S5 U1: density ratio, scatter and normalized deviations
+PASS: Table S5 U1: detection flags
+PASS: Table S4 U2: parameter and composition ratios
+PASS: Table S5 U2: density ratio, scatter and normalized deviations
+PASS: Table S5 U2: detection flags
+PASS: Table S4 U3: parameter and composition ratios
+PASS: Table S5 U3: density ratio, scatter and normalized deviations
+PASS: Table S5 U3: detection flags
+PASS: Table S4 U4: parameter and composition ratios
+PASS: Table S5 U4: density ratio, scatter and normalized deviations
+PASS: Table S5 U4: detection flags
+PASS: Table S4 C1: parameter and composition ratios
+PASS: Table S5 C1: density ratio, scatter and normalized deviations
+PASS: Table S5 C1: detection flags
+PASS: Table S4 C2: parameter and composition ratios
+PASS: Table S5 C2: density ratio, scatter and normalized deviations
+PASS: Table S5 C2: detection flags
+PASS: Table S4 C3: parameter and composition ratios
+PASS: Table S5 C3: density ratio, scatter and normalized deviations
+PASS: Table S5 C3: detection flags
+PASS: Table S4 C4: parameter and composition ratios
+PASS: Table S5 C4: density ratio, scatter and normalized deviations
+PASS: Table S5 C4: detection flags
+PASS: Table S4 C5: parameter and composition ratios
+PASS: Table S5 C5: density ratio, scatter and normalized deviations
+PASS: Table S5 C5: detection flags
+PASS: Table S4 C6: parameter and composition ratios
+PASS: Table S5 C6: density ratio, scatter and normalized deviations
+PASS: Table S5 C6: detection flags
+PASS: Table S4 C7: parameter and composition ratios
+PASS: Table S5 C7: density ratio, scatter and normalized deviations
+PASS: Table S5 C7: detection flags
+PASS: Table S4 C8: parameter and composition ratios
+PASS: Table S5 C8: density ratio, scatter and normalized deviations
+PASS: Table S5 C8: detection flags
+PASS: Table S4 C9: parameter and composition ratios
+PASS: Table S5 C9: density ratio, scatter and normalized deviations
+PASS: Table S5 C9: detection flags
+PASS: six of nine slips move X outside input interval
+PASS: all 13 scenario compositions close
+PASS: density indicator flags C3 to C6
+PASS: scatter indicator flags C7
+PASS: reference indicator flags C3 C5 C6 C8 C9

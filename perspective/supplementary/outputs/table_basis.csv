@@ -1,0 +1,14 @@
+material,element,molar_mass_g_mol,mass_percent,mole_percent,mean_molar_mass_g_mol,M_over_mean,reported_over_true_if_unconverted,relative_error_percent_if_unconverted
+Ti-6Al-4V (titanium alloy),Ti,47.867,90.00,86.20,45.85,1.0440,0.9578,-4.2
+Ti-6Al-4V (titanium alloy),Al,26.982,6.00,10.20,45.85,0.5885,1.6992,69.9
+Ti-6Al-4V (titanium alloy),V,50.942,4.00,3.60,45.85,1.1111,0.9000,-10.0
+90W-7Ni-3Fe (tungsten heavy alloy),W,183.84,90.00,73.89,150.93,1.2180,0.8210,-17.9
+90W-7Ni-3Fe (tungsten heavy alloy),Ni,58.693,7.00,18.00,150.93,0.3889,2.5716,157.2
+90W-7Ni-3Fe (tungsten heavy alloy),Fe,55.845,3.00,8.11,150.93,0.3700,2.7027,170.3
+63Sn-37Pb (solder),Sn,118.71,63.00,74.82,140.99,0.8420,1.1877,18.8
+63Sn-37Pb (solder),Pb,207.2,37.00,25.18,140.99,1.4696,0.6804,-32.0
+Al-2.5Li (aluminum-lithium alloy),Al,26.982,97.50,90.93,25.17,1.0722,0.9327,-6.7
+Al-2.5Li (aluminum-lithium alloy),Li,6.94,2.50,9.07,25.17,0.2758,3.6261,262.6
+Constructed record X-Y-Z (hypothetical),X,27.0,6.00,11.92,53.66,0.5032,1.9875,98.7
+Constructed record X-Y-Z (hypothetical),Y,56.0,91.00,87.20,53.66,1.0436,0.9582,-4.2
+Constructed record X-Y-Z (hypothetical),Z,184.0,3.00,0.87,53.66,3.4289,0.2916,-70.8

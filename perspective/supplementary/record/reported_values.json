@@ -1,0 +1,119 @@
+{
+  "note": "Values as printed in Supplementary Text S1. Each entry gives the printed value and its printed increment. Deterministic values are reconstructed within half an increment. Monte Carlo-based values are printed with two significant digits, a precision at which any seed reproduces them; their unrounded values (outputs/summary.json) are regenerated exactly with the seed and generator stated in record.json.",
+  "deterministic": {
+    "A1_stark_fwhm_nm": {
+      "value": 0.124,
+      "increment": 0.0001
+    },
+    "A1_n_e_1e17_cm3": {
+      "value": 1.0,
+      "increment": 0.01
+    },
+    "A2_temperature_K": {
+      "value": 9990.0,
+      "increment": 10.0
+    },
+    "A2_temperature_replicate_sd_K": {
+      "value": 35.0,
+      "increment": 1.0
+    },
+    "A3_mcwhirter_threshold_1e15_cm3": {
+      "value": 4.95,
+      "increment": 0.01
+    },
+    "A3_ne_saha_over_ne_stark": {
+      "value": 0.99,
+      "increment": 0.01
+    },
+    "A4_mole_percent": {
+      "X": {
+        "value": 11.889,
+        "increment": 0.001
+      },
+      "Y": {
+        "value": 87.241,
+        "increment": 0.001
+      },
+      "Z": {
+        "value": 0.87,
+        "increment": 0.001
+      }
+    },
+    "A4_mass_percent": {
+      "X": {
+        "value": 5.982,
+        "increment": 0.001
+      },
+      "Y": {
+        "value": 91.034,
+        "increment": 0.001
+      },
+      "Z": {
+        "value": 2.984,
+        "increment": 0.001
+      }
+    },
+    "A5_rsd_percent": {
+      "X": {
+        "value": 2.9,
+        "increment": 0.1
+      },
+      "Y": {
+        "value": 0.2,
+        "increment": 0.1
+      },
+      "Z": {
+        "value": 1.5,
+        "increment": 0.1
+      }
+    },
+    "A5_signed_deviation_percent": {
+      "X": {
+        "value": -0.3,
+        "increment": 0.1
+      },
+      "Y": {
+        "value": 0.0,
+        "increment": 0.1
+      },
+      "Z": {
+        "value": -0.5,
+        "increment": 0.1
+      }
+    }
+  },
+  "monte_carlo_based": {
+    "A2_temperature_propagated_u_K": {
+      "value": 180.0,
+      "increment": 10.0
+    },
+    "A5_u_combined_percentage_points": {
+      "X": {
+        "value": 1.6,
+        "increment": 0.1
+      },
+      "Y": {
+        "value": 1.5,
+        "increment": 0.1
+      },
+      "Z": {
+        "value": 0.28,
+        "increment": 0.01
+      }
+    },
+    "A5_zeta": {
+      "X": {
+        "value": -0.01,
+        "increment": 0.01
+      },
+      "Y": {
+        "value": 0.02,
+        "increment": 0.01
+      },
+      "Z": {
+        "value": -0.06,
+        "increment": 0.01
+      }
+    }
+  }
+}
