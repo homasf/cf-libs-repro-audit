@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Please cite this fixed Perspective code release."
+type: software
+title: "Code S1: Constructed Examples and Reporting Record for the CF LIBS Perspective"
+authors:
+  - family-names: Saeidfirozeh
+    given-names: Homa
+version: 1.0.0
+date-released: 2026-10-06
+license: MIT
+url: "https://github.com/homasf/cf-libs-repro-audit/releases/tag/perspective-v1.0.0"
+abstract: "Constructed numerical examples, a hypothetical reporting record, numerical and table checks, and fixed figure artwork accompanying a Perspective on CF LIBS reconstructability. No published study is assessed by this package."

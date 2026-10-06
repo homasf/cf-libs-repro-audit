@@ -1,0 +1,99 @@
+name: Publish fixed Perspective archive
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/publish-perspective.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: perspective-v1.0.0
+          path: snapshot
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify fixed assets and numerical table consistency
+        working-directory: snapshot
+        run: |
+          python3 supplementary/code/restore_figures.py
+          python3 supplementary/code/verify_release.py
+      - name: Build the fixed archive from the committed files
+        working-directory: snapshot
+        run: |
+          git restore supplementary/outputs
+          python3 build_archive.py
+      - name: Publish the version tag and archive
+        working-directory: snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: homasf/cf-libs-repro-audit
+        run: |
+          python3 - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          def run(args, check=True):
+              return subprocess.run(args, check=check, text=True, capture_output=True)
+
+          sha = run(['git', 'rev-parse', 'HEAD']).stdout.strip()
+          tag = 'perspective-v1.0.0'
+          current = run(['gh', 'api', f'repos/homasf/cf-libs-repro-audit/git/ref/tags/{tag}'], check=False)
+          if current.returncode == 0:
+              if json.loads(current.stdout)['object']['sha'] != sha:
+                  raise SystemExit('Existing tag identifies another commit; refusing to move it.')
+          else:
+              run(['gh', 'api', '--method', 'POST', 'repos/homasf/cf-libs-repro-audit/git/refs',
+                   '-f', 'ref=refs/tags/' + tag, '-f', 'sha=' + sha])
+
+          existing = run(['gh', 'release', 'view', tag, '--json', 'tagName'], check=False)
+          if existing.returncode == 0:
+              print('Fixed release already exists; leaving its assets unchanged.')
+          else:
+              notes = Path('dist/RELEASE_NOTES.md')
+              notes.write_text('Code S1 version 1.0.0 for the CF LIBS Perspective.\n\n'
+                               'This tagged snapshot and its attached archive contain only the constructed '
+                               'Perspective examples, record, calculations, tables, numerical checks, '
+                               'and fixed manuscript figure assets. No published study is assessed.\n\n'
+                               'The five manuscript figures are preserved raster artwork in PDF wrappers. '
+                               'Restoration verifies and copies their supplied bytes. Optional numerical '
+                               'diagnostic plots have a separate design. Original editable drawing sources '
+                               'are not included.\n\n'
+                               'The release checker performs numerical/table and file integrity checks; '
+                               'it does not check manuscript prose or citations. A Zenodo DOI has not '
+                               'been issued.\n\nCommit: `' + sha + '`\n')
+              assets = ['dist/CF_LIBS_Perspective_CodeS1_v1.0.0.zip',
+                        'dist/CF_LIBS_Perspective_CodeS1_v1.0.0.zip.sha256']
+              run(['gh', 'release', 'create', tag, '--verify-tag', '--title',
+                   'CF LIBS Perspective Code S1, version 1.0.0', '--notes-file', str(notes)] + assets)
+              print('Published fixed Perspective release at commit ' + sha)
+          PY
+      - name: Remove the superseded unverified review branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: homasf/cf-libs-repro-audit
+        run: |
+          python3 - <<'PY'
+          import json
+          import subprocess
+          branch = 'codex/scientific-revision-20260915'
+          expected = 'b336f038ae173f5582a58611333f434912172870'
+          prefix = 'repos/homasf/cf-libs-repro-audit/git/'
+          result = subprocess.run(['gh', 'api', prefix + 'ref/heads/' + branch],
+                                  text=True, capture_output=True)
+          if result.returncode:
+              print('Superseded branch is already absent; no deletion needed.')
+          else:
+              if json.loads(result.stdout)['object']['sha'] != expected:
+                  raise SystemExit('Review branch changed; refusing deletion of a different revision.')
+              subprocess.run(['gh', 'api', '--method', 'DELETE', prefix + 'refs/heads/' + branch], check=True)
+              print('Removed the superseded review branch. Existing commit history was preserved.')
+          PY

@@ -2,10 +2,10 @@
 """Run every calculation of the supplementary package in the right order.
 
     python3 run_all.py               # calculations and checks (standard library only)
-    python3 run_all.py --figures     # additionally redraw Figures 2-4 and S1
-                                     # (needs NumPy and Matplotlib)
-    python3 run_all.py --check-text  # additionally compare the numbers quoted in
-                                     # the article and the supplement with the outputs
+    python3 run_all.py --figures     # additionally restore the five supplied figure PDFs
+    python3 run_all.py --diagnostic-plots  # draw optional numerical diagnostic plots
+                                           # (needs NumPy and Matplotlib)
+    python3 run_all.py --help        # show available options
 
 The run takes a few minutes; most of the time is spent in the Monte Carlo
 propagations (200,000 draws for the record, 20,000 draws per scenario).
@@ -16,6 +16,7 @@ confirms that the regenerated files are identical to the shipped ones.
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import subprocess
 import sys
@@ -35,8 +36,13 @@ def digest(path: Path) -> str:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--figures", action="store_true", help="restore the five fixed manuscript figure PDFs and verify hashes")
+    parser.add_argument("--diagnostic-plots", action="store_true", help="draw optional numerical plots in supplementary/diagnostic_figures/ (requires NumPy and Matplotlib)")
+    parser.add_argument("--regenerate-record", action="store_true", help="regenerate constructed inputs and compare with supplied files")
+    args = parser.parse_args()
     status = 0
-    if "--regenerate-record" in sys.argv:
+    if args.regenerate_record:
         files = [REC / "record.json", REC / "line_intensities.csv"]
         before = [digest(f) for f in files]
         status |= run("make_record.py")
@@ -48,10 +54,10 @@ def main() -> int:
     status |= run("reconstruct_record.py")
     status |= run("seeded_defects.py")
     status |= run("make_tables.py")
-    if "--figures" in sys.argv:
+    if args.figures:
+        status |= run("restore_figures.py")
+    if args.diagnostic_plots:
         status |= run("make_figures.py")
-    if "--check-text" in sys.argv:
-        status |= run("check_manuscript.py")
     print("\nALL CHECKS PASSED" if status == 0 else "\nSOME CHECKS FAILED")
     return status
 

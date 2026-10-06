@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""Regenerate Figures 2-4 of the Perspective and Figure S1 of the supplement.
+"""Draw optional numerical diagnostic plots from the constructed calculations.
 
 Requires NumPy and Matplotlib. All plotted values come from cflibs_chain.py,
 the constructed record in ../record/ and the CSV/JSON files written by
-worked_examples.py, reconstruct_record.py and seeded_defects.py - run those
-first (or simply run run_all.py).
+worked_examples.py, reconstruct_record.py and seeded_defects.py. Run those
+first, or run run_all.py --diagnostic-plots.
 
-Figure 1 (the quantification-chain schematic) is a TikZ drawing:
-../../figures/fig1_chain.tex.
-
-Output: ../../figures/fig{2,3,4}_*.pdf/.png (main text) and
-        ../figures/figS1_boltzmann.pdf/.png (supplement)
+Output: ../diagnostic_figures/fig{2,3,4}_*.pdf/.png and
+        ../diagnostic_figures/figS1_boltzmann.pdf/.png.
+These plots differ from the supplied manuscript artwork. Use
+restore_figures.py to copy the exact five fixed manuscript figure PDFs.
 """
 from __future__ import annotations
 
@@ -23,7 +22,6 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
-from matplotlib import font_manager  # noqa: E402
 from matplotlib.ticker import NullFormatter  # noqa: E402
 
 import cflibs_chain as cf  # noqa: E402
@@ -31,8 +29,8 @@ import cflibs_chain as cf  # noqa: E402
 HERE = Path(__file__).resolve().parent
 OUT = HERE.parent / "outputs"
 REC = HERE.parent / "record"
-FIG = HERE.parent.parent / "figures"       # figures of the main text
-FIG_SUPP = HERE.parent / "figures"         # figures of the supplement
+FIG = HERE.parent / "diagnostic_figures"
+FIG_SUPP = FIG
 
 # ---- palette; series are also distinguished by marker shape or line style ----
 BLUE, ORANGE, AQUA, YELLOW = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
@@ -41,12 +39,7 @@ GRID, AXIS = "#e1e0d9", "#c3c2b7"
 
 
 def setup() -> None:
-    family = "DejaVu Sans"
-    try:
-        font_manager.findfont("Liberation Sans", fallback_to_default=False)
-        family = "Liberation Sans"
-    except Exception:  # font not installed: keep the Matplotlib default
-        pass
+    family = "DejaVu Sans"  # bundled with Matplotlib; do not depend on host fonts
     plt.rcParams.update({
         "font.family": family, "font.size": 7.5,
         "axes.labelsize": 8.0, "axes.titlesize": 8.0,
@@ -60,16 +53,13 @@ def setup() -> None:
         "legend.frameon": False, "pdf.fonttype": 42, "ps.fonttype": 42,
         "savefig.dpi": 600, "figure.dpi": 150, "text.color": INK,
     })
-    if family == "Liberation Sans":
-        plt.rcParams.update({"mathtext.fontset": "custom", "mathtext.rm": "Liberation Sans",
-                             "mathtext.it": "Liberation Sans:italic", "mathtext.bf": "Liberation Sans:bold",
-                             "mathtext.cal": "Liberation Sans:italic", "mathtext.sf": "Liberation Sans",
-                             "mathtext.tt": "Liberation Mono"})
+    plt.rcParams.update({"mathtext.fontset": "dejavusans"})
 
 
 def save(fig, name: str, folder: Path = FIG) -> None:
     folder.mkdir(parents=True, exist_ok=True)
-    fig.savefig(folder / f"{name}.pdf", bbox_inches="tight", pad_inches=0.02)
+    fig.savefig(folder / f"{name}.pdf", bbox_inches="tight", pad_inches=0.02,
+                metadata={"CreationDate": None, "ModDate": None})
     fig.savefig(folder / f"{name}.png", bbox_inches="tight", pad_inches=0.02, dpi=600)
     plt.close(fig)
     print(f"wrote {folder.relative_to(HERE.parent.parent)}/{name}.pdf/.png")

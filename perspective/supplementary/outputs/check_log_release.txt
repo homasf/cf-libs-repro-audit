@@ -1,8 +1,8 @@
-105 of 105 revised manuscript consistency checks passed.
+105 of 105 numerical and table consistency checks passed.
 
-The original prose-specific 180 checks are retained separately and are not asserted here.
-Main manuscript text and citation checks not performed: source or bibliography absent.
-Supplement text and citation checks not performed: source or bibliography absent.
+Scope: supplied constructed inputs, numerical outputs and table bodies.
+These checks do not assess manuscript prose, citations, experiments or published studies.
+
 PASS: record: 21 lines and five replicates
 PASS: record: assigned 3 percent intensity noise
 PASS: reported record: 18 deterministic and seven Monte Carlo values

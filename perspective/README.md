@@ -1,63 +1,76 @@
-# CF LIBS Perspective: Code S1 and Data S1
+# Code S1 for the CF LIBS Perspective
 
-Supporting calculations for **Towards Reconstructable CF LIBS Quantification: A Perspective on Reporting, Validation, and Reproducibility**.
+Constructed examples and reporting record accompanying *Towards Reconstructable CF LIBS Quantification: A Perspective on Reporting, Validation, and Reproducibility* by Homa Saeidfirozeh, Petr Kubelík, Jan Suchánek, and Martin Ferus.
 
-This folder contains the author's original nine Python scripts, complete input record, numerical outputs, tables, and original figure PDFs. The data describe hypothetical X, Y, and Z elements in a constructed plasma model. The illustrative line parameters are not real atomic transition data or experimental measurements.
+**Software author:** Homa Saeidfirozeh. **Version:** 1.0.0. **Date:** 6 October 2026. **Tag:** `perspective-v1.0.0`.
 
-## Run
+This release snapshot contains only the constructed material accompanying this Perspective. All numerical data are hypothetical. No published study is assessed by this package. The separate older audit software and its example records are excluded from this snapshot and the attached Code S1 archive. The repository history is not part of the archive.
 
-From this `perspective/` folder:
+Download the [fixed Code S1 archive](https://github.com/homasf/cf-libs-repro-audit/releases/download/perspective-v1.0.0/CF_LIBS_Perspective_CodeS1_v1.0.0.zip) or see the [version specific release](https://github.com/homasf/cf-libs-repro-audit/releases/tag/perspective-v1.0.0). Cite the software using `CITATION.cff` or `CITATION.bib`. Version 1.0.0 is specific to this Perspective package, independent of version numbers used by other software. A DOI has not yet been issued.
 
-```sh
+## Run the numerical examples
+
+From the extracted archive root:
+
+```bash
 python3 supplementary/code/run_all.py
+python3 supplementary/code/restore_figures.py
 python3 supplementary/code/verify_release.py
 ```
 
-Use Python 3.12 or newer for the complete workflow, including the optional figure dependencies. The calculations require only the Python standard library. Optional deterministic input regeneration is tested with:
+The calculations, table production, figure restoration, and checks require only the Python standard library. They were verified with Python 3.12.14. Running the Monte Carlo calculations takes several minutes.
 
-```sh
-python3 supplementary/code/run_all.py --regenerate-record
+To regenerate the inputs from their saved seed and verify that they match the supplied input files, use:
+
+```bash
+python3 supplementary/code/run_all.py --regenerate-record --figures
+python3 supplementary/code/verify_release.py
 ```
 
-To regenerate Figures 2, 3, 4, and S1:
+## What the calculations do
 
-```sh
+1. `make_record.py` constructs 21 line entries for hypothetical elements X, Y, and Z and five replicate intensity records using the saved seed. These are simulated inputs, with no experimental measurements.
+2. `worked_examples.py` evaluates the five checkpoints: linewidth decomposition, plasma parameters, model consistency, composition basis, and reference comparison.
+3. `reconstruct_record.py` reads the record and replicate intensities, obtains electron density and temperature, combines neutral and singly ionized populations, and converts mole fractions into mass fractions. It propagates the assigned input uncertainties using 200,000 Monte Carlo draws.
+4. `seeded_defects.py` applies nine convention or reporting slips and four legitimate input perturbations to the same record. It compares their effects with input uncertainty intervals and with density, scatter, and reference indicators.
+5. `make_tables.py` turns the numerical outputs into the five supplementary LaTeX table bodies.
+6. `verify_release.py` checks the packaged numerical values and table entries, and separately verifies the identities of the fixed figure files. It does not read manuscript prose, citations, or a bibliography. It does not establish physical validity or experimental accuracy.
+
+There are 76 checks inside the calculation scripts, 105 additional numerical and table checks, and 15 figure file integrity checks. The last group checks ten supplied PDF/PNG asset hashes and five restored PDF copies. See `verification/VALIDATION.md` for results and limits.
+
+## The manuscript figures
+
+The five final manuscript figures are fixed raster artwork in PDF wrappers. They were recovered losslessly from the author supplied final PDFs, preserving the embedded pixels and Figure 1 transparency. Their PDF and PNG assets, SHA256 hashes, and provenance are in `supplementary/figure_assets/`.
+
+`restore_figures.py` and the `--figures` option verify and copy these assets to `supplementary/figures/`. They restore the exact supplied files and do not redraw the artwork. Figure 1 is a schematic rather than a numerical plot. The original editable drawing sources were not supplied; this release cannot recreate the graphical design from numerical inputs.
+
+Optional diagnostic plots are drawn directly from the numerical results in a separate directory. Their graphical design differs from the final manuscript artwork, and they never overwrite it:
+
+```bash
 python3 -m pip install -r supplementary/code/requirements.txt
-python3 supplementary/code/run_all.py --figures
+python3 supplementary/code/run_all.py --diagnostic-plots
 ```
 
-Main numerical figures are written to `figures/`, and Figure S1 to `supplementary/figures/`. Figure 1 is supplied as its original vector PDF schematic. Original dependency pins are retained.
+These plots use NumPy 2.3.5, Matplotlib 3.10.8, and the bundled DejaVu Sans font. They are written to `supplementary/diagnostic_figures/`. The supplied artwork's original software versions are unknown; these pins describe only the verified diagnostic plotting environment.
 
-## Contents and checks
+## Files
 
-`supplementary/` contains `code/`, `record/`, `outputs/`, `tables/`, and `figures/`. `verification/` records calculation validation and input provenance. The original scripts are unchanged; `verify_release.py` is an additional checker.
+| Path | Contents |
+| --- | --- |
+| `supplementary/code/` | Calculation, table, restoration, diagnostic plotting, and verification scripts |
+| `supplementary/record/` | Constructed JSON inputs and five replicate intensities |
+| `supplementary/outputs/` | Expected numerical outputs and check logs |
+| `supplementary/tables/` | Five supplementary LaTeX table bodies |
+| `supplementary/figure_assets/` | Fixed manuscript PDF and PNG artwork, provenance, and hashes |
+| `supplementary/figures/` | Restored fixed manuscript PDFs |
+| `verification/` | Validation evidence and provenance |
 
-The input record was regenerated with the original supplied generator. Expected printed values were recovered from the supplied summary using the author's formatting function. All 21 line rows and 105 intensities match the supplied table.
+The article and supplementary prose are distributed separately from this code release. This package intentionally has no manuscript text checker requiring absent source files. Numerical checks, file checks, and author review of prose have different scopes.
 
-All 76 numerical checks passed after the full baseline and all 13 scenarios were rerun. The 11 regenerated outputs are byte identical to the supplied originals, and all 666 numerical JSON values match exactly. The additional `verify_release.py` runs 105 numerical and table checks here and explicitly reports that manuscript text checks are not performed because manuscript drafts are excluded.
+## Archiving
 
-The original `check_manuscript.py` requires the original manuscript files and exact wording; its supplied 180 check log is historical. Use `verify_release.py` for this bundle rather than `run_all.py --check-text`.
+The GitHub release attaches the fixed Code S1 ZIP and its SHA256 checksum. `.zenodo.json` provides metadata for manual archival deposition. Deposit this clean ZIP, rather than the general repository homepage or another branch, and then cite the version specific DOI issued for the deposition. Do not describe an unissued DOI as available.
 
-## What the code does, step by step
+## License
 
-1. **Read the supplied record.** The default run uses `record/record.json`, `record/line_intensities.csv`, and `record/reported_values.json` inside `supplementary/`. These describe hypothetical X, Y, and Z elements, 21 spectral lines, five intensity replicates, assigned uncertainties, and expected printed results. The calculation starts from saved integrated intensities and linewidths.
-
-2. **Recalculate the worked examples.** `worked_examples.py` demonstrates linewidth correction, temperature and density conventions, concentration conversion, sensitivity, and reference comparisons. It writes example results and runs 24 checks.
-
-3. **Reconstruct the composition.** `reconstruct_record.py` uses `cflibs_chain.py` to correct the linewidth, calculate electron density, and fit Boltzmann points to estimate temperature and relative populations. Saha balance supplies missing charge stages. The populations are normalized to mole fractions and converted to mass fractions for each replicate.
-
-4. **Propagate uncertainty.** A Monte Carlo calculation with 200,000 draws varies the assigned physical and atomic inputs. Each input draw is shared across all five replicates, while replicate intensity scatter is combined separately. The output includes standard uncertainties, percentile intervals, signed deviations, and comparison scores. A second calculation with 20,000 draws uses another seed as a consistency check.
-
-5. **Test deliberate changes.** `seeded_defects.py` introduces 13 individual perturbations, including linewidth and density conventions, intensity conventions, and concentration basis. Each scenario uses 20,000 uncertainty draws. The code checks whether density agreement, Boltzmann fit scatter, and reference compatibility reveal the resulting changes.
-
-6. **Write the results and tables.** Detailed results go to JSON files; replicate and scenario comparisons go to CSV files in `supplementary/outputs/`. `make_tables.py` generates the five supplementary LaTeX table bodies in `supplementary/tables/`. The default run performs 76 numerical checks.
-
-7. **Run the separate consistency checker.** Run `verify_release.py` after the calculations. Its 105 checks compare the packaged numerical values and table relationships. It writes `check_log_release.txt` and preserves the original historical text check log.
-
-The `--figures` option additionally redraws Figures 2, 3, 4, and S1. Figure 1 is supplied as its original schematic. The `--regenerate-record` option recreates the constructed inputs from the saved seed and checks them against the shipped files.
-
-These scripts run locally without an AI service or API key. They demonstrate reproducibility and sensitivity of the constructed calculations. The checks do not establish experimental accuracy or validate a real plasma model.
-
-## Repository and citation
-
-This folder is hosted at [homasf/cf-libs-repro-audit](https://github.com/homasf/cf-libs-repro-audit/tree/main/perspective). Preserve its directory structure when downloading or running it. The repository's [MIT license](LICENSE) is included here. Cite the specific commit or archived release used for the paper, and cite the Perspective separately when its journal citation becomes available.
+MIT License. See `LICENSE`.

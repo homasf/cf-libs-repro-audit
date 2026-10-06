@@ -1,7 +1,20 @@
 {
-  "record.json": "Regenerated from user supplied make_record.py; not supplied as an original record file.",
-  "line_intensities.csv": "Regenerated from user supplied make_record.py; compare against supplied Table S2 line intensities.",
-  "reported_values.json": "Recovered by applying the supplied reconstruct_record.reported_from function to the original user supplied outputs.zip/outputs/summary.json before any numerical rerun. Not generated from the validation run.",
+  "record.json": "Regenerated from the supplied make_record.py; this constructed input was not supplied as an original record file.",
+  "line_intensities.csv": "Regenerated from make_record.py and compared with all 21 atomic line rows and 105 printed intensity strings in supplied Table S2. Canonical CSV line endings are CRLF.",
+  "reported_values.json": "Recovered by applying the supplied reconstruct_record.reported_from function to the original supplied outputs.zip summary.json before the initial numerical rerun; not derived from a validation rerun.",
   "original_summary_sha256": "22252bc6b19b34080cd4a803944e8b2e2e723be6e2263f3ccc2f13f9437cddca",
-  "formatting_function_source_sha256": "f1e1d52199244742e5acfb045eda1a7718c8218c86e0698c789463fc5344f53c"
+  "initial_staging_csv_normalization": {
+    "file": "line_intensities.csv",
+    "staged_bytes": 833,
+    "canonical_bytes": 855,
+    "rows_with_CRLF": 22,
+    "cause": "Local GitHub text fetch normalized CSV CRLF line endings to LF; first input regeneration restored canonical CSV writer bytes. JSON input files were unaffected.",
+    "numeric_contents_identical": true,
+    "repeated_regeneration_byte_identical": true
+  },
+  "final_input_sha256": {
+    "record.json": "4c0a1a033b30c6891ba0d4e12e9928d9197f0cd07baab9eb762d98be2ae3f6c7",
+    "line_intensities.csv": "9eacf3313d702c3ebf85e7c0fcfb8e5d28b3ddffe12ddac933b2ad647d9017c8",
+    "reported_values.json": "2d914a467aaecb1037b53768524de5fcb59f47d38d64a472528aae0d88326be3"
+  }
 }

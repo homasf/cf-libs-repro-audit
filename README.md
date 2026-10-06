@@ -11,36 +11,27 @@ LIBS/LIPS study can be reconstructed from the values printed in the article.
 
 **Software author:** Homa Saeidfirozeh  
 **Version:** 2.0.0  
-**Release date:** 7 July 2026  
+**Package metadata date:** 7 July 2026 (no tagged general audit release exists at this date)  
 **Repository:** `homasf/cf-libs-repro-audit`
-
-The software accompanies the article:
-
-> Homa Saeidfirozeh and Martin Ferus, *Can a published CF-LIBS
-> quantification be reconstructed? A reproducibility-audit framework and
-> reporting checklist.*
-
-The article's short title is *Reproducibility audit for CF-LIBS
-quantification*.
 
 ## Chemosensors Perspective support
 
-The [`perspective/`](perspective/) folder contains Code S1 and Data S1 for
-*Towards Reconstructable CF LIBS Quantification: A Perspective on Reporting,
-Validation, and Reproducibility*. It includes the original calculation
-scripts, constructed input record, numerical results, tables, and all five
-original figures. Run the supporting calculations from the repository root:
+Code S1 and Data S1 for *Towards Reconstructable CF LIBS Quantification: A Perspective on Reporting, Validation, and Reproducibility* have their own fixed version, `perspective-v1.0.0`.
+
+Use the [Perspective only archive](https://github.com/homasf/cf-libs-repro-audit/releases/download/perspective-v1.0.0/CF_LIBS_Perspective_CodeS1_v1.0.0.zip) and its [version specific release](https://github.com/homasf/cf-libs-repro-audit/releases/tag/perspective-v1.0.0). The release snapshot contains only the constructed Perspective material. It excludes the separate legacy named study audit documented below and excludes repository history.
+
+The [`perspective/`](perspective/) development folder mirrors that material. Run:
 
 ```bash
 cd perspective
 python3 supplementary/code/run_all.py
+python3 supplementary/code/restore_figures.py
 python3 supplementary/code/verify_release.py
 ```
 
-The calculations use only the Python standard library. See the
-[Perspective README](perspective/README.md) for figure dependencies, input
-provenance, and verification details. This support folder supplements the
-audit engine described below.
+The five final manuscript figures are fixed raster artwork in PDF wrappers, with provenance and hashes. Restoration copies the exact supplied assets. Optional numerical diagnostic plots are drawn separately and do not overwrite the manuscript figures. See the [Perspective README](perspective/README.md).
+
+The general audit engine below is separate software. Its named example and any related manuscript are not part of Code S1 and are not cited as evidence by the Perspective. The earlier README article description is not a statement of publication or submission status. If a related manuscript is submitted or under review, its authors should disclose its actual status and relationship to the editor.
 
 ## Scope
 
@@ -62,7 +53,7 @@ that a claim is not reproducible from the values as printed; it is not an
 assessment of author intent, experimental misconduct or the true sample
 concentrations.
 
-## Worked example
+## Legacy audit worked example
 
 The bundled record audits El-Saeed et al., *Scientific Reports* 15 (2025)
 19949. From printed values only, the repository regenerates:
@@ -168,9 +159,7 @@ The software author is **Homa Saeidfirozeh**. Use GitHub's **Cite this
 repository** control or the archived Zenodo DOI after it is minted. The
 machine-readable software metadata are in `CITATION.cff`.
 
-The accompanying article is a separate research output authored by Homa
-Saeidfirozeh and Martin Ferus. It should be cited separately using its full
-journal citation when available.
+The Perspective package is cited separately using its own fixed version and release metadata. The legacy audit software metadata do not describe the Perspective Code S1 package.
 
 ## License
 

@@ -1,0 +1,9 @@
+{
+  "command": "python3 supplementary/code/make_record.py",
+  "exit_code": 0,
+  "repeated_regeneration_byte_identical": true,
+  "input_sha256": {
+    "record.json": "4c0a1a033b30c6891ba0d4e12e9928d9197f0cd07baab9eb762d98be2ae3f6c7",
+    "line_intensities.csv": "9eacf3313d702c3ebf85e7c0fcfb8e5d28b3ddffe12ddac933b2ad647d9017c8"
+  }
+}

@@ -1,26 +1,26 @@
 #!/usr/bin/env python3
-"""Numeric, citation and file checks for the rewritten LaTeX manuscript.
+"""Check the packaged constructed numerical outputs and LaTeX table bodies.
 
-This is a separate checker for the rewritten manuscript.
-The original check_manuscript.py is retained unchanged.
-The numerical calculation scripts and their 76 checks remain unchanged.
-This checker validates displayed table values and key numerical claims within
-specific sections; it does not claim that the original 180 literal-string
-checks were rerun or that automated text checks establish physical validity.
-Expected layout: main.tex and references.bib above supplementary/;
-supplementary/{code,record,outputs,tables,figures,supplementary.tex,
-references_supplement.bib}. Standard library only.
+Run after run_all.py. The 105 numerical and table checks use the supplied
+record, outputs and tables. A separate integrity check verifies ten fixed
+figure assets and five restored PDF copies. It checks numerical relationships,
+printed table values and file identity. It does not read or verify manuscript prose, citation records or
+item numbering, and does not validate an experiment or a plasma model.
+The calculation scripts retain their separate 76 numerical checks.
+Standard library only.
 """
 from __future__ import annotations
+import argparse
 import csv
 import json
 import math
 import re
+import statistics
 from pathlib import Path
+import restore_figures
 
 HERE=Path(__file__).resolve().parent
 SUPP_DIR=HERE.parent
-PKG=SUPP_DIR.parent
 OUT=SUPP_DIR/'outputs'
 REC=SUPP_DIR/'record'
 RESULTS=[]
@@ -31,75 +31,13 @@ def check(name, condition):
 def read(path):
     return path.read_text(encoding='utf-8')
 
-def expanded(text,base):
-    """Include table bodies, without executing LaTeX or silently filling gaps."""
-    def replace(m):
-        path=base/m.group(1)
-        if not path.suffix:path=path.with_suffix('.tex')
-        check(f'input file exists: {path.name}',path.exists())
-        return read(path) if path.exists() else ''
-    text=re.sub(r'\\(?:input|tabinput)\{([^}]+)\}',replace,text)
-    return re.sub(r'\\input\s+([^\s%]+)',replace,text)
-
 def numbers(text):
     text=re.sub(r'\\(?:ref|eqref|cite|label|includegraphics)\{[^}]*\}','',text)
     text=text.replace(',', '').replace('{,}', '').replace('--',' to ')
     return re.findall(r'(?<![A-Za-z_])[-+]?\d+(?:\.\d+)?(?![A-Za-z_])',text)
 
-def numeric_claim(name,text,values):
-    """Require the displayed values in order in the relevant labelled section."""
-    hay=numbers(text); pos=0
-    for expected in map(str,values):
-        while pos<len(hay) and float(hay[pos])!=float(expected):pos+=1
-        if pos==len(hay):check(name,False);return
-        pos+=1
-    check(name,True)
-
-def scope(text,label):
-    marker='\\label{'+label+'}'
-    index=text.find(marker)
-    if index<0:return ''
-    section=list(re.finditer(r'\\(?:section|subsection)\*?\{',text[:index]))
-    start=section[-1].start() if section else index
-    end=re.search(r'\\(?:section|subsection)\*?\{',text[index+len(marker):])
-    return text[start:index+len(marker)+end.start()] if end else text[start:]
-
-def bib_entries(text):
-    # Parse entry heads independently of indentation and closing-brace style.
-    return set(re.findall(r'@\w+\s*\{\s*([^,\s]+)\s*,',text))
-
-def citations(text):
-    return {k.strip() for group in re.findall(r'\\cite\w*\*?(?:\[[^\]]*\])*\{([^}]+)\}',text) for k in group.split(',')}
-
-def document_checks(name,text,bib,base):
-    keys=bib_entries(bib);cited=citations(text)
-    check(f'{name}: all citation keys resolve ({len(cited)} keys)',cited<=keys)
-    # Uncited .bib entries are permitted: BibTeX prints the cited subset.
-    labels=set(re.findall(r'\\label\{([^}]+)\}',text))
-    refs=set(re.findall(r'\\(?:ref|eqref|autoref|cref|Cref)\{([^}]+)\}',text))
-    check(f'{name}: all internal references have labels',refs<=labels)
-    for path in re.findall(r'\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}',text):
-        check(f'{name}: figure exists: {path}',(base/path).exists())
-
-def table(text,label):
-    for block in re.findall(r'\\begin\{table\*?\}.*?\\end\{table\*?\}',text,re.S):
-        if '\\label{'+label+'}' in block:return block
-    return ''
-
-def row_contains(block,values):
-    for line in block.splitlines():
-        if '&' not in line:continue
-        cells=[v.strip().strip('$') for v in line.rstrip('\\').split('&')]
-        if len(cells)<len(values):continue
-        for start in range(len(cells)-len(values)+1):
-            try:
-                if all(float(cells[start+i])==float(value) for i,value in enumerate(values)):return True
-            except ValueError:continue
-    return False
-
 def table_path(name):
-    canonical=PKG/'tables'/name
-    return canonical if canonical.exists() else SUPP_DIR/'tables'/name
+    return SUPP_DIR/'tables'/name
 
 def table_rows(name):
     path=table_path(name)
@@ -118,10 +56,6 @@ def same_numeric_cells(actual,expected):
         pairs=[(cell_values(a),cell_values(e)) for a,e in zip(actual,expected)]
         return len(actual)==len(expected) and all(len(a)==len(e) and all(math.isclose(x,y,rel_tol=1e-13,abs_tol=1e-12) for x,y in zip(a,e)) for a,e in pairs)
     except (ValueError,TypeError):return False
-
-def fallback_tables():
-    pairs=[('tableS1_linewidth.tex','tab:linewidth'),('tableS2_lines.tex','tab:lines'),('tableS3_summary.tex','tab:summary'),('tableS4_seeded.tex','tab:seeded'),('tableS5_indicators.tex','tab:indicators')]
-    return '\n'.join('\\begin{table}\\label{'+lab+'}\n'+read(table_path(name))+'\n\\end{table}' for name,lab in pairs if table_path(name).exists())
 
 def all_table_checks(summ,seeded,record):
     rows=table_rows('tableS1_linewidth.tex');source=list(csv.DictReader((OUT/'table_linewidth.csv').open(newline='')))
@@ -150,18 +84,8 @@ def all_table_checks(summ,seeded,record):
         check('Table S5 density and scatter interval endpoints',same_numeric_cells(rows[1][2:4],[f'{lo:.2f} to {hi:.2f}',f'{sl:.3f} to {sh:.3f}']))
 
 def main():
-    main_path=PKG/'main.tex'
-    supp_path=PKG/'supplementary.tex' if (PKG/'supplementary.tex').exists() else SUPP_DIR/'supplementary.tex'
-    main_available=main_path.exists() and (PKG/'references.bib').exists()
-    supp_available=supp_path.exists() and (SUPP_DIR/'references_supplement.bib').exists()
-    MAIN=expanded(read(main_path),PKG) if main_available else ''
-    supp_base=PKG if supp_path.parent==PKG else SUPP_DIR
-    SUPP=expanded(read(supp_path),supp_base) if supp_available else ''
-    if main_available:document_checks('main',MAIN,read(PKG/'references.bib'),PKG)
-    if supp_available:document_checks('supplement',SUPP,read(SUPP_DIR/'references_supplement.bib'),supp_base)
-    skipped=[]
-    if not main_available:skipped.append('Main manuscript text and citation checks not performed: source or bibliography absent.')
-    if not supp_available:skipped.append('Supplement text and citation checks not performed: source or bibliography absent.')
+    argparse.ArgumentParser(description=__doc__).parse_args()
+    RESULTS.clear()
     summ=json.loads(read(OUT/'summary.json'));seeded=json.loads(read(OUT/'seeded_defects.json'))
     record=json.loads(read(REC/'record.json'));reported=json.loads(read(REC/'reported_values.json'))
     check('record: 21 lines and five replicates',len(record['lines'])==21 and record['n_replicates']==5)
@@ -170,14 +94,10 @@ def main():
     check('reported record: 18 deterministic and seven Monte Carlo values',count(reported['deterministic'])==18 and count(reported['monte_carlo_based'])==7)
     for element in summ['elements']:
         vals=summ['A4']['mass_fraction_replicates'][element]
-        import statistics
         check(f'{element}: JSON mean agrees with replicates',abs(statistics.mean(vals)-summ['A5'][element]['mean'])<1e-14)
         check(f'{element}: JSON sample deviation agrees with replicates',abs(statistics.stdev(vals)-summ['A5'][element]['sd'])<1e-14)
     for i in range(summ['n_replicates']):
         check(f'replicate {i+1}: mass fractions close',abs(sum(summ['A4']['mass_fraction_replicates'][e][i] for e in summ['elements'])-1)<1e-14)
-    if main_available:numeric_claim('main constructed section: T, density and mass fractions',scope(MAIN,'sec:constructed'),[9990,35,1.00,17,5.98,91.03,2.98])
-    if supp_available:numeric_claim('supplement reconstruction: observed result',scope(SUPP,'sec:reconstruction'),[0.1240,1.00,17,1.21,17,1.10,17,9990,35])
-    if supp_available:numeric_claim('supplement uncertainty: draws and generator seed',scope(SUPP,'sec:uncertainty'),[record['uncertainty_budget']['monte_carlo']['draws'],record['uncertainty_budget']['monte_carlo']['seed']])
     all_table_checks(summ,seeded,record)
     scenarios={x['id']:x for x in seeded['scenarios']}
     for key,v in scenarios.items():
@@ -193,15 +113,29 @@ def main():
     check('density indicator flags C3 to C6',[v['id'] for v in slips if v['flag_D']]==['C3','C4','C5','C6'])
     check('scatter indicator flags C7',[v['id'] for v in slips if v['flag_S']]==['C7'])
     check('reference indicator flags C3 C5 C6 C8 C9',[v['id'] for v in slips if v['flag_R']]==['C3','C5','C6','C8','C9'])
-    eqblocks=re.findall(r'\\begin\{equation\}.*?\\end\{equation\}',MAIN,re.S)
-    expected=['eq:intensity','eq:saha','eq:closure','eq:stark','eq:voigt','eq:mcwhirter','eq:massmole','eq:delta','eq:zeta']
-    if main_available:check('cross-document equations 1 to 9 preserve their meanings',len(eqblocks)>=9 and all('\\label{'+lab+'}' in block for lab,block in zip(expected,eqblocks[:9])))
     n_ok=sum(ok for ok,_ in RESULTS)
-    text=f'{n_ok} of {len(RESULTS)} revised manuscript consistency checks passed.\n\n'
-    text+='The original prose-specific 180 checks are retained separately and are not asserted here.\n'
-    text+='\n'.join(skipped)+'\n'
+    text=f'{n_ok} of {len(RESULTS)} numerical and table consistency checks passed.\n\n'
+    text+='Scope: supplied constructed inputs, numerical outputs and table bodies.\n'
+    text+='These checks do not assess manuscript prose, citations, experiments or published studies.\n\n'
     text+='\n'.join(('PASS' if ok else 'FAIL')+': '+name for ok,name in RESULTS)+'\n'
     (OUT/'check_log_release.txt').write_text(text,encoding='utf-8');print(text)
-    return 0 if n_ok==len(RESULTS) else 1
+    try:
+        asset_status = restore_figures.verify(log_path=OUT/'check_log_assets.txt')
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        asset_text = f'FAIL: cannot verify required figure assets: {error}\n'
+        (OUT/'check_log_assets.txt').write_text(asset_text, encoding='utf-8')
+        print(asset_text)
+        asset_status = 1
+    passed = n_ok==len(RESULTS) and asset_status == 0
+    print('RELEASE CONSISTENCY CHECKS PASSED' if passed else 'RELEASE CONSISTENCY CHECKS FAILED')
+    return 0 if passed else 1
 
-if __name__=='__main__':raise SystemExit(main())
+if __name__=='__main__':
+    try:
+        raise SystemExit(main())
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        message = f'FAIL: cannot verify required release files: {error}\n'
+        if OUT.is_dir():
+            (OUT/'check_log_release.txt').write_text(message, encoding='utf-8')
+        print(message)
+        raise SystemExit(1)
