@@ -1,0 +1,98 @@
+{
+  "complete_code_only_release": {
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "pass": true,
+    "first_line": "105 of 105 numerical and table consistency checks passed."
+  },
+  "no_third_party_packages_needed_for_release_verification": {
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "pass": true,
+    "first_line": "105 of 105 numerical and table consistency checks passed."
+  },
+  "changed_displayed_table_value": {
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "pass": true,
+    "first_line": "104 of 105 numerical and table consistency checks passed."
+  },
+  "missing_required_record": {
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "pass": true,
+    "first_line": "FAIL: cannot verify required release files: [Errno 2] No such file or directory: '/tmp/cflibs_release_checker_h_ap45xm/release/supplementary/record/record.json'"
+  },
+  "missing_required_table": {
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "pass": true,
+    "first_line": "94 of 96 numerical and table consistency checks passed."
+  },
+  "manuscript_files_do_not_change_numeric_check_scope": {
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "pass": true,
+    "first_line": "105 of 105 numerical and table consistency checks passed."
+  },
+  "changed_fixed_PNG_asset_fails_verifier": {
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "pass": true,
+    "first_line": "105 of 105 numerical and table consistency checks passed."
+  },
+  "changed_fixed_PNG_asset_blocks_restore_before_copy": {
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "pass": true,
+    "first_line": "FAIL: cannot verify or restore figure assets: Figure asset checksum mismatch or missing file: packaged asset SHA256: fig2_linewidth.png"
+  },
+  "changed_restored_PDF_fails_verifier": {
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "pass": true,
+    "first_line": "105 of 105 numerical and table consistency checks passed."
+  },
+  "restore_repairs_corrupted_destination": {
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "pass": true,
+    "first_line": "Restored fixed figure: fig1_chain.pdf"
+  },
+  "repaired_release_passes": {
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "pass": true,
+    "first_line": "105 of 105 numerical and table consistency checks passed."
+  },
+  "missing_restored_PDF_fails_check_without_copy": {
+    "exit_code": 1,
+    "expected_exit_code": 1,
+    "pass": true,
+    "first_line": "10 of 10 packaged figure asset checks passed."
+  },
+  "restore_recovers_missing_destination": {
+    "exit_code": 0,
+    "expected_exit_code": 0,
+    "pass": true,
+    "first_line": "Restored fixed figure: fig1_chain.pdf"
+  },
+  "unsupported_text_option_rejected": {
+    "exit_code": 2,
+    "expected_exit_code": 2,
+    "pass": true,
+    "first_line": "usage: run_all.py [-h] [--figures] [--diagnostic-plots] [--regenerate-record]\nrun_all.py: error: unrecognized arguments: --check-text\n"
+  },
+  "unchanged_calculation_sources": {
+    "cflibs_chain.py": true,
+    "worked_examples.py": true,
+    "make_record.py": true,
+    "reconstruct_record.py": true,
+    "seeded_defects.py": true,
+    "make_tables.py": true
+  },
+  "missing_input_overwrites_stale_pass_log": {
+    "pass": true,
+    "exit_code": 1
+  }
+}

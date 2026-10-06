@@ -1,0 +1,21 @@
+10 of 10 packaged figure asset checks passed.
+5 of 5 restored figure PDF checks passed.
+
+Scope: file integrity and identity of fixed supplied artwork.
+These checks do not assess the analytical content of a drawing.
+
+PASS: packaged asset SHA256: fig1_chain.pdf
+PASS: packaged asset SHA256: fig1_chain.png
+PASS: packaged asset SHA256: fig2_linewidth.pdf
+PASS: packaged asset SHA256: fig2_linewidth.png
+PASS: packaged asset SHA256: fig3_basis.pdf
+PASS: packaged asset SHA256: fig3_basis.png
+PASS: packaged asset SHA256: fig4_sensitivity.pdf
+PASS: packaged asset SHA256: fig4_sensitivity.png
+PASS: packaged asset SHA256: figS1_boltzmann.pdf
+PASS: packaged asset SHA256: figS1_boltzmann.png
+PASS: restored PDF SHA256: fig1_chain.pdf
+PASS: restored PDF SHA256: fig2_linewidth.pdf
+PASS: restored PDF SHA256: fig3_basis.pdf
+PASS: restored PDF SHA256: fig4_sensitivity.pdf
+PASS: restored PDF SHA256: figS1_boltzmann.pdf

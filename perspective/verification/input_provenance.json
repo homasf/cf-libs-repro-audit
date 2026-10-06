@@ -1,7 +1,0 @@
-{
-  "record.json": "Regenerated from user supplied make_record.py; not supplied as an original record file.",
-  "line_intensities.csv": "Regenerated from user supplied make_record.py; compare against supplied Table S2 line intensities.",
-  "reported_values.json": "Recovered by applying the supplied reconstruct_record.reported_from function to the original user supplied outputs.zip/outputs/summary.json before any numerical rerun. Not generated from the validation run.",
-  "original_summary_sha256": "22252bc6b19b34080cd4a803944e8b2e2e723be6e2263f3ccc2f13f9437cddca",
-  "formatting_function_source_sha256": "f1e1d52199244742e5acfb045eda1a7718c8218c86e0698c789463fc5344f53c"
-}

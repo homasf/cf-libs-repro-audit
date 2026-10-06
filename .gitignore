@@ -1,10 +1,5 @@
 __pycache__/
 *.pyc
 .pytest_cache/
-output/
-/figures/
-*.egg-info/
-build/
 dist/
-.venv/
-.DS_Store
+supplementary/diagnostic_figures/

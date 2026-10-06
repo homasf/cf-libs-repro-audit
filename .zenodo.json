@@ -1,0 +1,26 @@
+{
+  "title": "Code S1: Constructed Examples and Reporting Record for the CF LIBS Perspective",
+  "description": "Constructed numerical examples, a hypothetical reporting record, numerical and table checks, and fixed figure artwork accompanying the Perspective Towards Reconstructable CF LIBS Quantification: A Perspective on Reporting, Validation, and Reproducibility. No published study is assessed by this package.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Saeidfirozeh, Homa"
+    }
+  ],
+  "version": "1.0.0",
+  "publication_date": "2026-10-06",
+  "license": "MIT",
+  "keywords": [
+    "CF LIBS",
+    "reconstructability",
+    "reporting",
+    "constructed examples"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/homasf/cf-libs-repro-audit/releases/tag/perspective-v1.0.0",
+      "relation": "isIdenticalTo",
+      "scheme": "url"
+    }
+  ]
+}

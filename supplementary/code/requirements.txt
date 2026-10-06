@@ -1,0 +1,4 @@
+# Needed only for optional numerical diagnostic plots (make_figures.py).
+# Verified with Python 3.12.14; fixed manuscript artwork restoration needs no packages.
+numpy==2.3.5
+matplotlib==3.10.8

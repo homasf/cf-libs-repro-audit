@@ -1,0 +1,131 @@
+{
+  "comparison_basis": "Original uploaded outputs.zip bytes and the canonical earlier Code S1 constructed inputs; local GitHub text fetches normalized CSV line endings.",
+  "numerical_outputs": {
+    "boltzmann_points_replicate1.csv": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "353d5eebe349b38d3f7686dc7ca5a137a7a36b0232b9e73f25faf33ad0bd6009"
+    },
+    "check_log_examples.txt": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "16079bf743a4f9314396564ac8bfd736e56249e3f8327bf3d55a4d091beae665"
+    },
+    "check_log_record.txt": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "99ba4a0c0ad7442fccd8649d6a8a56203f42fd9ea5b72392de7ba9f12791d718"
+    },
+    "check_log_seeded_defects.txt": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "b1141f4ad48465c632340951836af342a60af8b31e8888849889426fd2333a7a"
+    },
+    "replicate_results.csv": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "b50587efba605d7e9664189c4dac314d67997477f696c71f98796bd943a515e8"
+    },
+    "seeded_defects.csv": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "656cbc1efd3b1d5d708dbf8188082975c0024551e13e6761f2ca275c67a9d6b5"
+    },
+    "seeded_defects.json": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "f32224b4810d65bae5046a33eae5fb95b1531fbcbfb86760048b9a93cc75a025"
+    },
+    "summary.json": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "22252bc6b19b34080cd4a803944e8b2e2e723be6e2263f3ccc2f13f9437cddca"
+    },
+    "table_basis.csv": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "5d1fe1c035e2185d8f4b7d97821569ab940ad83cfd4b6cb982bf6ee2207eb83d"
+    },
+    "table_linewidth.csv": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "83791fd93f0a5d60c7250e4fb8d28be2f82b81888314e612efa4cc1e57fbfa11"
+    },
+    "worked_examples.json": {
+      "byte_identical_to_original_upload": true,
+      "sha256": "aef67db0de67b64f2338ca1d06510ae8a00cc4938c2ab9704474b7df2a9138a4"
+    }
+  },
+  "local_GitHub_staging_line_ending_differences": {
+    "boltzmann_points_replicate1.csv": {
+      "staged_bytes": 785,
+      "canonical_bytes": 807,
+      "rows_with_CRLF": 22,
+      "numeric_contents_identical": true
+    },
+    "replicate_results.csv": {
+      "staged_bytes": 555,
+      "canonical_bytes": 561,
+      "rows_with_CRLF": 6,
+      "numeric_contents_identical": true
+    },
+    "seeded_defects.csv": {
+      "staged_bytes": 3280,
+      "canonical_bytes": 3295,
+      "rows_with_CRLF": 15,
+      "numeric_contents_identical": true
+    },
+    "table_basis.csv": {
+      "staged_bytes": 1177,
+      "canonical_bytes": 1191,
+      "rows_with_CRLF": 14,
+      "numeric_contents_identical": true
+    },
+    "table_linewidth.csv": {
+      "staged_bytes": 366,
+      "canonical_bytes": 376,
+      "rows_with_CRLF": 10,
+      "numeric_contents_identical": true
+    }
+  },
+  "constructed_inputs": {
+    "record.json": {
+      "byte_identical_to_canonical_Code_S1_inputs": true,
+      "sha256": "4c0a1a033b30c6891ba0d4e12e9928d9197f0cd07baab9eb762d98be2ae3f6c7"
+    },
+    "line_intensities.csv": {
+      "byte_identical_to_canonical_Code_S1_inputs": true,
+      "sha256": "9eacf3313d702c3ebf85e7c0fcfb8e5d28b3ddffe12ddac933b2ad647d9017c8"
+    },
+    "reported_values.json": {
+      "byte_identical_to_canonical_Code_S1_inputs": true,
+      "sha256": "2d914a467aaecb1037b53768524de5fcb59f47d38d64a472528aae0d88326be3"
+    }
+  },
+  "initial_record_line_ending_difference": {
+    "file": "line_intensities.csv",
+    "staged_bytes": 833,
+    "canonical_bytes": 855,
+    "rows_with_CRLF": 22,
+    "cause": "Local GitHub text fetch normalized CSV CRLF line endings to LF; first input regeneration restored canonical CSV writer bytes. JSON input files were unaffected.",
+    "numeric_contents_identical": true,
+    "repeated_regeneration_byte_identical": true
+  },
+  "numeric_JSON_values_compared": 666,
+  "maximum_absolute_numerical_difference": 0,
+  "maximum_relative_numerical_difference": 0,
+  "actual_python_version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "calculation_checks": {
+    "worked_examples": 24,
+    "constructed_record": 35,
+    "perturbations": 17,
+    "total": 76,
+    "all_passed": true
+  },
+  "input_regeneration": "Repeated make_record.py leaves record.json and line_intensities.csv byte identical; reported_values.json is not rewritten.",
+  "successful_release_run": {
+    "command": "python3 supplementary/code/run_all.py --regenerate-record --figures",
+    "exit_code": 0,
+    "record_regeneration_byte_identical": true,
+    "numerical_checks_passed": 76,
+    "five_fixed_PDFs_restored": true
+  },
+  "additional_release_checks": {
+    "command": "python3 supplementary/code/verify_release.py",
+    "exit_code": 0,
+    "numerical_and_table_checks_passed": 105,
+    "packaged_asset_hashes_passed": 10,
+    "restored_PDF_hashes_passed": 5,
+    "scope": "Constructed numerical calculations, table values and fixed figure file identity; no manuscript prose or citation verification."
+  }
+}

@@ -1,176 +1,75 @@
-# CF-LIBS Reproducibility Audit
+# Code S1 for the CF LIBS Perspective
 
-[![audit-checks](https://github.com/homasf/cf-libs-repro-audit/actions/workflows/ci.yml/badge.svg)](https://github.com/homasf/cf-libs-repro-audit/actions/workflows/ci.yml)
-![python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white)
-![version](https://img.shields.io/badge/version-2.0.0-blue)
-![license](https://img.shields.io/badge/license-MIT-green)
+Constructed examples and reporting record accompanying *Towards Reconstructable CF LIBS Quantification: A Perspective on Reporting, Validation, and Reproducibility* by Homa Saeidfirozeh, Petr Kubelík, Jan Suchánek, and Martin Ferus.
 
-**CF-LIBS Reproducibility Audit** is an executable A1–A5 audit engine for
-checking whether quantitative claims in a published calibration-free
-LIBS/LIPS study can be reconstructed from the values printed in the article.
+**Software author:** Homa Saeidfirozeh. **Version:** 1.0.0. **Date:** 6 October 2026. **Tag:** `perspective-v1.0.0`.
 
-**Software author:** Homa Saeidfirozeh  
-**Version:** 2.0.0  
-**Release date:** 7 July 2026  
-**Repository:** `homasf/cf-libs-repro-audit`
+This release snapshot contains only the constructed material accompanying this Perspective. All numerical data are hypothetical. No published study is assessed by this package. The separate older audit software and its example records are excluded from this snapshot and the attached Code S1 archive. The repository history is not part of the archive.
 
-The software accompanies the article:
+Download the [fixed Code S1 archive](https://github.com/homasf/cf-libs-repro-audit/releases/download/perspective-v1.0.0/CF_LIBS_Perspective_CodeS1_v1.0.0.zip) or see the [version specific release](https://github.com/homasf/cf-libs-repro-audit/releases/tag/perspective-v1.0.0). Cite the software using `CITATION.cff` or `CITATION.bib`. Version 1.0.0 is specific to this Perspective package, independent of version numbers used by other software. A DOI has not yet been issued.
 
-> Homa Saeidfirozeh and Martin Ferus, *Can a published CF-LIBS
-> quantification be reconstructed? A reproducibility-audit framework and
-> reporting checklist.*
+## Run the numerical examples
 
-The article's short title is *Reproducibility audit for CF-LIBS
-quantification*.
-
-## Chemosensors Perspective support
-
-The [`perspective/`](perspective/) folder contains Code S1 and Data S1 for
-*Towards Reconstructable CF LIBS Quantification: A Perspective on Reporting,
-Validation, and Reproducibility*. It includes the original calculation
-scripts, constructed input record, numerical results, tables, and all five
-original figures. Run the supporting calculations from the repository root:
+From the extracted archive root:
 
 ```bash
-cd perspective
 python3 supplementary/code/run_all.py
+python3 supplementary/code/restore_figures.py
 python3 supplementary/code/verify_release.py
 ```
 
-The calculations use only the Python standard library. See the
-[Perspective README](perspective/README.md) for figure dependencies, input
-provenance, and verification details. This support folder supplements the
-audit engine described below.
+The calculations, table production, figure restoration, and checks require only the Python standard library. They were verified with Python 3.12.14. Running the Monte Carlo calculations takes several minutes.
 
-## Scope
-
-The software reads a machine-actionable JSON record containing values
-transcribed from a publication and reruns deterministic checks associated
-with five checkpoints:
-
-- **A1 — Linewidth provenance:** printed FWHM, Stark-width and instrumental-width checks.
-- **A2 — Plasma-parameter consistency:** units, normalizations and powers of ten.
-- **A3 — Plasma-model reporting:** LTE, optical-thinness/self-absorption, atomic-data provenance and related reporting flags.
-- **A4 — Concentration inversion:** invertibility and consistency of printed empirical equations.
-- **A5 — Validation:** signed relative deviations from independent comparison values and stated tolerances.
-
-The engine returns `PASS`, `FAIL`, `NOT_INVERTIBLE`, `NOT_REPORTED`,
-`REPORTED` and `INFO` results, with the arithmetic shown in Markdown or HTML.
-
-**No raw spectra are used and no new measurements are made.** A failure means
-that a claim is not reproducible from the values as printed; it is not an
-assessment of author intent, experimental misconduct or the true sample
-concentrations.
-
-## Worked example
-
-The bundled record audits El-Saeed et al., *Scientific Reports* 15 (2025)
-19949. From printed values only, the repository regenerates:
-
-| Paper item | Checkpoint | Implementation/output |
-|---|---|---|
-| Table 1 — signed relative deviations versus ICP-OES | A5 | `report.table1_rows`, `output/table1_signed_deviations.csv` |
-| Figure 2 — deviation chart with the stated ±1% band | A5 | `scripts/make_figure2.py` |
-| Table 2 — Ca I 646.257 nm linewidth/Stark check | A1/A2 | `report.table2_rows`, `output/table2_linewidth_check.csv` |
-| Instrumental-width upper bound at $R=75{,}000$ | A1 | `audit.instrumental_fwhm`, `audit.quadrature_corrected_fwhm` |
-| Electron-density exponent check | A2/A4 | `audit.ne_scale_check` |
-| Fe/Ni zero-slope equation audit | A4 | `audit.LinearEquation` |
-
-## Installation
-
-From PyPI, after the release is published:
+To regenerate the inputs from their saved seed and verify that they match the supplied input files, use:
 
 ```bash
-python -m pip install cf-libs-repro-audit
+python3 supplementary/code/run_all.py --regenerate-record --figures
+python3 supplementary/code/verify_release.py
 ```
 
-For development from GitHub:
+## What the calculations do
+
+1. `make_record.py` constructs 21 line entries for hypothetical elements X, Y, and Z and five replicate intensity records using the saved seed. These are simulated inputs, with no experimental measurements.
+2. `worked_examples.py` evaluates the five checkpoints: linewidth decomposition, plasma parameters, model consistency, composition basis, and reference comparison.
+3. `reconstruct_record.py` reads the record and replicate intensities, obtains electron density and temperature, combines neutral and singly ionized populations, and converts mole fractions into mass fractions. It propagates the assigned input uncertainties using 200,000 Monte Carlo draws.
+4. `seeded_defects.py` applies nine convention or reporting slips and four legitimate input perturbations to the same record. It compares their effects with input uncertainty intervals and with density, scatter, and reference indicators.
+5. `make_tables.py` turns the numerical outputs into the five supplementary LaTeX table bodies.
+6. `verify_release.py` checks the packaged numerical values and table entries, and separately verifies the identities of the fixed figure files. It does not read manuscript prose, citations, or a bibliography. It does not establish physical validity or experimental accuracy.
+
+There are 76 checks inside the calculation scripts, 105 additional numerical and table checks, and 15 figure file integrity checks. The last group checks ten supplied PDF/PNG asset hashes and five restored PDF copies. See `verification/VALIDATION.md` for results and limits.
+
+## The manuscript figures
+
+The five final manuscript figures are fixed raster artwork in PDF wrappers. They were recovered losslessly from the author supplied final PDFs, preserving the embedded pixels and Figure 1 transparency. Their PDF and PNG assets, SHA256 hashes, and provenance are in `supplementary/figure_assets/`.
+
+`restore_figures.py` and the `--figures` option verify and copy these assets to `supplementary/figures/`. They restore the exact supplied files and do not redraw the artwork. Figure 1 is a schematic rather than a numerical plot. The original editable drawing sources were not supplied; this release cannot recreate the graphical design from numerical inputs.
+
+Optional diagnostic plots are drawn directly from the numerical results in a separate directory. Their graphical design differs from the final manuscript artwork, and they never overwrite it:
 
 ```bash
-git clone https://github.com/homasf/cf-libs-repro-audit.git
-cd cf-libs-repro-audit
-python -m pip install -e ".[dev]"
+python3 -m pip install -r supplementary/code/requirements.txt
+python3 supplementary/code/run_all.py --diagnostic-plots
 ```
 
-## Use
+These plots use NumPy 2.3.5, Matplotlib 3.10.8, and the bundled DejaVu Sans font. They are written to `supplementary/diagnostic_figures/`. The supplied artwork's original software versions are unknown; these pins describe only the verified diagnostic plotting environment.
 
-Audit the bundled worked example:
+## Files
 
-```bash
-cf-libs-audit --worked-example
-```
+| Path | Contents |
+| --- | --- |
+| `supplementary/code/` | Calculation, table, restoration, diagnostic plotting, and verification scripts |
+| `supplementary/record/` | Constructed JSON inputs and five replicate intensities |
+| `supplementary/outputs/` | Expected numerical outputs and check logs |
+| `supplementary/tables/` | Five supplementary LaTeX table bodies |
+| `supplementary/figure_assets/` | Fixed manuscript PDF and PNG artwork, provenance, and hashes |
+| `supplementary/figures/` | Restored fixed manuscript PDFs |
+| `verification/` | Validation evidence and provenance |
 
-Write a styled HTML report:
+The article and supplementary prose are distributed separately from this code release. This package intentionally has no manuscript text checker requiring absent source files. Numerical checks, file checks, and author review of prose have different scopes.
 
-```bash
-cf-libs-audit --worked-example -o audit_report.html
-```
+## Archiving
 
-Audit another paper:
-
-```bash
-cp examples/template.json mypaper.json
-# Transcribe and verify the paper's printed values in mypaper.json.
-cf-libs-audit mypaper.json -o mypaper_report.html
-```
-
-Use strict mode in continuous integration:
-
-```bash
-cf-libs-audit mypaper.json --strict
-```
-
-Regenerate the manuscript tables and numerical checks:
-
-```bash
-python -m libs_repro_audit
-```
-
-Regenerate Figure 2:
-
-```bash
-python scripts/make_figure2.py
-```
-
-Run the test suite:
-
-```bash
-python -m pytest -v
-```
-
-## Repository structure
-
-- `data/printed_values.json` — printed numerical inputs for the worked example.
-- `examples/template.json` — paper-independent audit-record template.
-- `examples/elsaeed2025_scirep.json` — verified worked-example record.
-- `src/libs_repro_audit/audit.py` — deterministic numerical functions.
-- `src/libs_repro_audit/engine.py` — general A1–A5 audit engine.
-- `src/libs_repro_audit/cli.py` — `cf-libs-audit` command-line interface.
-- `tests/` — assertions for the numerical results used in the article.
-- `.github/workflows/ci.yml` — tests on Python 3.9 and 3.12.
-- `perspective/` — Code S1 and Data S1 for the Chemosensors Perspective.
-- `.github/workflows/perspective.yml` — numerical and consistency checks for the Perspective support.
-
-## AI-assisted extraction
-
-`cf-libs-audit-extract` can draft an audit record from a plain-text paper
-export. The draft is always stamped `UNVERIFIED`. A human must check every
-value against the publication before the deterministic audit is run. The
-language model performs transcription only; it never determines the audit
-verdict. This optional command requires a compatible chat completion endpoint,
-model, and key configured by the user; no provider is selected by default.
-The audit engine and the Perspective calculation scripts run without an AI
-service. See `AGENT_GUIDE.md` for configuration and verification instructions.
-
-## Citation
-
-The software author is **Homa Saeidfirozeh**. Use GitHub's **Cite this
-repository** control or the archived Zenodo DOI after it is minted. The
-machine-readable software metadata are in `CITATION.cff`.
-
-The accompanying article is a separate research output authored by Homa
-Saeidfirozeh and Martin Ferus. It should be cited separately using its full
-journal citation when available.
+The GitHub release attaches the fixed Code S1 ZIP and its SHA256 checksum. `.zenodo.json` provides metadata for manual archival deposition. Deposit this clean ZIP, rather than the general repository homepage or another branch, and then cite the version specific DOI issued for the deposition. Do not describe an unissued DOI as available.
 
 ## License
 
