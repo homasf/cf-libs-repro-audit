@@ -8,5 +8,6 @@ authors:
 version: 1.0.0
 date-released: 2026-10-06
 license: MIT
-url: "https://github.com/homasf/cf-libs-repro-audit/releases/tag/perspective-v1.0.0"
+doi: 10.5281/zenodo.23196815
+url: "https://doi.org/10.5281/zenodo.23196815"
 abstract: "Constructed numerical examples, a hypothetical reporting record, numerical and table checks, and fixed figure artwork accompanying a Perspective on CF LIBS reconstructability. No published study is assessed by this package."

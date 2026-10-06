@@ -20,7 +20,9 @@ Code S1 and Data S1 for *Towards Reconstructable CF LIBS Quantification: A Persp
 
 Use the [Perspective only archive](https://github.com/homasf/cf-libs-repro-audit/releases/download/perspective-v1.0.0/CF_LIBS_Perspective_CodeS1_v1.0.0.zip) and its [version specific release](https://github.com/homasf/cf-libs-repro-audit/releases/tag/perspective-v1.0.0). The release snapshot contains only the constructed Perspective material. It excludes the separate legacy named study audit documented below and excludes repository history.
 
-The [`perspective/`](perspective/) development folder mirrors that material. Run:
+The same fixed Code S1 ZIP is publicly archived on Zenodo as version 1.0.0: [10.5281/zenodo.23196815](https://doi.org/10.5281/zenodo.23196815). Use this version specific DOI to cite the Perspective support material. Its SHA256 matches the GitHub release asset.
+
+The [`perspective/`](perspective/) development folder contains that numerical material and updated citation metadata. Run:
 
 ```bash
 cd perspective
@@ -159,7 +161,7 @@ The software author is **Homa Saeidfirozeh**. Use GitHub's **Cite this
 repository** control or the archived Zenodo DOI after it is minted. The
 machine-readable software metadata are in `CITATION.cff`.
 
-The Perspective package is cited separately using its own fixed version and release metadata. The legacy audit software metadata do not describe the Perspective Code S1 package.
+The Perspective package is cited separately using [doi:10.5281/zenodo.23196815](https://doi.org/10.5281/zenodo.23196815) and the metadata in `perspective/CITATION.cff` or `perspective/CITATION.bib`. The legacy audit software metadata do not describe the Perspective Code S1 package.
 
 ## License
 

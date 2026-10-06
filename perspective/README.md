@@ -6,7 +6,7 @@ Constructed examples and reporting record accompanying *Towards Reconstructable 
 
 This release snapshot contains only the constructed material accompanying this Perspective. All numerical data are hypothetical. No published study is assessed by this package. The separate older audit software and its example records are excluded from this snapshot and the attached Code S1 archive. The repository history is not part of the archive.
 
-Download the [fixed Code S1 archive](https://github.com/homasf/cf-libs-repro-audit/releases/download/perspective-v1.0.0/CF_LIBS_Perspective_CodeS1_v1.0.0.zip) or see the [version specific release](https://github.com/homasf/cf-libs-repro-audit/releases/tag/perspective-v1.0.0). Cite the software using `CITATION.cff` or `CITATION.bib`. Version 1.0.0 is specific to this Perspective package, independent of version numbers used by other software. A DOI has not yet been issued.
+Download the [fixed Code S1 archive](https://github.com/homasf/cf-libs-repro-audit/releases/download/perspective-v1.0.0/CF_LIBS_Perspective_CodeS1_v1.0.0.zip) or see the [version specific release](https://github.com/homasf/cf-libs-repro-audit/releases/tag/perspective-v1.0.0). Cite the software using `CITATION.cff` or `CITATION.bib`. Version 1.0.0 is specific to this Perspective package, independent of version numbers used by other software. The published Zenodo archive is [doi:10.5281/zenodo.23196815](https://doi.org/10.5281/zenodo.23196815).
 
 ## Run the numerical examples
 
@@ -69,7 +69,9 @@ The article and supplementary prose are distributed separately from this code re
 
 ## Archiving
 
-The GitHub release attaches the fixed Code S1 ZIP and its SHA256 checksum. `.zenodo.json` provides metadata for manual archival deposition. Deposit this clean ZIP, rather than the general repository homepage or another branch, and then cite the version specific DOI issued for the deposition. Do not describe an unissued DOI as available.
+The GitHub release attaches the fixed Code S1 ZIP and its SHA256 checksum. The same ZIP is published on Zenodo as version 1.0.0, with version specific DOI [10.5281/zenodo.23196815](https://doi.org/10.5281/zenodo.23196815). Cite that DOI for the material used in the Perspective.
+
+The public Zenodo ZIP was independently downloaded and its SHA256 is `a568ec7bcc941fc62818f9ec6e44e3466ec750b251907529828ff4e6399d2dd8`, identical to the fixed GitHub release asset. The documentation and citation metadata in this development folder were updated after deposition. The existing release tag, release asset, and Zenodo ZIP retain their original bytes.
 
 ## License
 
