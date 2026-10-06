@@ -157,7 +157,10 @@ python -m pytest -v
 export. The draft is always stamped `UNVERIFIED`. A human must check every
 value against the publication before the deterministic audit is run. The
 language model performs transcription only; it never determines the audit
-verdict. See `AGENT_GUIDE.md`.
+verdict. This optional command requires a compatible chat completion endpoint,
+model, and key configured by the user; no provider is selected by default.
+The audit engine and the Perspective calculation scripts run without an AI
+service. See `AGENT_GUIDE.md` for configuration and verification instructions.
 
 ## Citation
 

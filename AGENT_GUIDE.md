@@ -4,8 +4,8 @@ The audit splits into two stages with very different reliability
 requirements, and the design keeps them strictly separate:
 
 1. **Extraction** — transcribing printed values from a PDF into the
-   audit-record JSON. This is tedious and error-prone for humans and is
-   where an AI assistant (Claude, GPT, etc.) genuinely helps.
+   audit-record JSON. An AI assistant can help with this transcription,
+   but the extracted values still require verification against the paper.
 2. **Judgment** — deciding whether the numerical chain reproduces. This is
    pure deterministic arithmetic and is done ONLY by the engine
    (`cf-libs-audit`), never by the language model.
@@ -27,11 +27,26 @@ PDF ──(LLM extraction prompt below)──> draft record.json
 
 ## Automated extraction command
 
+The optional extraction helper uses a compatible chat completion service.
+Configure its endpoint URL, model name, and API key yourself; no provider or
+model is selected by default. Replace the example settings below with the
+settings for your service. The key is read from the environment and is not
+written to the draft record.
+
 ```bash
-export ANTHROPIC_API_KEY=sk-ant-...     # read from env, never stored
+export LIBS_AUDIT_API_URL="https://your-service.example/v1/chat/completions"
+export LIBS_AUDIT_MODEL="your-model"
+export LIBS_AUDIT_API_KEY="your-api-key"
 pdftotext paper.pdf paper.txt
 cf-libs-audit-extract paper.txt -o draft_record.json
 ```
+
+The service must accept JSON with `model` and `messages` fields, system and
+user message roles, and Bearer authentication. It must return the generated
+text in `choices[0].message.content`. The helper sends the supplied paper
+text and record template to the configured endpoint only when this optional
+command is run. The numerical audit and the Perspective calculation scripts
+do not use this service.
 
 The draft is stamped `"verification": "DRAFT — UNVERIFIED"`; `cf-libs-audit`
 prints a prominent warning for such records until a human replaces the stamp

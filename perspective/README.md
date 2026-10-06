@@ -38,6 +38,26 @@ All 76 numerical checks passed after the full baseline and all 13 scenarios were
 
 The original `check_manuscript.py` requires the original manuscript files and exact wording; its supplied 180 check log is historical. Use `verify_release.py` for this bundle rather than `run_all.py --check-text`.
 
+## What the code does, step by step
+
+1. **Read the supplied record.** The default run uses `record/record.json`, `record/line_intensities.csv`, and `record/reported_values.json` inside `supplementary/`. These describe hypothetical X, Y, and Z elements, 21 spectral lines, five intensity replicates, assigned uncertainties, and expected printed results. The calculation starts from saved integrated intensities and linewidths.
+
+2. **Recalculate the worked examples.** `worked_examples.py` demonstrates linewidth correction, temperature and density conventions, concentration conversion, sensitivity, and reference comparisons. It writes example results and runs 24 checks.
+
+3. **Reconstruct the composition.** `reconstruct_record.py` uses `cflibs_chain.py` to correct the linewidth, calculate electron density, and fit Boltzmann points to estimate temperature and relative populations. Saha balance supplies missing charge stages. The populations are normalized to mole fractions and converted to mass fractions for each replicate.
+
+4. **Propagate uncertainty.** A Monte Carlo calculation with 200,000 draws varies the assigned physical and atomic inputs. Each input draw is shared across all five replicates, while replicate intensity scatter is combined separately. The output includes standard uncertainties, percentile intervals, signed deviations, and comparison scores. A second calculation with 20,000 draws uses another seed as a consistency check.
+
+5. **Test deliberate changes.** `seeded_defects.py` introduces 13 individual perturbations, including linewidth and density conventions, intensity conventions, and concentration basis. Each scenario uses 20,000 uncertainty draws. The code checks whether density agreement, Boltzmann fit scatter, and reference compatibility reveal the resulting changes.
+
+6. **Write the results and tables.** Detailed results go to JSON files; replicate and scenario comparisons go to CSV files in `supplementary/outputs/`. `make_tables.py` generates the five supplementary LaTeX table bodies in `supplementary/tables/`. The default run performs 76 numerical checks.
+
+7. **Run the separate consistency checker.** Run `verify_release.py` after the calculations. Its 105 checks compare the packaged numerical values and table relationships. It writes `check_log_release.txt` and preserves the original historical text check log.
+
+The `--figures` option additionally redraws Figures 2, 3, 4, and S1. Figure 1 is supplied as its original schematic. The `--regenerate-record` option recreates the constructed inputs from the saved seed and checks them against the shipped files.
+
+These scripts run locally without an AI service or API key. They demonstrate reproducibility and sensitivity of the constructed calculations. The checks do not establish experimental accuracy or validate a real plasma model.
+
 ## Repository and citation
 
 This folder is hosted at [homasf/cf-libs-repro-audit](https://github.com/homasf/cf-libs-repro-audit/tree/main/perspective). Preserve its directory structure when downloading or running it. The repository's [MIT license](LICENSE) is included here. Cite the specific commit or archived release used for the paper, and cite the Perspective separately when its journal citation becomes available.
