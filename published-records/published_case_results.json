@@ -1,0 +1,179 @@
+{
+  "scope": "Selected calculations from printed records; no raw spectra, measured instrumental profile, or omitted composition inputs are reconstructed.",
+  "sources": {
+    "soil": {
+      "doi": "10.1038/s41598-025-04395-5",
+      "title": "Calibration-free picosecond LIPS for quantifying heavy metals in soils near Egyptian industrial sites",
+      "locations": [
+        "Table 6",
+        "Validity confirmed through real-world sample analysis"
+      ],
+      "basis": "ppm as printed; one S1 test sample; empirical plasma-parameter–concentration inversion"
+    },
+    "alloy": {
+      "doi": "10.3390/met13071188",
+      "title": "Spectroscopical Characterization of Copper–Iron (Cu-Fe) Alloy Plasma Using LIBS, ICP-AES, and EDX",
+      "locations": [
+        "Table 1",
+        "Section 3.2, Equation (1)",
+        "Sections 3.5 and 3.6",
+        "Table 4"
+      ],
+      "basis": "Intensity ratios use Table 1; composition is printed in wt.%; composition chain is not regenerated"
+    },
+    "plant": {
+      "doi": "10.1016/j.arabjc.2024.105941",
+      "title": "Rapid qualitative and quantitative vital nutrient contents in high-altitude cultivated folklore herbal medicinal Costus roots using calibration-free LIBS",
+      "locations": [
+        "Table 1, Ca I 610.2 nm level energies",
+        "Section 3.2, fitted linewidth and adopted Stark coefficient",
+        "Section 3.5, Equation (3)",
+        "Tables 3a and 3b, CF-LIBS column"
+      ],
+      "basis": "Absolute concentrations in mg kg^-1 of the plant sample as reported; total fitted width is used only to reproduce source arithmetic"
+    }
+  },
+  "soil": [
+    {
+      "element": "Cd",
+      "icp_oes_ppm": 69.62,
+      "density_estimate_ppm": 65.02,
+      "density_delta_percent": -6.60729675380639,
+      "temperature_estimate_ppm": 75.8,
+      "temperature_delta_percent": 8.876759551852906
+    },
+    {
+      "element": "Zn",
+      "icp_oes_ppm": 145.33,
+      "density_estimate_ppm": 136.94,
+      "density_delta_percent": -5.773068189637387,
+      "temperature_estimate_ppm": 138.66,
+      "temperature_delta_percent": -4.589554806302908
+    },
+    {
+      "element": "Fe",
+      "icp_oes_ppm": 61.67,
+      "density_estimate_ppm": 61.27,
+      "density_delta_percent": -0.6486135884546758,
+      "temperature_estimate_ppm": 61.27,
+      "temperature_delta_percent": -0.6486135884546758
+    },
+    {
+      "element": "Ni",
+      "icp_oes_ppm": 149.53,
+      "density_estimate_ppm": 149.87,
+      "density_delta_percent": 0.22737912124657486,
+      "temperature_estimate_ppm": 149.87,
+      "temperature_delta_percent": 0.22737912124657486
+    }
+  ],
+  "alloy": [
+    {
+      "species": "Fe I",
+      "experimental_ratio": 0.5862726406101049,
+      "theoretical_ratio": 0.5906889340700465,
+      "difference_percent": -0.7476512941442631,
+      "satisfies_printed_10percent_comparison": true
+    },
+    {
+      "species": "Cu I",
+      "experimental_ratio": 0.532051282051282,
+      "theoretical_ratio": 0.5400605449041372,
+      "difference_percent": -1.4830305469318938,
+      "satisfies_printed_10percent_comparison": true
+    }
+  ],
+  "plant": {
+    "energy_gap_eV": 2.031,
+    "mcwhirter_threshold_cm_inverse_cubed": 1169727517572845.0,
+    "density_using_total_fitted_width_cm_inverse_cubed": 5.7675438596491224e+16,
+    "instrument_corrected_density_cm_inverse_cubed": null,
+    "concentration_sum_mg_per_kg": 31893.26,
+    "mass_percent_of_reported_23_elements": 3.189326,
+    "absolute_closure_reconstructed": false
+  },
+  "checks": [
+    {
+      "name": "soil_Cd_density_delta",
+      "passes": true
+    },
+    {
+      "name": "soil_Cd_temperature_delta",
+      "passes": true
+    },
+    {
+      "name": "soil_Zn_density_delta",
+      "passes": true
+    },
+    {
+      "name": "soil_Zn_temperature_delta",
+      "passes": true
+    },
+    {
+      "name": "soil_Fe_density_delta",
+      "passes": true
+    },
+    {
+      "name": "soil_Fe_temperature_delta",
+      "passes": true
+    },
+    {
+      "name": "soil_Ni_density_delta",
+      "passes": true
+    },
+    {
+      "name": "soil_Ni_temperature_delta",
+      "passes": true
+    },
+    {
+      "name": "alloy_Fe I_experimental_ratio",
+      "passes": true
+    },
+    {
+      "name": "alloy_Fe I_theoretical_ratio",
+      "passes": true
+    },
+    {
+      "name": "alloy_Fe I_difference_percent",
+      "passes": true
+    },
+    {
+      "name": "alloy_Fe I_printed_10percent_comparison",
+      "passes": true
+    },
+    {
+      "name": "alloy_Cu I_experimental_ratio",
+      "passes": true
+    },
+    {
+      "name": "alloy_Cu I_theoretical_ratio",
+      "passes": true
+    },
+    {
+      "name": "alloy_Cu I_difference_percent",
+      "passes": true
+    },
+    {
+      "name": "alloy_Cu I_printed_10percent_comparison",
+      "passes": true
+    },
+    {
+      "name": "plant_mcwhirter_rounding",
+      "passes": true
+    },
+    {
+      "name": "plant_total_width_stark_rounding",
+      "passes": true
+    },
+    {
+      "name": "plant_concentration_sum",
+      "passes": true
+    },
+    {
+      "name": "plant_mass_percent",
+      "passes": true
+    }
+  ],
+  "check_count": 20,
+  "all_checks_pass": true
+}

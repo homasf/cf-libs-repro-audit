@@ -1,0 +1,3 @@
+species,experimental_ratio,theoretical_ratio,difference_percent,satisfies_printed_10percent_comparison
+Fe I,0.5862726406101049,0.5906889340700465,-0.7476512941442631,True
+Cu I,0.532051282051282,0.5400605449041372,-1.4830305469318938,True

@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Cite this separately versioned Code S2/Data S2 package and the three original studies."
+type: software
+title: "Code S2 and Data S2: Reconstructions of Three Published CF-LIBS Records"
+version: 1.0.0
+date-released: 2026-10-07
+authors:
+  - family-names: Saeidfirozeh
+    given-names: Homa
+repository-code: "https://github.com/homasf/cf-libs-repro-audit"
+url: "https://github.com/homasf/cf-libs-repro-audit/releases/tag/published-records-v1.0.0"
+license: MIT
+abstract: "Selected arithmetic reconstructions of printed records; no experimental or complete composition validation."

@@ -33,6 +33,8 @@ python3 supplementary/code/verify_release.py
 
 The five final manuscript figures are fixed raster artwork in PDF wrappers, with provenance and hashes. Restoration copies the exact supplied assets. Optional numerical diagnostic plots are drawn separately and do not overwrite the manuscript figures. See the [Perspective README](perspective/README.md).
 
+Code S2 and Data S2 supply selected calculations from three published studies (soil, alloy and plant material). They are available in [`published-records/`](published-records/) and as the separate [`published-records-v1.0.0` release](https://github.com/homasf/cf-libs-repro-audit/releases/tag/published-records-v1.0.0). Run `python3 published-records/published_case_checks.py` to regenerate the JSON/CSV outputs and check 20 arithmetic comparisons. These checks reconstruct printed calculations; they do not validate the experiments or complete composition determinations. The Code S1 DOI identifies only the constructed package.
+
 The general audit engine below is separate software. Its named example and any related manuscript are not part of Code S1 and are not cited as evidence by the Perspective. The earlier README article description is not a statement of publication or submission status. If a related manuscript is submitted or under review, its authors should disclose its actual status and relationship to the editor.
 
 ## Scope
@@ -141,7 +143,8 @@ python -m pytest -v
 - `src/libs_repro_audit/cli.py` — `cf-libs-audit` command-line interface.
 - `tests/` — assertions for the numerical results used in the article.
 - `.github/workflows/ci.yml` — tests on Python 3.9 and 3.12.
-- `perspective/` — Code S1 and Data S1 for the Chemosensors Perspective.
+- `perspective/` — constructed Code S1 and Data S1 for the Chemosensors Perspective.
+- `published-records/` — Code S2 and Data S2 for three published-study examples.
 - `.github/workflows/perspective.yml` — numerical and consistency checks for the Perspective support.
 
 ## AI-assisted extraction
@@ -163,6 +166,9 @@ machine-readable software metadata are in `CITATION.cff`.
 
 The Perspective package is cited separately using [doi:10.5281/zenodo.23196815](https://doi.org/10.5281/zenodo.23196815) and the metadata in `perspective/CITATION.cff` or `perspective/CITATION.bib`. The legacy audit software metadata do not describe the Perspective Code S1 package.
 
+The published-study calculations are supplied separately as Code S2/Data S2, version 1.0.0. Use the GitHub repository or its [versioned release](https://github.com/homasf/cf-libs-repro-audit/releases/tag/published-records-v1.0.0), together with the three original studies listed in `published-records/README.md`. Component citation metadata are in `published-records/CITATION.cff`; no DOI has been assigned to Code S2/Data S2.
+
 ## License
 
 MIT License. See `LICENSE`.
+

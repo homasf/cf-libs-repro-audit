@@ -1,0 +1,118 @@
+% Reader copy of the current manuscript's Supplementary Text S2.
+% Tables and section numbering continue Supplementary Text S1.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2cm]{geometry}
+\usepackage{mathpazo}
+\usepackage{amsmath,amssymb,booktabs,tabularx,changepage}
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+\setlength{\emergencystretch}{3em}
+\newlength{\extralength}
+\setlength{\extralength}{0pt}
+\newcommand{\Ne}{N_{\mathrm e}}
+\newcommand{\unitdensity}{\mathrm{cm}^{-3}}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\theequation}{S\arabic{equation}}
+\begin{document}
+\setcounter{section}{4}
+\setcounter{table}{5}
+\setcounter{equation}{3}
+
+\section*{Supplementary Text S2: Reconstructions of Published Records}
+
+\section{Selected published numerical records}\label{sec:published-records}
+The following examples use values printed by El-Saeed et al.~\cite{ElSaeed2025}, Fayyaz et al.~\cite{Fayyaz2023}, and Aldakheel et al.~\cite{Aldakheel2024}. They illustrate particular calculation steps rather than the frequency of reporting patterns. No raw spectra were reprocessed or samples remeasured. Successful recomputation establishes the stated arithmetic; missing inputs identify a reporting gap without establishing that the measurement is incorrect. These published records are separate from the constructed examples in Sections~S2 and~S3 of Supplementary Text~S1.
+
+\subsection{Soil study: validation deviations}\label{sec:published-soil}
+The picosecond LIPS soil study~\cite{ElSaeed2025} describes its procedure as calibration free but obtains concentrations by inverting empirical relations between plasma parameters and ICP-OES concentrations. This step uses calibration information and differs from spectrum based CF LIBS closure. Table~6 of that article gives one validation sample and separate estimates from electron density and temperature. Table~\ref{tab:published-soil} reproduces its central values and applies Equation~(8) of the Perspective.
+
+\begin{table}[htbp]
+\begin{adjustwidth}{-\extralength}{0cm}
+\caption{Central concentrations from Table~6 of El-Saeed et al.~\cite{ElSaeed2025} and signed relative deviations, $\delta=100(C_m-C_r)/C_r$. Concentrations are in ppm as printed; the two estimates use electron density and temperature, respectively.}\label{tab:published-soil}
+\centering\small
+\begin{tabular}{@{}lrrrrr@{}}\toprule
+Element&ICP-OES&Density estimate&$\delta$ (\%)&Temperature estimate&$\delta$ (\%)\\\midrule
+Cd&69.62&65.02&$-6.61$&75.80&$+8.88$\\
+Zn&145.33&136.94&$-5.77$&138.66&$-4.59$\\
+Fe&61.67&61.27&$-0.65$&61.27&$-0.65$\\
+Ni&149.53&149.87&$+0.23$&149.87&$+0.23$\\
+\bottomrule
+\end{tabular}
+\end{adjustwidth}
+\end{table}
+
+The stated approximately $\pm1\%$ agreement is recovered for Fe and Ni but not Cd or Zn. Percentage annotations accompanying the source estimates are distinct from these deviations. Their meaning does not provide a complete uncertainty budget, so this arithmetic does not establish statistical incompatibility with ICP-OES. One validation sample also does not establish performance across a concentration range or different matrices.
+
+\subsection{Alloy study: intensity ratios and composition inputs}\label{sec:published-alloy}
+For the Cu--Fe alloy study~\cite{Fayyaz2023}, Table~\ref{tab:published-alloy} supplies the inputs from its Table~1. Using $k_{\mathrm B}T=0.69$~eV and Equation~(1) of that article gives
+\[
+r_{\mathrm{exp}}=\frac{I_1}{I_2},\qquad
+r_{\mathrm{th}}=\frac{A_1g_1\lambda_2}{A_2g_2\lambda_1}
+\exp\left[-\frac{E_1-E_2}{k_{\mathrm B}T}\right].
+\]
+
+\begin{table}[htbp]
+\begin{adjustwidth}{-\extralength}{0cm}
+\caption{Inputs from Table~1 of Fayyaz et al.~\cite{Fayyaz2023} for its intensity ratio comparison. Intensities are in the reported arbitrary units. The common Cu upper level energy is used for both Cu lines.}\label{tab:published-alloy}
+\centering\small
+\begin{tabular}{@{}lrrrrr@{}}\toprule
+Species&$\lambda$ (nm)&$I$&$A$ ($\mathrm{s^{-1}}$)&$g$&$E$ (eV)\\\midrule
+Fe I&372.13&61.5&$6.7\times10^6$&3&5.82\\
+Fe I&382.18&104.9&$7.3\times10^6$&5&5.85\\
+Cu I&515.32&1079&$6.0\times10^7$&4&6.19\\
+Cu I&521.82&2028&$7.5\times10^7$&6&6.19\\
+\bottomrule
+\end{tabular}
+\end{adjustwidth}
+\end{table}
+
+The Fe pair gives $r_{\mathrm{exp}}=0.586$ and $r_{\mathrm{th}}=0.591$; the Cu pair gives 0.532 and 0.540. The differences, $100(r_{\mathrm{exp}}-r_{\mathrm{th}})/r_{\mathrm{th}}$, are $-0.75\%$ and $-1.48\%$, calculated before rounding. Both central comparisons satisfy the stated 10\% criterion, despite inconsistent ratio entries between the narrative and Table~1. This recomputation does not independently establish optical thinness; the transition probability accuracy grades and printed energy precision limit its interpretation.
+
+In contrast, the reported CF LIBS composition, 18.09\% Cu and 81.91\% Fe by mass, cannot be regenerated from the general equations alone. The complete integrated intensities, numerical partition functions, species intercepts, neutral and ionic fractions, and normalization factor used for that result are not supplied. The four intensities above support the ratio calculation, not a complete composition record. A reconstructable comparison at A3 therefore coexists with a reporting gap at A4.
+
+\subsection{Plant study: plasma arithmetic and absolute concentration closure}\label{sec:published-plant}
+For the Costus root study~\cite{Aldakheel2024}, Section~3.2 and Table~1 provide $T=7615$~K and the chosen Ca I 610.2~nm level separation, $\Delta E=3.910-1.879=2.031$~eV. Equation~(6) of the Perspective returns
+\[
+1.6\times10^{12}\sqrt{7615}(2.031)^3
+=1.1697\times10^{15}\,\unitdensity,
+\]
+reproducing the printed McWhirter threshold of $1.17\times10^{15}\,\unitdensity$. This necessary condition does not establish complete LTE.
+
+The reported fitted FWHM is 0.06575~nm. The adopted Stark HWHM coefficient, $\omega=0.057$~\AA{} at $N_{\mathrm{ref}}=10^{16}\,\unitdensity$, is 0.0057~nm. Assigning the entire fitted width to the Stark component in Equation~(4) gives
+\[
+\Ne=\frac{0.06575}{2(0.0057)}\,10^{16}
+=5.7675\times10^{16}\,\unitdensity,
+\]
+reproducing the printed $5.77\times10^{16}\,\unitdensity$. This verifies the substitution, not the coefficient's transfer from the tabulated 614.39~nm transition to 610.2~nm. No measured instrumental profile at the diagnostic wavelength is reported, so an instrument corrected Stark density remains unreconstructed. The nominal spectrograph resolution is not substituted for such a measurement here.
+
+Section~3.5 expresses closure as $\sum_s C_s=1$, using the source's notation for species fractions. Its Tables~3a and~3b instead report 23 absolute concentrations in $\mathrm{mg\,kg^{-1}}$. Their printed sum is $31{,}893.26~\mathrm{mg\,kg^{-1}}$, or 3.189326\% of the sample mass. The reporting gap is the conversion connecting the normalized species set to that absolute mass scale. Neither the complete composition inputs nor a numerical scaling record explaining the conversion is supplied.
+
+\subsection{Recalculation files}\label{sec:published-recalculation}
+Data S2 contains \texttt{published\_case\_inputs.json}, including source locations and all 23 plant concentrations. Code S2 contains \texttt{published\_case\_checks.py}. With both files in the same directory, run
+\begin{verbatim}
+python3 published_case_checks.py
+\end{verbatim}
+The standard library script writes the numerical results in JSON and CSV and performs 20 arithmetic checks. Missing spectral, instrumental, and composition inputs are retained as missing; the script does not infer them or validate the experiments.
+
+\begin{thebibliography}{8}
+\setcounter{enumiv}{5}
+\bibitem{ElSaeed2025}
+El-Saeed, M.; Tawfik, W.; Khalil, A.A.I.; Mubarak, M.; Fikry, M.
+Calibration-free picosecond LIPS for quantifying heavy metals in soils near Egyptian industrial sites.
+\textit{Sci. Rep.} \textbf{2025}, \textit{15}, 19949.
+\url{https://doi.org/10.1038/s41598-025-04395-5}.
+\bibitem{Fayyaz2023}
+Fayyaz, A.; Iqbal, J.; Asghar, H.; Alrebdi, T.A.; Alshehri, A.M.; Ahmed, W.; Ahmed, N.
+Spectroscopical characterization of copper--iron (Cu-Fe) alloy plasma using LIBS, ICP-AES, and EDX.
+\textit{Metals} \textbf{2023}, \textit{13}, 1188.
+\url{https://doi.org/10.3390/met13071188}.
+\bibitem{Aldakheel2024}
+Aldakheel, R.K.; Gondal, M.A.; Almessiere, M.A.; Nasr, M.M.; Rehan, I.; Adel, F.F.
+Rapid qualitative and quantitative vital nutrient contents in high-altitude cultivated folklore herbal medicinal Costus roots using calibration-free LIBS.
+\textit{Arab. J. Chem.} \textbf{2024}, \textit{17}, 105941.
+\url{https://doi.org/10.1016/j.arabjc.2024.105941}.
+\end{thebibliography}
+\end{document}

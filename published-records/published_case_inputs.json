@@ -1,0 +1,204 @@
+{
+  "scope": "Selected calculations from printed records; no raw spectra, measured instrumental profile, or omitted composition inputs are reconstructed.",
+  "sources": {
+    "soil": {
+      "doi": "10.1038/s41598-025-04395-5",
+      "title": "Calibration-free picosecond LIPS for quantifying heavy metals in soils near Egyptian industrial sites",
+      "locations": [
+        "Table 6",
+        "Validity confirmed through real-world sample analysis"
+      ],
+      "basis": "ppm as printed; one S1 test sample; empirical plasma-parameter–concentration inversion"
+    },
+    "alloy": {
+      "doi": "10.3390/met13071188",
+      "title": "Spectroscopical Characterization of Copper–Iron (Cu-Fe) Alloy Plasma Using LIBS, ICP-AES, and EDX",
+      "locations": [
+        "Table 1",
+        "Section 3.2, Equation (1)",
+        "Sections 3.5 and 3.6",
+        "Table 4"
+      ],
+      "basis": "Intensity ratios use Table 1; composition is printed in wt.%; composition chain is not regenerated"
+    },
+    "plant": {
+      "doi": "10.1016/j.arabjc.2024.105941",
+      "title": "Rapid qualitative and quantitative vital nutrient contents in high-altitude cultivated folklore herbal medicinal Costus roots using calibration-free LIBS",
+      "locations": [
+        "Table 1, Ca I 610.2 nm level energies",
+        "Section 3.2, fitted linewidth and adopted Stark coefficient",
+        "Section 3.5, Equation (3)",
+        "Tables 3a and 3b, CF-LIBS column"
+      ],
+      "basis": "Absolute concentrations in mg kg^-1 of the plant sample as reported; total fitted width is used only to reproduce source arithmetic"
+    }
+  },
+  "soil": {
+    "stated_agreement_percent": 1.0,
+    "estimates": [
+      {
+        "element": "Cd",
+        "icp_oes_ppm": 69.62,
+        "density_estimate_ppm": 65.02,
+        "temperature_estimate_ppm": 75.8,
+        "printed_density_annotation_percent": 0.93,
+        "printed_temperature_annotation_percent": 1.0,
+        "expected_density_delta_percent": -6.61,
+        "expected_temperature_delta_percent": 8.88
+      },
+      {
+        "element": "Zn",
+        "icp_oes_ppm": 145.33,
+        "density_estimate_ppm": 136.94,
+        "temperature_estimate_ppm": 138.66,
+        "printed_density_annotation_percent": 0.94,
+        "printed_temperature_annotation_percent": 0.95,
+        "expected_density_delta_percent": -5.77,
+        "expected_temperature_delta_percent": -4.59
+      },
+      {
+        "element": "Fe",
+        "icp_oes_ppm": 61.67,
+        "density_estimate_ppm": 61.27,
+        "temperature_estimate_ppm": 61.27,
+        "printed_density_annotation_percent": 0.99,
+        "printed_temperature_annotation_percent": 0.99,
+        "expected_density_delta_percent": -0.65,
+        "expected_temperature_delta_percent": -0.65
+      },
+      {
+        "element": "Ni",
+        "icp_oes_ppm": 149.53,
+        "density_estimate_ppm": 149.87,
+        "temperature_estimate_ppm": 149.87,
+        "printed_density_annotation_percent": 1.0,
+        "printed_temperature_annotation_percent": 1.0,
+        "expected_density_delta_percent": 0.23,
+        "expected_temperature_delta_percent": 0.23
+      }
+    ]
+  },
+  "alloy": {
+    "kBT_eV": 0.69,
+    "ratio_acceptance_percent": 10.0,
+    "line_pairs": [
+      {
+        "species": "Fe I",
+        "wavelengths_nm": [
+          372.13,
+          382.18
+        ],
+        "intensities_au": [
+          61.5,
+          104.9
+        ],
+        "transition_probabilities_s_inverse": [
+          6700000.0,
+          7300000.0
+        ],
+        "upper_statistical_weights": [
+          3,
+          5
+        ],
+        "upper_energies_eV": [
+          5.82,
+          5.85
+        ],
+        "printed_accuracy_grades": [
+          "B",
+          "B"
+        ],
+        "expected_experimental_ratio_3dp": 0.586,
+        "expected_theoretical_ratio_3dp": 0.591,
+        "expected_difference_percent_2dp": -0.75
+      },
+      {
+        "species": "Cu I",
+        "wavelengths_nm": [
+          515.32,
+          521.82
+        ],
+        "intensities_au": [
+          1079.0,
+          2028.0
+        ],
+        "transition_probabilities_s_inverse": [
+          60000000.0,
+          75000000.0
+        ],
+        "upper_statistical_weights": [
+          4,
+          6
+        ],
+        "upper_energies_eV": [
+          6.19,
+          6.19
+        ],
+        "energy_note": "Table 1 prints a common upper-level energy of 6.19 eV for the two Cu lines; this is used for both.",
+        "printed_accuracy_grades": [
+          "C+",
+          "C+"
+        ],
+        "expected_experimental_ratio_3dp": 0.532,
+        "expected_theoretical_ratio_3dp": 0.54,
+        "expected_difference_percent_2dp": -1.48
+      }
+    ],
+    "printed_cflibs_composition_wt_percent": {
+      "Cu": 18.09,
+      "Fe": 81.91
+    },
+    "missing_composition_inputs": [
+      "complete line-by-line integrated intensities used for composition",
+      "numerical partition functions",
+      "species-specific intercepts",
+      "neutral and ionic fractions",
+      "normalization factor"
+    ]
+  },
+  "plant": {
+    "temperature_K": 7615.0,
+    "lower_energy_eV": 1.879,
+    "upper_energy_eV": 3.91,
+    "mcwhirter_prefactor_cm_inverse_cubed": 1600000000000.0,
+    "printed_mcwhirter_threshold_cm_inverse_cubed": 1170000000000000.0,
+    "mcwhirter_reporting_increment_cm_inverse_cubed": 10000000000000.0,
+    "diagnostic_wavelength_nm": 610.2,
+    "total_fitted_fwhm_nm": 0.06575,
+    "stark_hwhm_Angstrom": 0.057,
+    "stark_reference_density_cm_inverse_cubed": 1e+16,
+    "stark_tabulation_temperature_K": 10000.0,
+    "stark_coefficient_source_transition_nm": 614.39,
+    "printed_density_cm_inverse_cubed": 5.77e+16,
+    "density_reporting_increment_cm_inverse_cubed": 100000000000000.0,
+    "cflibs_concentrations_mg_per_kg": {
+      "Ca": 14424.0,
+      "K": 9511.0,
+      "Mg": 2031.0,
+      "Si": 1559.0,
+      "S": 1450.0,
+      "P": 1465.0,
+      "Al": 678.0,
+      "Fe": 458.0,
+      "Na": 59.0,
+      "Ti": 48.0,
+      "Ba": 47.0,
+      "Mn": 37.0,
+      "Zn": 37.0,
+      "Sr": 27.0,
+      "B": 19.0,
+      "Cu": 19.6,
+      "Rb": 15.0,
+      "Cr": 2.6,
+      "Ni": 1.5,
+      "Pb": 1.5,
+      "V": 1.16,
+      "Mo": 1.0,
+      "Li": 0.9
+    },
+    "expected_concentration_sum_mg_per_kg": 31893.26,
+    "expected_mass_percent": 3.189326,
+    "printed_species_closure_sum": 1.0,
+    "instrumental_profile_reported_at_diagnostic_wavelength": false
+  }
+}

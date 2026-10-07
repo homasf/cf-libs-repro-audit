@@ -1,0 +1,104 @@
+name: Code S2 calculations and release
+
+on:
+  push:
+    branches: [main]
+    paths: ['published-records/**', '.github/workflows/published-records.yml']
+  pull_request:
+    paths: ['published-records/**', '.github/workflows/published-records.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: published-records-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Recalculate the published numerical examples
+        run: python3 published-records/published_case_checks.py
+      - name: Verify saved results
+        run: git diff --exit-code -- published-records/published_case_results.json published-records/published_case_soil.csv published-records/published_case_alloy_ratios.csv published-records/published_case_plant_concentrations.csv
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build and publish the versioned Code S2 archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: homasf/cf-libs-repro-audit
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          def run(args, check=True):
+              return subprocess.run(args, check=check, text=True, capture_output=True)
+
+          root = Path('published-records')
+          version = (root / 'VERSION').read_text().strip()
+          tag = 'published-records-v' + version
+          sha = os.environ['GITHUB_SHA']
+          repo = os.environ['GH_REPO']
+          existing = run(['gh', 'release', 'view', tag, '--json', 'tagName'], check=False)
+          if existing.returncode == 0:
+              print('This version is already published; its tag and assets remain unchanged.')
+              raise SystemExit(0)
+
+          current = run(['gh', 'api', f'repos/{repo}/git/ref/tags/{tag}'], check=False)
+          if current.returncode == 0:
+              obj = json.loads(current.stdout)['object']
+              while obj['type'] == 'tag':
+                  obj = json.loads(run(['gh', 'api', f'repos/{repo}/git/tags/{obj["sha"]}']).stdout)['object']
+              if obj['sha'] != sha:
+                  raise SystemExit('The existing version tag identifies another commit; refusing to move it.')
+
+          subprocess.run(['python3', str(root / 'published_case_checks.py')], check=True)
+          run(['git', 'diff', '--exit-code', '--',
+               str(root / 'published_case_results.json'),
+               str(root / 'published_case_soil.csv'),
+               str(root / 'published_case_alloy_ratios.csv'),
+               str(root / 'published_case_plant_concentrations.csv')])
+          subprocess.run(['python3', str(root / 'build_archive.py')], check=True)
+          name = 'CF_LIBS_Published_Records_CodeS2_DataS2_v' + version + '.zip'
+          notes = root / 'dist' / 'RELEASE_NOTES.md'
+          notes.write_text(
+              'Code S2 and Data S2, version ' + version + ', for '
+              '*Towards Reconstructable CF-LIBS Quantification: A Perspective on Reporting, Validation, and Reproducibility*.\n\n'
+              'The attached archive contains the input record, Python calculation script, '
+              'saved JSON/CSV results, and Supplementary Text S2 for three published studies '
+              '(soil, alloy and plant material). All 20 arithmetic checks pass. '
+              'Python 3.10 or later is required; no third-party packages are needed.\n\n'
+              'These calculations reconstruct selected printed values. They do not validate '
+              'experiments, plasma models or complete composition determinations. '
+              'The original studies are credited in the package README and input record.\n\n'
+              'This archive is separate from the constructed Code S1 package, '
+              'which retains DOI 10.5281/zenodo.23196815. No DOI has been assigned to Code S2/Data S2. '
+              'The GitHub tag identifies the full repository at the commit below; '
+              'the attached ZIP contains only the Code S2/Data S2 component.\n\n'
+              'Commit: `' + sha + '`\n', encoding='utf-8')
+          command = ['gh', 'release', 'create', tag, '--target', sha, '--latest=false',
+                     '--title', 'CF-LIBS Perspective Code S2 and Data S2, version ' + version,
+                     '--notes-file', str(notes), str(root / 'dist' / name),
+                     str(root / 'dist' / (name + '.sha256'))]
+          result = run(command)
+          print(result.stdout)
+          PY
